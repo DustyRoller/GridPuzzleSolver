@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Utilities
+﻿namespace GridPuzzleSolver.KakuroSolver.Utilities
 {
     /// <summary>
     /// Class to calculate integer partitions for given number combinations.
@@ -50,7 +50,7 @@
             if (integerPartitions == null)
             {
                 // We need to calculate the integer partition.
-                var values = IntegerPartitionCalculator.CalculateDistinctIntegerPartitionsRecursive(total, partitionLength, minValue, maxValue);
+                var values = CalculateDistinctIntegerPartitionsRecursive(total, partitionLength, minValue, maxValue);
 
                 integerPartitions = new IntegerPartitions(total, partitionLength, values);
 
@@ -97,7 +97,7 @@
             }
             else
             {
-                var partition = (sum == 0 || sum < minimumValue)
+                var partition = sum == 0 || sum < minimumValue
                     ? new List<uint>()
                     : new List<uint>() { sum };
 

@@ -14,7 +14,7 @@ namespace GridPuzzleSolver.Cells.UnitTests
                 Coordinate = new Coordinate(0u, 0u),
             };
 
-            var ex = Assert.Throws<KakuroSolverException>(() => puzzleCell.CellValue = 10u);
+            var ex = Assert.Throws<GridPuzzleSolverException>(() => puzzleCell.CellValue = 10u);
 
             Assert.AreEqual($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", ex.Message);
         }

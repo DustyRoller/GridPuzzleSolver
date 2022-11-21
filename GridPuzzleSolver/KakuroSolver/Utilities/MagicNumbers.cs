@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Utilities
+﻿namespace GridPuzzleSolver.KakuroSolver.Utilities
 {
     /// <summary>
     /// Class containing 'magic numbers', these are known integer partitions

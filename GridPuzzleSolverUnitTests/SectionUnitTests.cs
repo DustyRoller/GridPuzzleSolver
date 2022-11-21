@@ -1,5 +1,5 @@
 ﻿using GridPuzzleSolver.Cells;
-using GridPuzzleSolver.Utilities;
+using GridPuzzleSolver.KakuroSolver.Utilities;
 using NUnit.Framework;
 
 namespace GridPuzzleSolver.UnitTests

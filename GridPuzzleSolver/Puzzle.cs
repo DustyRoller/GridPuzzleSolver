@@ -95,7 +95,7 @@ namespace GridPuzzleSolver
                     RecursivelySolvePuzzle(unsolvedCells.ToList());
                 }
             }
-            catch (KakuroSolverException ex)
+            catch (GridPuzzleSolverException ex)
             {
                 Console.Error.WriteLine("Caught exception whilst solving puzzle");
                 Console.Error.WriteLine(ex.ToString());

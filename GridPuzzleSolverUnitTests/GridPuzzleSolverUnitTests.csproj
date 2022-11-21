@@ -27,25 +27,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="TestPuzzles\Challenging9x17Puzzle.txt">
+    <None Update="TestPuzzles\Kakuro\Challenging9x17Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestPuzzles\Easy4x4Puzzle.txt">
+    <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestPuzzles\Easy4x4Puzzle2.txt">
+    <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle2.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestPuzzles\Easy6x6Puzzle.txt">
+    <None Update="TestPuzzles\Kakuro\Easy6x6Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestPuzzles\Hard9x11Puzzle.txt">
+    <None Update="TestPuzzles\Kakuro\Hard9x11Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestPuzzles\Hard9x11Puzzle2.txt">
+    <None Update="TestPuzzles\Kakuro\Hard9x11Puzzle2.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestPuzzles\Intermediate4x4Puzzle.txt">
+    <None Update="TestPuzzles\Kakuro\Intermediate4x4Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using GridPuzzleSolver.Cells;
-using GridPuzzleSolver.Utilities;
+using GridPuzzleSolver.KakuroSolver.Utilities;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
@@ -59,7 +59,7 @@ namespace GridPuzzleSolver
             if (clueValue == 0)
             {
                 // This would only happen if our solving has gone wrong somewhere.
-                throw new KakuroSolverException("Invalid clue value of 0 found");
+                throw new GridPuzzleSolverException("Invalid clue value of 0 found");
             }
 
             // If we only have on cell left then we can figure out what its

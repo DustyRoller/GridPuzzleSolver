@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using GridPuzzleSolver.KakuroSolver.Parser;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GridPuzzleSolverUnitTests")]
@@ -18,7 +19,7 @@ namespace GridPuzzleSolver
                 Environment.Exit(1);
             }
 
-            var puzzle = Parser.Parser.ParsePuzzle(args[0]);
+            var puzzle = new KakuroParser().ParsePuzzle(args[0]);
 
             // Time how long it takes to solve the puzzle.
             var stopwatch = Stopwatch.StartNew();

@@ -1,4 +1,5 @@
 ﻿using GridPuzzleSolver.Cells;
+using GridPuzzleSolver.KakuroSolver.Parser;
 using NUnit.Framework;
 
 namespace GridPuzzleSolver.UnitTests
@@ -49,13 +50,13 @@ namespace GridPuzzleSolver.UnitTests
             Assert.AreEqual(0, puzzle.NumberOfUnsolvedCells);
         }
 
-        [TestCase("Easy4x4Puzzle.txt")]
-        [TestCase("Easy4x4Puzzle2.txt")]
-        [TestCase("Easy6x6Puzzle.txt")]
-        [TestCase("Intermediate4x4Puzzle.txt")]
-        [TestCase("Hard9x11Puzzle.txt")]
-        [TestCase("Hard9x11Puzzle2.txt")]
-        [TestCase("Challenging9x17Puzzle.txt")]
+        [TestCase("Easy4x4Puzzle.kak")]
+        [TestCase("Easy4x4Puzzle2.kak")]
+        [TestCase("Easy6x6Puzzle.kak")]
+        [TestCase("Intermediate4x4Puzzle.kak")]
+        [TestCase("Hard9x11Puzzle.kak")]
+        [TestCase("Hard9x11Puzzle2.kak")]
+        [TestCase("Challenging9x17Puzzle.kak")]
         public void Puzzle_Solve_SuccessfullySolvesTestPuzzles(string testPuzzleFileName)
         {
             const string TestPuzzleDir = "TestPuzzles";
@@ -63,7 +64,7 @@ namespace GridPuzzleSolver.UnitTests
 
             Assert.IsTrue(File.Exists(testFile));
 
-            var puzzle = Parser.Parser.ParsePuzzle(testFile);
+            var puzzle = new KakuroParser().ParsePuzzle(testFile);
 
             Assert.IsTrue(puzzle.Solve());
         }

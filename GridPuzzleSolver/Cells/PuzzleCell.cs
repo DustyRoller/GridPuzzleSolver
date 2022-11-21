@@ -21,7 +21,7 @@
             {
                 if (value > 9)
                 {
-                    throw new KakuroSolverException($"Puzzle cell value cannot be greater than 9. {Coordinate}.");
+                    throw new GridPuzzleSolverException($"Puzzle cell value cannot be greater than 9. {Coordinate}.");
                 }
 
                 cellValue = value;
