@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace GridPuzzleSolver.Utilities.UnitTests
+namespace GridPuzzleSolver.KakuroSolver.Utilities.UnitTests
 {
     [TestFixture]
     public class IntegerPartitionCalculatorUnitTests
