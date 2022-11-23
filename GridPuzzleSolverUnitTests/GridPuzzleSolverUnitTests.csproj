@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Cells\" />
+    <Folder Include="Utilities\" />
     <Folder Include="TestPuzzles\" />
   </ItemGroup>
 
