@@ -59,8 +59,8 @@ namespace GridPuzzleSolver.UnitTests
         [TestCase("Challenging9x17Puzzle.kak")]
         public void Puzzle_Solve_SuccessfullySolvesTestPuzzles(string testPuzzleFileName)
         {
-            const string TestPuzzleDir = "TestPuzzles";
-            var testFile = Path.Combine(TestPuzzleDir, testPuzzleFileName);
+            var testPuzzleDir = Path.Combine("TestPuzzles", "Kakuro");
+            var testFile = Path.Combine(testPuzzleDir, testPuzzleFileName);
 
             Assert.IsTrue(File.Exists(testFile));
 
