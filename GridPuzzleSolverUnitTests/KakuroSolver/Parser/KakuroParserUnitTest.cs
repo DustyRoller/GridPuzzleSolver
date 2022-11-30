@@ -9,9 +9,9 @@ namespace GridPuzzleSolverUnitTests.KakuroSolver.Parser
     [TestFixture]
     public class KakuroParserUnitTests
     {
-        private const string TestPuzzleFileName = "TestPuzzle.txt";
+        private const string TestPuzzleFileName = "TestPuzzle.kak";
 
-        private const string TestPuzzleDir = "TestPuzzles";
+        private readonly string TestPuzzleDir = Path.Combine("TestPuzzles", "Kakuro");
 
         [Test]
         public void KakuroParser_ParsePuzzle_FailsWithNonExistantFile()
@@ -32,7 +32,7 @@ namespace GridPuzzleSolverUnitTests.KakuroSolver.Parser
             var parser = new KakuroParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(fileName));
 
-            Assert.AreEqual("Invalid file type, expected .txt. (Parameter 'puzzleFilePath')", ex.Message);
+            Assert.AreEqual("Invalid file type, expected .kak. (Parameter 'puzzleFilePath')", ex.Message);
 
             File.Delete(fileName);
         }
