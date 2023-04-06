@@ -21,7 +21,7 @@
             {
                 if (value > 9)
                 {
-                    throw new KakuroSolverException($"Puzzle cell value cannot be greater than 9. {Coordinate}.");
+                    throw new GridPuzzleSolverException($"Puzzle cell value cannot be greater than 9. {Coordinate}.");
                 }
 
                 cellValue = value;
@@ -36,10 +36,8 @@
         /// sections that this cell belongs to, and returns all of the common
         /// values into a single list.
         /// </remarks>
-        public List<uint> PossibleValues => ColumnSection.CalculateIntegerPartitions()
-                                                         .SelectMany(ip => ip)
-                                                         .Intersect(RowSection.CalculateIntegerPartitions()
-                                                                              .SelectMany(ip => ip))
+        public List<uint> PossibleValues => ColumnSection.CalculatePossibleValues()
+                                                         .Intersect(RowSection.CalculatePossibleValues())
                                                          .ToList();
 
         /// <summary>

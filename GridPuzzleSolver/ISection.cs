@@ -8,21 +8,16 @@ namespace GridPuzzleSolver
     internal interface ISection
     {
         /// <summary>
-        /// Gets the clue value of this Section.
-        /// </summary>
-        uint ClueValue { get; }
-
-        /// <summary>
         /// Gets the list of PuzzleCells that make up this section.
         /// </summary>
         List<PuzzleCell> PuzzleCells { get; }
 
         /// <summary>
-        /// Calculate all of the possible integer partitions for this section,
-        /// taking into account already solved cells.
+        /// Calculate all of the possible values that can be placed within this
+        /// section.
         /// </summary>
-        /// <returns>List of integer partitions.</returns>
-        List<List<uint>> CalculateIntegerPartitions();
+        /// <returns>List of possible values for this section.</returns>
+        List<uint> CalculatePossibleValues();
 
         /// <summary>
         /// Is this Section solved with valid answers.

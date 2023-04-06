@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace GridPuzzleSolver.Utilities.UnitTests
+namespace GridPuzzleSolver.KakuroSolver.Utilities.UnitTests
 {
     [TestFixture]
     public class IntegerPartitionCalculatorUnitTests
@@ -114,6 +114,17 @@ namespace GridPuzzleSolver.Utilities.UnitTests
             var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, 1u, maxValue);
 
             Assert.AreEqual(0, partitions.Count);
+        }
+
+        [Test]
+        public void IntegerPartitionCalulator_CalculateDistinctIntegerPartitions_ReturnsAnEmptyListIfUnableToFindPartitionsa()
+        {
+            var sum = 11u;
+            var partitionLength = 2u;
+            var maxValue = 9u;
+            var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, 1u, maxValue);
+
+            Assert.AreEqual(4, partitions.Count);
         }
 
         private static void ValidatePartitions(List<List<uint>> partitions, uint sum)
