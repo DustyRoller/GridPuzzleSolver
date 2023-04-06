@@ -4,13 +4,13 @@
     /// Exception class for any exception thrown within the project that
     /// relates to the solving of a Kakuro puzzle.
     /// </summary>
-    public class KakuroSolverException : Exception
+    public class GridPuzzleSolverException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KakuroSolverException"/> class.
+        /// Initializes a new instance of the <see cref="GridPuzzleSolverException"/> class.
         /// </summary>
         /// <param name="message">The message associated with the exception.</param>
-        public KakuroSolverException(string message)
+        public GridPuzzleSolverException(string message)
             : base(message)
         {
         }

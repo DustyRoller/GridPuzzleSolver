@@ -1,16 +1,15 @@
 ﻿using GridPuzzleSolver.Cells;
-using GridPuzzleSolver.Utilities;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.UnitTests
+namespace GridPuzzleSolver.KakuroSolver.UnitTests
 {
     [TestFixture]
-    public class SectionUnitTests
+    public class KakuroSectionUnitTests
     {
         [Test]
-        public void Section_CalculatePossibilities_ReturnsEmptyListsIfAllPuzzleCellsSolved()
+        public void KakuroSection_CalculatePossibleValues_ReturnsEmptyListsIfAllPuzzleCellsSolved()
         {
-            var section = new Section(4u);
+            var section = new KakuroSection(4u);
 
             section.PuzzleCells.Add(new PuzzleCell
             {
@@ -23,15 +22,16 @@ namespace GridPuzzleSolver.UnitTests
                 Coordinate = new Coordinate(0u, 0u),
             });
 
-            var partitions = section.CalculateIntegerPartitions();
+            var partitions = section.CalculatePossibleValues();
 
             Assert.AreEqual(0, partitions.Count);
         }
 
         [Test]
-        public void Section_CalculatePossibilities_ReturnsSinglePartitionListForMagicNumber()
+        public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValuesForMagicNumber()
         {
-            var section = new Section(4u);
+            // 4 will be a magic number if there are two cells.
+            var section = new KakuroSection(4u);
 
             section.PuzzleCells.Add(new PuzzleCell
             {
@@ -42,19 +42,21 @@ namespace GridPuzzleSolver.UnitTests
                 Coordinate = new Coordinate(0u, 0u),
             });
 
-            var partitions = section.CalculateIntegerPartitions();
+            var possibleValues = section.CalculatePossibleValues();
 
-            Assert.AreEqual(1, partitions.Count);
-            Assert.AreEqual(2, partitions[0].Count);
-            Assert.IsTrue(partitions[0].Contains(1u));
-            Assert.IsTrue(partitions[0].Contains(3u));
+            var expectedPossibleValues = new List<uint>
+            {
+                1u, 3u,
+            };
+
+            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
         }
 
         [Test]
-        public void Section_CalculatePossibilities_ReturnsMultiplePartitionListForValue()
+        public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValues()
         {
             var sectionClueValue = 9u;
-            var section = new Section(sectionClueValue);
+            var section = new KakuroSection(sectionClueValue);
 
             section.PuzzleCells.Add(new PuzzleCell
             {
@@ -65,18 +67,21 @@ namespace GridPuzzleSolver.UnitTests
                 Coordinate = new Coordinate(0u, 0u),
             });
 
-            var partitions = section.CalculateIntegerPartitions();
+            var possibleValues = section.CalculatePossibleValues();
 
-            Assert.AreEqual(4, partitions.Count);
-            Assert.IsTrue(partitions.All(p => p.Count == 2));
-            Assert.IsTrue(partitions.All(p => p.Sum() == sectionClueValue));
+            var expectedPossibleValues = new List<uint>
+            {
+                1u, 8u, 2u, 7u, 3u, 6u, 4u, 5u
+            };
+
+            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
         }
 
         [Test]
-        public void Section_CalculatePossibilities_ReturnsSingleValueIfOnlyOneUnsolvedPuzzleCell()
+        public void KakuroSection_CalculatePossibleValues_ReturnsSingleValueIfOnlyOneUnsolvedPuzzleCell()
         {
             var sectionClueValue = 4u;
-            var section = new Section(sectionClueValue);
+            var section = new KakuroSection(sectionClueValue);
 
             section.PuzzleCells.Add(new PuzzleCell
             {
@@ -88,18 +93,21 @@ namespace GridPuzzleSolver.UnitTests
                 Coordinate = new Coordinate(0u, 0u),
             });
 
-            var partitions = section.CalculateIntegerPartitions();
+            var possibleValues = section.CalculatePossibleValues();
 
-            Assert.AreEqual(1, partitions.Count);
-            Assert.AreEqual(1, partitions[0].Count);
-            Assert.AreEqual(1u, partitions[0][0]);
+            var expectedPossibleValues = new List<uint>
+            {
+                1u,
+            };
+
+            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
         }
 
         [Test]
-        public void Section_CalculatePossibilities_ReturnsMultiplePartitionsWithSolvedPuzzleCell()
+        public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValuesWithSolvedPuzzleCell()
         {
             var sectionClueValue = 12u;
-            var section = new Section(sectionClueValue);
+            var section = new KakuroSection(sectionClueValue);
 
             var solvedPuzzleCellValue = 3u;
             section.PuzzleCells.Add(new PuzzleCell
@@ -116,18 +124,20 @@ namespace GridPuzzleSolver.UnitTests
                 Coordinate = new Coordinate(0u, 0u),
             });
 
-            var partitions = section.CalculateIntegerPartitions();
+            var possibleValues = section.CalculatePossibleValues();
 
-            Assert.AreEqual(3, partitions.Count);
-            Assert.IsTrue(partitions.All(p => p.Count == 2));
-            var expectedSectionTotal = sectionClueValue - solvedPuzzleCellValue;
-            Assert.IsTrue(partitions.All(p => p.Sum() == expectedSectionTotal));
+            var expectedPossibleValues = new List<uint>
+            {
+                1u, 8u, 2u, 7u, 4u, 5u,
+            };
+
+            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
         }
 
         [Test]
-        public void Section_IsSolved_ReturnsFalseIfNotAllCellsAreSolved()
+        public void KakuroSection_IsSolved_ReturnsFalseIfNotAllCellsAreSolved()
         {
-            var section = new Section(12u);
+            var section = new KakuroSection(12u);
 
             section.PuzzleCells.Add(new PuzzleCell
             {
@@ -148,9 +158,9 @@ namespace GridPuzzleSolver.UnitTests
         }
 
         [Test]
-        public void Section_IsSolved_ReturnsFalseIfSumOfCellsIsNotEqualToClueValue()
+        public void KakuroSection_IsSolved_ReturnsFalseIfSumOfCellsIsNotEqualToClueValue()
         {
-            var section = new Section(12u);
+            var section = new KakuroSection(12u);
 
             section.PuzzleCells.Add(new PuzzleCell
             {
@@ -172,9 +182,9 @@ namespace GridPuzzleSolver.UnitTests
         }
 
         [Test]
-        public void Section_IsSolved_ReturnsFalseIfCellsHaveDuplicatedValues()
+        public void KakuroSection_IsSolved_ReturnsFalseIfCellsHaveDuplicatedValues()
         {
-            var section = new Section(3u);
+            var section = new KakuroSection(3u);
 
             section.PuzzleCells.Add(new PuzzleCell
             {
@@ -196,9 +206,9 @@ namespace GridPuzzleSolver.UnitTests
         }
 
         [Test]
-        public void Section_IsSolved_ReturnsTrueForValidCompletedSection()
+        public void KakuroSection_IsSolved_ReturnsTrueForValidCompletedSection()
         {
-            var section = new Section(12u);
+            var section = new KakuroSection(12u);
 
             section.PuzzleCells.Add(new PuzzleCell
             {

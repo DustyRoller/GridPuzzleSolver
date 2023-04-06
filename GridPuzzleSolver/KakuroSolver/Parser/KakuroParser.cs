@@ -1,9 +1,10 @@
 ﻿using GridPuzzleSolver.Cells;
+using GridPuzzleSolver.Parser;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("KakuroSolverUnitTests")]
 
-namespace GridPuzzleSolver.Parser
+namespace GridPuzzleSolver.KakuroSolver.Parser
 {
     /// <summary>
     /// Class to parse Kakuro puzzles from text files.
@@ -16,14 +17,19 @@ namespace GridPuzzleSolver.Parser
     ///   |  x  |  \23|  -  |  -  |  -  |
     ///   |  x  |  x  |  \14|  -  |  -  |.
     /// </remarks>
-    internal static class Parser
+    internal class KakuroParser : IParser
     {
+        /// <summary>
+        /// The file extension used for kakuro puzzles.
+        /// </summary>
+        private const string KakuroPuzzleFileExtension = ".kak";
+
         /// <summary>
         /// Parse the given file to generate a Puzzle, ready to be solved.
         /// </summary>
         /// <param name="puzzleFilePath">The path to the file containing the puzzle.</param>
         /// <returns>A Puzzle object.</returns>
-        public static Puzzle ParsePuzzle(string puzzleFilePath)
+        public Puzzle ParsePuzzle(string puzzleFilePath)
         {
             ValidateInputFile(puzzleFilePath);
 
@@ -123,7 +129,7 @@ namespace GridPuzzleSolver.Parser
                 rowClue = uint.Parse(clues[1].Trim());
             }
 
-            return new ClueCell()
+            return new ClueCell
             {
                 ColumnClue = columnClue,
                 RowClue = rowClue,
@@ -138,7 +144,7 @@ namespace GridPuzzleSolver.Parser
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
         private static void ParseColumnSection(Puzzle puzzle, ClueCell clueCell, int cellIndex)
         {
-            var section = new Section(clueCell.ColumnClue);
+            var section = new KakuroSection(clueCell.ColumnClue);
 
             // Find all clue cells in the column until there is a break.
             for (var j = (int)(cellIndex + puzzle.Width); j < (puzzle.Height * puzzle.Width); j += (int)puzzle.Width)
@@ -168,10 +174,10 @@ namespace GridPuzzleSolver.Parser
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
         private static void ParseRowSection(Puzzle puzzle, ClueCell clueCell, int cellIndex)
         {
-            var section = new Section(clueCell.RowClue);
+            var section = new KakuroSection(clueCell.RowClue);
 
             // Find all clue cells in the row until there is a break.
-            for (var j = cellIndex + 1; j < (puzzle.Height * puzzle.Width); ++j)
+            for (var j = cellIndex + 1; j < puzzle.Height * puzzle.Width; ++j)
             {
                 if (puzzle.Cells[j] is not PuzzleCell)
                 {
@@ -226,10 +232,9 @@ namespace GridPuzzleSolver.Parser
                 throw new FileNotFoundException("Unable to find puzzle file.", puzzleFilePath);
             }
 
-            const string puzzleFileExtension = ".txt";
-            if (Path.GetExtension(puzzleFilePath) != puzzleFileExtension)
+            if (Path.GetExtension(puzzleFilePath) != KakuroPuzzleFileExtension)
             {
-                throw new ArgumentException($"Invalid file type, expected {puzzleFileExtension}.", nameof(puzzleFilePath));
+                throw new ArgumentException($"Invalid file type, expected {KakuroPuzzleFileExtension}.", nameof(puzzleFilePath));
             }
 
             // Make sure the file actually contains some data.

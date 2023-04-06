@@ -1,44 +1,49 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver;
+using GridPuzzleSolver.Cells;
+using GridPuzzleSolver.KakuroSolver.Parser;
 using NUnit.Framework;
 using System.Text;
 
-namespace GridPuzzleSolver.Parser.UnitTests
+namespace GridPuzzleSolverUnitTests.KakuroSolver.Parser
 {
     [TestFixture]
-    public class ParserUnitTests
+    public class KakuroParserUnitTests
     {
-        private const string TestPuzzleFileName = "TestPuzzle.txt";
+        private const string TestPuzzleFileName = "TestPuzzle.kak";
 
-        private const string TestPuzzleDir = "TestPuzzles";
+        private readonly string TestPuzzleDir = Path.Combine("TestPuzzles", "Kakuro");
 
         [Test]
-        public void Parser_ParsePuzzle_FailsWithNonExistantFile()
+        public void KakuroParser_ParsePuzzle_FailsWithNonExistantFile()
         {
-            var ex = Assert.Throws<FileNotFoundException>(() => Parser.ParsePuzzle("randomfile"));
+            var parser = new KakuroParser();
+            var ex = Assert.Throws<FileNotFoundException>(() => parser.ParsePuzzle("randomfile"));
 
             Assert.AreEqual("Unable to find puzzle file.", ex.Message);
         }
 
         [Test]
-        public void Parser_ParsePuzzle_FailsWithInvalidFileExtension()
+        public void KakuroParser_ParsePuzzle_FailsWithInvalidFileExtension()
         {
             var fileName = "test.fdg";
 
             File.Create(fileName).Close();
 
-            var ex = Assert.Throws<ArgumentException>(() => Parser.ParsePuzzle(fileName));
+            var parser = new KakuroParser();
+            var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(fileName));
 
-            Assert.AreEqual("Invalid file type, expected .txt. (Parameter 'puzzleFilePath')", ex.Message);
+            Assert.AreEqual("Invalid file type, expected .kak. (Parameter 'puzzleFilePath')", ex.Message);
 
             File.Delete(fileName);
         }
 
         [Test]
-        public void Parser_ParsePuzzle_FailsWithEmptyFile()
+        public void KakuroParser_ParsePuzzle_FailsWithEmptyFile()
         {
             File.Create(TestPuzzleFileName).Close();
 
-            var ex = Assert.Throws<ArgumentException>(() => Parser.ParsePuzzle(TestPuzzleFileName));
+            var parser = new KakuroParser();
+            var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
             Assert.AreEqual("Puzzle file is empty. (Parameter 'puzzleFilePath')", ex.Message);
 
@@ -46,7 +51,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
         }
 
         [Test]
-        public void Parser_ParsePuzzle_FailsWithPuzzleWithDifferentColumnLengths()
+        public void KakuroParser_ParsePuzzle_FailsWithPuzzleWithDifferentColumnLengths()
         {
             var sb = new StringBuilder();
 
@@ -56,7 +61,8 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             File.WriteAllText(TestPuzzleFileName, sb.ToString());
 
-            var ex = Assert.Throws<ParserException>(() => Parser.ParsePuzzle(TestPuzzleFileName));
+            var parser = new KakuroParser();
+            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
             Assert.AreEqual("Mismatch in row width on row 2.", ex.Message);
 
@@ -64,7 +70,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
         }
 
         [Test]
-        public void Parser_ParsePuzzle_FailsWithPuzzleWithInvalidCharacters()
+        public void KakuroParser_ParsePuzzle_FailsWithPuzzleWithInvalidCharacters()
         {
             var sb = new StringBuilder();
 
@@ -73,7 +79,8 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             File.WriteAllText(TestPuzzleFileName, sb.ToString());
 
-            var ex = Assert.Throws<ParserException>(() => Parser.ParsePuzzle(TestPuzzleFileName));
+            var parser = new KakuroParser();
+            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
             Assert.AreEqual("Found invalid cell data: ?.", ex.Message);
 
@@ -81,13 +88,14 @@ namespace GridPuzzleSolver.Parser.UnitTests
         }
 
         [Test]
-        public void Parser_ParsePuzzle_Successful()
+        public void KakuroParser_ParsePuzzle_Successful()
         {
-            var testFile = Path.Combine(TestPuzzleDir, "Easy4x4Puzzle.txt");
+            var testFile = Path.Combine(TestPuzzleDir, "Easy4x4Puzzle.kak");
 
             Assert.IsTrue(File.Exists(testFile));
 
-            var puzzle = Parser.ParsePuzzle(testFile);
+            var parser = new KakuroParser();
+            var puzzle = parser.ParsePuzzle(testFile);
 
             Assert.AreEqual(25, puzzle.Cells.Count);
             Assert.AreEqual(5u, puzzle.Width);

@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Utilities
+﻿namespace GridPuzzleSolver.KakuroSolver.Utilities
 {
     /// <summary>
     /// Class to calculate integer partitions for given number combinations.
@@ -9,10 +9,10 @@
         /// As calculating integer partitions can be quite slow, keep a cache
         /// of previously caclulated integer partitions and the known magic numbers.
         /// </summary>
-        private static readonly List<IntegerPartitions> Cache = new(MagicNumbers.MagicNumberValues);
+        private static List<IntegerPartitions> Cache = new(MagicNumbers.MagicNumberValues);
 
         /// <summary>
-        /// Calculate the distinct integer partitionss for the given set
+        /// Calculate the distinct integer partitions for the given set
         /// of arguments.
         /// </summary>
         /// <param name="total">The total that the partitions must add up to.</param>
@@ -43,6 +43,8 @@
                 throw new ArgumentException("Maximum value must be greater than the minimum value.");
             }
 
+            List<List<uint>> partitionValues;
+
             var integerPartitions = Cache.FirstOrDefault(ip => ip.PartitionLength == partitionLength &&
                                                                ip.Total == total &&
                                                                ip.Values[0].All(v => v >= minValue && v <= maxValue));
@@ -50,19 +52,35 @@
             if (integerPartitions == null)
             {
                 // We need to calculate the integer partition.
-                var values = IntegerPartitionCalculator.CalculateDistinctIntegerPartitionsRecursive(total, partitionLength, minValue, maxValue);
+                partitionValues = CalculateDistinctIntegerPartitionsRecursive(total, partitionLength, minValue, maxValue);
 
-                integerPartitions = new IntegerPartitions(total, partitionLength, values);
+                if (partitionValues.Count > 0)
+                {
+                    integerPartitions = new IntegerPartitions(total, partitionLength, partitionValues);
 
-                // Now add it to the cache for future use.
-                Cache.Add(integerPartitions);
+                    // Now add it to the cache for future use.
+                    Cache.Add(integerPartitions);
+                }
+            }
+            else
+            {
+                partitionValues = integerPartitions.Values;
             }
 
-            return integerPartitions.Values;
+            return partitionValues;
         }
 
         /// <summary>
-        /// Recursively calculate the distinct integer partitionss for the
+        /// Helper function to reset the cache back to the initial magic
+        /// number values.
+        /// </summary>
+        public static void Reset()
+        {
+            Cache = new(MagicNumbers.MagicNumberValues);
+        }
+
+        /// <summary>
+        /// Recursively calculate the distinct integer partitions for the
         /// given set of arguments.
         /// </summary>
         /// <param name="sum">The sum that the partitions must add up to.</param>
@@ -97,7 +115,7 @@
             }
             else
             {
-                var partition = (sum == 0 || sum < minimumValue)
+                var partition = sum == 0 || sum < minimumValue
                     ? new List<uint>()
                     : new List<uint>() { sum };
 
