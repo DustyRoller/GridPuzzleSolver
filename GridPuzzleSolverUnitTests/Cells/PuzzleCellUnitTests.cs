@@ -34,10 +34,10 @@ namespace GridPuzzleSolver.Cells.UnitTests
 
             var puzzleCell = new PuzzleCell
             {
-                ColumnSection = mockSection.Object,
                 Coordinate = new Coordinate(0u, 0u),
-                RowSection = mockSection.Object,
             };
+
+            puzzleCell.Sections.Add(mockSection.Object);
 
             var possibleValues = puzzleCell.PossibleValues;
 
@@ -69,10 +69,11 @@ namespace GridPuzzleSolver.Cells.UnitTests
 
             var puzzleCell = new PuzzleCell
             {
-                ColumnSection = columnSection.Object,
                 Coordinate = new Coordinate(0u, 0u),
-                RowSection = rowSection.Object,
             };
+
+            puzzleCell.Sections.Add(columnSection.Object);
+            puzzleCell.Sections.Add(rowSection.Object);
 
             var expectedValues = columnSectionPossibilities.Intersect(rowSectionPossibilities);
 

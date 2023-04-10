@@ -23,7 +23,7 @@
   <ItemGroup>
     <Folder Include="Cells\" />
     <Folder Include="KakuroSolver\Utilities\" />
-    <Folder Include="TestPuzzles\" />
+    <Folder Include="TestPuzzles\Sudoku\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +45,25 @@
     <None Update="TestPuzzles\Kakuro\Hard9x11Puzzle2.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestPuzzles\Kakuro\Intermediate4x4Puzzle.kak">
+    <None Update="TestPuzzles\Kakuro\Medium4x4Puzzle.kak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Sudoku\EasyPuzzle.sod">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Sudoku\EasyPuzzle.sud">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Sudoku\EasyPuzzle2.sud">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Sudoku\ExpertPuzzle.sud">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Sudoku\HardPuzzle.sud">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Sudoku\MediumPuzzle.sud">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace GridPuzzleSolver.KakuroSolver.UnitTests
         [TestCase("Easy4x4Puzzle.kak")]
         [TestCase("Easy4x4Puzzle2.kak")]
         [TestCase("Easy6x6Puzzle.kak")]
-        [TestCase("Intermediate4x4Puzzle.kak")]
+        [TestCase("Medium4x4Puzzle.kak")]
         [TestCase("Hard9x11Puzzle.kak")]
         public void Puzzle_Solve_SuccessfullySolvesTestPuzzles(string testPuzzleFileName)
         {

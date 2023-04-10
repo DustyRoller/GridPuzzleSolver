@@ -7,11 +7,6 @@
     internal class PuzzleCell : Cell
     {
         /// <summary>
-        /// Gets a value indicating whether this cell has been solved or not.
-        /// </summary>
-        public bool Solved => CellValue != 0u;
-
-        /// <summary>
         /// Gets or sets the value of the cell, will be 0 if it hasn't been solved yet.
         /// </summary>
         public uint CellValue
@@ -36,21 +31,31 @@
         /// sections that this cell belongs to, and returns all of the common
         /// values into a single list.
         /// </remarks>
-        public List<uint> PossibleValues => ColumnSection.CalculatePossibleValues()
-                                                         .Intersect(RowSection.CalculatePossibleValues())
-                                                         .ToList();
+        public List<uint> PossibleValues => 
+            Sections.Select(s => s.CalculatePossibleValues())
+                    .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues).ToList());
+                                                         //.Intersect(RowSection.CalculatePossibleValues())
+                                                         //.ToList();
 
         /// <summary>
-        /// Gets or sets the column section that this cell belongs to.
+        /// Gets the sections that this cell belongs to.
         /// </summary>
-        public ISection ColumnSection { get; set; }
+        public List<ISection> Sections { get; private set; }
 
         /// <summary>
-        /// Gets or sets the row section that this cell belongs to.
+        /// Gets a value indicating whether this cell has been solved or not.
         /// </summary>
-        public ISection RowSection { get; set; }
+        public bool Solved => CellValue != 0u;
 
         private uint cellValue = 0u;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PuzzleCell"/> class.
+        /// </summary>
+        public PuzzleCell()
+        {
+            Sections = new List<ISection>();
+        }
 
         /// <summary>
         /// Get a string representation of the current state of the cell.
