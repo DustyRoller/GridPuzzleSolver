@@ -159,7 +159,7 @@ namespace GridPuzzleSolver.KakuroSolver.Parser
                 section.PuzzleCells.Add(puzzleCell);
 
                 // Let the cell know it belongs to this section.
-                puzzleCell.ColumnSection = section;
+                puzzleCell.Sections.Add(section);
             }
 
             // Add the section to the puzzle.
@@ -189,7 +189,7 @@ namespace GridPuzzleSolver.KakuroSolver.Parser
                 section.PuzzleCells.Add(puzzleCell);
 
                 // Let the cell know it belongs to this section.
-                puzzleCell.RowSection = section;
+                puzzleCell.Sections.Add(section);
             }
 
             // Add the section to the puzzle.
