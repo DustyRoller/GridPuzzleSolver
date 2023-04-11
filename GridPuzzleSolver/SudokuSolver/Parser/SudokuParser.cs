@@ -26,7 +26,7 @@ namespace GridPuzzleSolver.SudokuSolver.Parser
         /// <summary>
         /// The file extension used for sudoku puzzles.
         /// </summary>
-        private const string SudokuPuzzleFileExtension = ".sud";
+        public const string SudokuPuzzleFileExtension = ".sud";
 
         /// <summary>
         /// Parse the given file to generate a Puzzle, ready to be solved.

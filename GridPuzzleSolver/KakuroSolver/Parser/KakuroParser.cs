@@ -22,7 +22,7 @@ namespace GridPuzzleSolver.KakuroSolver.Parser
         /// <summary>
         /// The file extension used for kakuro puzzles.
         /// </summary>
-        private const string KakuroPuzzleFileExtension = ".kak";
+        public const string KakuroPuzzleFileExtension = ".kak";
 
         /// <summary>
         /// Parse the given file to generate a Puzzle, ready to be solved.

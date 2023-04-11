@@ -1,4 +1,4 @@
-﻿using GridPuzzleSolver.KakuroSolver.Parser;
+﻿using GridPuzzleSolver.Parser;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -19,7 +19,10 @@ namespace GridPuzzleSolver
                 Environment.Exit(1);
             }
 
-            var puzzle = new KakuroParser().ParsePuzzle(args[0]);
+            // Get the correct parser for the given puzzle type.
+            var parser = ParserFactory.GetParser(args[0]);
+
+            var puzzle = parser.ParsePuzzle(args[0]);
 
             // Time how long it takes to solve the puzzle.
             var stopwatch = Stopwatch.StartNew();
