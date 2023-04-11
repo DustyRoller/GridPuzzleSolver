@@ -1,6 +1,7 @@
 ﻿using GridPuzzleSolver.Components;
 using GridPuzzleSolver.Parser;
 using GridPuzzleSolver.Puzzles.Kakuro.Parser;
+using GridPuzzleSolver.Puzzles.KillerSudoku.Parser;
 using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -44,30 +45,7 @@ namespace GridPuzzleSolver
 
             if (puzzleFileExtension == ".xml")
             {
-                var xmlDoc = XDocument.Load(puzzleFilePath);
-                if (xmlDoc == null)
-                {
-                    throw new ParserException($"Failed to load puzzle file - {puzzleFilePath}");
-                }
-
-                var rootValue = xmlDoc.Root?.Name;
-
-                if (rootValue == "SudokuPuzzle")
-                {
-                    Console.WriteLine("Parsing suduko puzzle");
-
-                    puzzle = SudokuXmlParser.ParsePuzzle(xmlDoc);
-                }
-                else if (rootValue == "KakuroPuzzle")
-                {
-                    Console.WriteLine("Parsing kakuro puzzle");
-
-                    puzzle = KakuroXmlParser.ParsePuzzle(xmlDoc);
-                }
-                else
-                {
-                    throw new ParserException($"Invalid root node - {xmlDoc.Root?.Name}");
-                }
+                puzzle = LoadPuzzleFromXml(puzzleFilePath);
             }
             else
             {
@@ -105,6 +83,50 @@ namespace GridPuzzleSolver
             Console.WriteLine($"Time taken: {timeTaken}s");
 
             return solved;
+        }
+
+        /// <summary>
+        /// Load a puzzle from the given XML file.
+        /// </summary>
+        /// <param name="puzzleFilePath">Path to the puzzle XML file.</param>
+        /// <returns>A puzzle object.</returns>
+        /// <exception cref="ParserException">Thrown if errors occur whilst
+        /// reading the XML file.</exception>
+        private static Puzzle LoadPuzzleFromXml(string puzzleFilePath)
+        {
+            var xmlDoc = XDocument.Load(puzzleFilePath);
+            if (xmlDoc == null)
+            {
+                throw new ParserException($"Failed to load puzzle file - {puzzleFilePath}");
+            }
+
+            Puzzle puzzle;
+            var rootValue = xmlDoc.Root?.Name;
+
+            if (rootValue == "KakuroPuzzle")
+            {
+                Console.WriteLine("Parsing kakuro puzzle");
+
+                puzzle = KakuroXmlParser.ParsePuzzle(xmlDoc);
+            }
+            else if (rootValue == "KillerSudokuPuzzle")
+            {
+                Console.WriteLine("Parsing killer suduko puzzle");
+
+                puzzle = KillerSudokuXmlParser.ParsePuzzle(xmlDoc);
+            }
+            else if (rootValue == "SudokuPuzzle")
+            {
+                Console.WriteLine("Parsing suduko puzzle");
+
+                puzzle = SudokuXmlParser.ParsePuzzle(xmlDoc);
+            }
+            else
+            {
+                throw new ParserException($"Invalid root node - {xmlDoc.Root?.Name}");
+            }
+
+            return puzzle;
         }
 
         private static int Main(string[] args)

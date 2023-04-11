@@ -57,7 +57,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
         private void ParseRowSection(ClueCell clueCell, int cellIndex)
         {
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = clueCell.RowClue,
             };
@@ -89,7 +89,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
         private void ParseColumnSection(ClueCell clueCell, int cellIndex)
         {
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = clueCell.ColumnClue,
             };

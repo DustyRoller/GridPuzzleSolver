@@ -1,15 +1,15 @@
-﻿using GridPuzzleSolver.Components;
-using GridPuzzleSolver.Puzzles.Kakuro.Utilities;
+﻿using GridPuzzleSolver.Puzzles.Kakuro.Utilities;
 
-namespace GridPuzzleSolver.Puzzles.Kakuro
+namespace GridPuzzleSolver.Components
 {
     /// <summary>
-    /// Class defining the sections that make up a kakuro puzzle.
+    /// Class defining a sum section which contains a clue number
+    /// that all the values of the cells should add up to.
     /// </summary>
-    internal class KakuroSection : Section
+    internal class SumSection : Section
     {
         /// <summary>
-        /// The sections clue value.
+        /// The section's clue value.
         /// </summary>
         private uint clueValue;
 

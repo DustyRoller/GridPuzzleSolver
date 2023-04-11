@@ -1,7 +1,7 @@
-﻿using System.Xml.Linq;
-using GridPuzzleSolver.Components;
+﻿using GridPuzzleSolver.Components;
 using GridPuzzleSolver.Components.Cells;
 using GridPuzzleSolver.Parser;
+using System.Xml.Linq;
 
 namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
 {

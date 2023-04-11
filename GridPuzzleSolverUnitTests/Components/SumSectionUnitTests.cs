@@ -1,16 +1,16 @@
-﻿using GridPuzzleSolver.Components.Cells;
-using GridPuzzleSolver.Puzzles.Kakuro;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Components.Cells;
 using NUnit.Framework;
 
-namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
+namespace GridPuzzleSolverUnitTests.Components
 {
     [TestFixture]
-    public class KakuroSectionUnitTests
+    public class SumSectionUnitTests
     {
         [Test]
         public void KakuroSection_CalculatePossibleValues_ReturnsEmptyListsIfAllPuzzleCellsSolved()
         {
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = 4u,
             };
@@ -33,7 +33,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValuesForMagicNumber()
         {
             // 4 will be a magic number if there are two cells.
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = 4u,
             };
@@ -55,7 +55,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValues()
         {
             var sectionClueValue = 9u;
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = sectionClueValue,
             };
@@ -77,7 +77,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         public void KakuroSection_CalculatePossibleValues_ReturnsSingleValueIfOnlyOneUnsolvedPuzzleCell()
         {
             var sectionClueValue = 4u;
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = sectionClueValue,
             };
@@ -102,7 +102,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValuesWithSolvedPuzzleCell()
         {
             var sectionClueValue = 12u;
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = sectionClueValue,
             };
@@ -128,7 +128,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         [Test]
         public void KakuroSection_IsSolved_ReturnsFalseIfNotAllCellsAreSolved()
         {
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = 12u,
             };
@@ -149,7 +149,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         [Test]
         public void KakuroSection_IsSolved_ReturnsFalseIfSumOfCellsIsNotEqualToClueValue()
         {
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = 12u,
             };
@@ -173,7 +173,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         [Test]
         public void KakuroSection_IsSolved_ReturnsFalseIfCellsHaveDuplicatedValues()
         {
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = 3u,
             };
@@ -197,7 +197,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         [Test]
         public void KakuroSection_IsSolved_ReturnsTrueForValidCompletedSection()
         {
-            var section = new KakuroSection
+            var section = new SumSection
             {
                 ClueValue = 12u,
             };

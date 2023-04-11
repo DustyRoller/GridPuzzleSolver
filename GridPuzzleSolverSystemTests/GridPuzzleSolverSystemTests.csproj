@@ -75,6 +75,9 @@
     <None Update="TestPuzzles\Kakuro\Medium4x4Puzzle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestPuzzles\KillerSudoku\EasyPuzzle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestPuzzles\Sudoku\EasyPuzzle.sud">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
