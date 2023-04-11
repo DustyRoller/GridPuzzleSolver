@@ -38,12 +38,12 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
         {
             ValidateInputFile(puzzleFilePath, FileExtension);
 
-            var puzzle = new Puzzle();
-
             // Now read in the puzzle.
             var lines = File.ReadAllLines(puzzleFilePath);
 
             ValidatePuzzleSize(lines);
+
+            var puzzle = new Puzzle();
 
             for (var row = 0u; row < lines.Length; ++row)
             {
