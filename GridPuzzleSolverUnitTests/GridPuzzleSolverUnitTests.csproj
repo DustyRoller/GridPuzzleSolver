@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Cells\" />
+    <Folder Include="TestPuzzles\KillerSudoku\" />
     <Folder Include="TestPuzzles\Sudoku\" />
   </ItemGroup>
 

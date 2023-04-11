@@ -21,7 +21,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser
     ///   |-|-|-|-|-|-|-|-|-|
     ///   |-|-|-|-|-|-|-|-|-|.
     /// </remarks>
-    internal class SudokuParser : IParser
+    internal class SudokuParser : BaseParser
     {
         /// <summary>
         /// Gets the file extension of the file that the parser will read.
@@ -33,16 +33,16 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser
         /// </summary>
         /// <param name="puzzleFilePath">The path to the file containing the puzzle.</param>
         /// <returns>A Puzzle object.</returns>
-        public Puzzle ParsePuzzle(string puzzleFilePath)
+        public override Puzzle ParsePuzzle(string puzzleFilePath)
         {
-            ValidateInputFile(puzzleFilePath);
-
-            var puzzle = new Puzzle();
+            ValidateInputFile(puzzleFilePath, FileExtension);
 
             // Now read in the puzzle.
             var lines = File.ReadAllLines(puzzleFilePath);
 
             ValidatePuzzleSize(lines);
+
+            var puzzle = new Puzzle();
 
             for (var row = 0u; row < lines.Length; ++row)
             {
@@ -155,29 +155,6 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser
                 squareCells.ForEach(sc => sc.Sections.Add(squareSection));
 
                 puzzle.Sections.Add(squareSection);
-            }
-        }
-
-        /// <summary>
-        /// Validate that the input file contains a valid puzzle.
-        /// </summary>
-        /// <param name="puzzleFilePath">The path to the file containing the puzzle.</param>
-        private static void ValidateInputFile(string puzzleFilePath)
-        {
-            if (!File.Exists(puzzleFilePath))
-            {
-                throw new FileNotFoundException("Unable to find puzzle file.", puzzleFilePath);
-            }
-
-            if (Path.GetExtension(puzzleFilePath) != FileExtension)
-            {
-                throw new ArgumentException($"Invalid file type, expected {FileExtension}.", nameof(puzzleFilePath));
-            }
-
-            // Make sure the file actually contains some data.
-            if (new FileInfo(puzzleFilePath).Length == 0)
-            {
-                throw new ArgumentException("Puzzle file is empty.", nameof(puzzleFilePath));
             }
         }
 

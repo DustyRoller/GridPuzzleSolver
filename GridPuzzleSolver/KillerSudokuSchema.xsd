@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="puzzle">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="cells">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="cell">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="id" type="xs:unsignedByte" />
+                    <xs:element name="x" type="xs:unsignedByte" />
+                    <xs:element name="y" type="xs:unsignedByte" />
+                    <xs:element name="value" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="cages">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cage">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="sum" type="xs:unsignedByte" />
+                    <xs:element name="cells">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="cell" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
