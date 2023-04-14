@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("KakuroSolverUnitTests")]
 
-namespace GridPuzzleSolver.KakuroSolver.Parser
+namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
 {
     /// <summary>
     /// Class to parse Kakuro puzzles from text files.
@@ -147,7 +147,7 @@ namespace GridPuzzleSolver.KakuroSolver.Parser
             var section = new KakuroSection(clueCell.ColumnClue);
 
             // Find all clue cells in the column until there is a break.
-            for (var j = (int)(cellIndex + puzzle.Width); j < (puzzle.Height * puzzle.Width); j += (int)puzzle.Width)
+            for (var j = (int)(cellIndex + puzzle.Width); j < puzzle.Height * puzzle.Width; j += (int)puzzle.Width)
             {
                 if (puzzle.Cells[j] is not PuzzleCell)
                 {

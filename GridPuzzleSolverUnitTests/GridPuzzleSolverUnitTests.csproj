@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Cells\" />
-    <Folder Include="KakuroSolver\Utilities\" />
     <Folder Include="TestPuzzles\Sudoku\" />
   </ItemGroup>
 
