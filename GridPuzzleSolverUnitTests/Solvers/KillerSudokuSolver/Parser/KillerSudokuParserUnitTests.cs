@@ -95,47 +95,83 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
             Assert.AreEqual("Failed to validate puzzle file against the schema.", ex.Message);
         }
 
-        //[Test]
-        //public void KillerSudokuParser_ParsePuzzle_FailsWithPuzzleWithInvalidNumberOfColumns()
-        //{
-        //    var xmlDoc = new XmlDocument();
-        //    var puzzleNode = xmlDoc.CreateElement("puzzle");
-        //    xmlDoc.AppendChild(puzzleNode);
+        [Test]
+        public void KillerSudokuParser_ParsePuzzle_FailsWithPuzzleWithInvalidNumberOfCells()
+        {
+            var xmlDoc = new XmlDocument();
+            var puzzleNode = xmlDoc.CreateElement("puzzle");
 
-        //    var cellsNode = xmlDoc.CreateElement("cells");
+            var gridNode = xmlDoc.CreateElement("grid");
 
-        //    // Create the cells.
-        //    var id = 0;
-        //    for (int column = 0; column < 8; ++column)
-        //    {
-        //        for (int row = 0; row < 9; ++row)               
-        //        {
-        //            var cellNode = xmlDoc.CreateElement("cell");
-        //            var cellIdNode = xmlDoc.CreateElement("id");
-        //            cellIdNode.InnerText = id.ToString();
-        //            var cellXNode = xmlDoc.CreateElement("x");
-        //            cellXNode.InnerText = row.ToString();
-        //            var cellYNode = xmlDoc.CreateElement("y");
-        //            cellYNode.InnerText = column.ToString();
+            var cellsNode = xmlDoc.CreateElement("cells");
 
-        //            cellNode.AppendChild(cellIdNode);
-        //            cellNode.AppendChild(cellXNode);
-        //            cellNode.AppendChild(cellYNode);
+            // Create the cells.
+            var id = 0;
+            for (int column = 0; column < 8; ++column)
+            {
+                for (int row = 0; row < 9; ++row)
+                {
+                    var cellNode = xmlDoc.CreateElement("cell");
+                    var cellIdNode = xmlDoc.CreateElement("id");
+                    cellIdNode.InnerText = id.ToString();
+                    var cellXNode = xmlDoc.CreateElement("x");
+                    cellXNode.InnerText = row.ToString();
+                    var cellYNode = xmlDoc.CreateElement("y");
+                    cellYNode.InnerText = column.ToString();
+                    var cellValueNode = xmlDoc.CreateElement("value");
 
-        //            cellsNode.AppendChild(cellNode);
+                    cellNode.AppendChild(cellIdNode);
+                    cellNode.AppendChild(cellXNode);
+                    cellNode.AppendChild(cellYNode);
+                    cellNode.AppendChild(cellValueNode);
 
-        //            ++id;
-        //        }
-        //    }
+                    cellsNode.AppendChild(cellNode);
 
-        //    puzzleNode.AppendChild(cellsNode);
+                    ++id;
+                }
+            }
 
-        //    xmlDoc.Save(TestPuzzleFileName);
+            gridNode.AppendChild(cellsNode);
 
-        //    var parser = new KillerSudokuParser();
-        //    var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
+            puzzleNode.AppendChild(gridNode);
 
-        //    Assert.AreEqual("Not all rows have 9 columns.", ex.Message);
-        //}
+            // Create a simple cage.
+            var cagesNode = xmlDoc.CreateElement("cages");
+
+            var cageNode = xmlDoc.CreateElement("cage");
+
+            var cageSumNode = xmlDoc.CreateElement("sum");
+            cageSumNode.InnerText = "3";
+
+            var cageCellsNode = xmlDoc.CreateElement("cells");
+
+            for (int i = 0; i < 2; ++i)
+            {
+                var cageCellNode = xmlDoc.CreateElement("cell");
+
+                var cageCellIdNode = xmlDoc.CreateElement("id");
+                cageCellIdNode.InnerText = i.ToString();
+
+                cageCellNode.AppendChild(cageCellIdNode);
+
+                cageCellsNode.AppendChild(cageCellNode);
+            }
+
+            cageNode.AppendChild(cageSumNode);
+            cageNode.AppendChild(cageCellsNode);
+
+            cagesNode.AppendChild(cageNode);
+
+            puzzleNode.AppendChild(cagesNode);
+
+            xmlDoc.AppendChild(puzzleNode);
+
+            xmlDoc.Save(TestPuzzleFileName);
+
+            var parser = new KillerSudokuParser();
+            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
+
+            Assert.AreEqual($"Puzzle only contains {id + 1}, expected 81.", ex.Message);
+        }
     }
 }

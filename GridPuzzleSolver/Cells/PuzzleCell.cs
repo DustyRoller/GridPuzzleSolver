@@ -33,9 +33,8 @@
         /// </remarks>
         public List<uint> PossibleValues => 
             Sections.Select(s => s.CalculatePossibleValues())
-                    .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues).ToList());
-                                                         //.Intersect(RowSection.CalculatePossibleValues())
-                                                         //.ToList();
+                    .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues)
+                                                                                         .ToList());
 
         /// <summary>
         /// Gets the sections that this cell belongs to.
