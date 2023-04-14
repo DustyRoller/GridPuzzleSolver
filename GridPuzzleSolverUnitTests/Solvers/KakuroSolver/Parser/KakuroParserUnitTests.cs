@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Text;
 
-namespace GridPuzzleSolver.KakuroSolver.Parser.UnitTests
+namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser.UnitTests
 {
     [TestFixture]
     public class KakuroParserUnitTests

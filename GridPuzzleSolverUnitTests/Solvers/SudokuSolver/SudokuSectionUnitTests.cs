@@ -1,7 +1,7 @@
 ﻿using GridPuzzleSolver.Cells;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.SudokuSolver.UnitTests
+namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
 {
     [TestFixture]
     public class SudokuSectionUnitTests

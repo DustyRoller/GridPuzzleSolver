@@ -1,5 +1,5 @@
-﻿using GridPuzzleSolver.KakuroSolver.Parser;
-using GridPuzzleSolver.SudokuSolver.Parser;
+﻿using GridPuzzleSolver.Solvers.KakuroSolver.Parser;
+using GridPuzzleSolver.Solvers.SudokuSolver.Parser;
 using NUnit.Framework;
 
 namespace GridPuzzleSolver.Parser.UnitTests

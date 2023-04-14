@@ -1,6 +1,6 @@
-﻿using GridPuzzleSolver.KakuroSolver.Utilities;
+﻿using GridPuzzleSolver.Solvers.KakuroSolver.Utilities;
 
-namespace GridPuzzleSolver.KakuroSolver
+namespace GridPuzzleSolver.Solvers.KakuroSolver
 {
     internal class KakuroSection : Section
     {
@@ -79,7 +79,7 @@ namespace GridPuzzleSolver.KakuroSolver
             else
             {
                 // Need to actually calculate the partitions.
-                var maxValue = (clueValue <= 9) ? (clueValue - 1) : 9;
+                var maxValue = clueValue <= 9 ? clueValue - 1 : 9;
                 var numCells = (uint)(PuzzleCells.Count - numSolvedCells);
 
                 partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(clueValue, numCells, 1u, maxValue);
