@@ -26,11 +26,11 @@ namespace GridPuzzleSolver.Parser
 
             IParser parser;
 
-            if (fileExtension == KakuroParser.KakuroPuzzleFileExtension)
+            if (fileExtension == KakuroParser.FileExtension)
             {
                 parser = new KakuroParser();
             }
-            else if (fileExtension == SudokuParser.SudokuPuzzleFileExtension)
+            else if (fileExtension == SudokuParser.FileExtension)
             {
                 parser = new SudokuParser();
             }

@@ -20,9 +20,9 @@ namespace GridPuzzleSolver.KakuroSolver.Parser
     internal class KakuroParser : IParser
     {
         /// <summary>
-        /// The file extension used for kakuro puzzles.
+        /// Gets the file extension of the file that the parser will read.
         /// </summary>
-        public const string KakuroPuzzleFileExtension = ".kak";
+        public static string FileExtension => ".kak";
 
         /// <summary>
         /// Parse the given file to generate a Puzzle, ready to be solved.
@@ -232,9 +232,9 @@ namespace GridPuzzleSolver.KakuroSolver.Parser
                 throw new FileNotFoundException("Unable to find puzzle file.", puzzleFilePath);
             }
 
-            if (Path.GetExtension(puzzleFilePath) != KakuroPuzzleFileExtension)
+            if (Path.GetExtension(puzzleFilePath) != FileExtension)
             {
-                throw new ArgumentException($"Invalid file type, expected {KakuroPuzzleFileExtension}.", nameof(puzzleFilePath));
+                throw new ArgumentException($"Invalid file type, expected {FileExtension}.", nameof(puzzleFilePath));
             }
 
             // Make sure the file actually contains some data.
