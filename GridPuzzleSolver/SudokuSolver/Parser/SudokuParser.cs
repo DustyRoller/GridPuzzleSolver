@@ -24,9 +24,9 @@ namespace GridPuzzleSolver.SudokuSolver.Parser
     internal class SudokuParser : IParser
     {
         /// <summary>
-        /// The file extension used for sudoku puzzles.
+        /// Gets the file extension of the file that the parser will read.
         /// </summary>
-        public const string SudokuPuzzleFileExtension = ".sud";
+        public static string FileExtension => ".sud";
 
         /// <summary>
         /// Parse the given file to generate a Puzzle, ready to be solved.
@@ -169,9 +169,9 @@ namespace GridPuzzleSolver.SudokuSolver.Parser
                 throw new FileNotFoundException("Unable to find puzzle file.", puzzleFilePath);
             }
 
-            if (Path.GetExtension(puzzleFilePath) != SudokuPuzzleFileExtension)
+            if (Path.GetExtension(puzzleFilePath) != FileExtension)
             {
-                throw new ArgumentException($"Invalid file type, expected {SudokuPuzzleFileExtension}.", nameof(puzzleFilePath));
+                throw new ArgumentException($"Invalid file type, expected {FileExtension}.", nameof(puzzleFilePath));
             }
 
             // Make sure the file actually contains some data.
