@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Cells
+﻿namespace GridPuzzleSolver.Components.Cells
 {
     internal interface ICell
     {

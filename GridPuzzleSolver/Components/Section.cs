@@ -1,9 +1,9 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
-namespace GridPuzzleSolver
+namespace GridPuzzleSolver.Components
 {
     /// <summary>
     /// A section represents a ClueCell and a list of PuzzleCells.

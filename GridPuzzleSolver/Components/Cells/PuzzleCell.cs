@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Cells
+﻿namespace GridPuzzleSolver.Components.Cells
 {
     /// <summary>
     /// The PuzzleCell class represents a cell within the puzzle that requires
@@ -31,7 +31,7 @@
         /// sections that this cell belongs to, and returns all of the common
         /// values into a single list.
         /// </remarks>
-        public List<uint> PossibleValues => 
+        public List<uint> PossibleValues =>
             Sections.Select(s => s.CalculatePossibleValues())
                     .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues).ToList());
                                                          //.Intersect(RowSection.CalculatePossibleValues())

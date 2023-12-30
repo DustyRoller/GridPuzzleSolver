@@ -1,4 +1,6 @@
-﻿namespace GridPuzzleSolver.Solvers.SudokuSolver
+﻿using GridPuzzleSolver.Components;
+
+namespace GridPuzzleSolver.Solvers.SudokuSolver
 {
     /// <summary>
     /// An object representing a section within a sudoku puzzle. Each section

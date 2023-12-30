@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.Cells.UnitTests
+namespace GridPuzzleSolver.Components.Cells.UnitTests
 {
     [TestFixture]
     public class PuzzleCellUnitTests

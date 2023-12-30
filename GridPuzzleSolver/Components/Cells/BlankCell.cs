@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Cells
+﻿namespace GridPuzzleSolver.Components.Cells
 {
     /// <summary>
     /// The BlankCell class represents a cell within the puzzle that acts as a

@@ -1,7 +1,7 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.UnitTests
+namespace GridPuzzleSolver.Components.UnitTests
 {
     [TestFixture]
     public class PuzzleUnitTests

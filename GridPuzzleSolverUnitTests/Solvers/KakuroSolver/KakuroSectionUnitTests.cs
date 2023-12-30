@@ -1,4 +1,4 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using NUnit.Framework;
 
 namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests

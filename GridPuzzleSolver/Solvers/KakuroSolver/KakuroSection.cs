@@ -1,4 +1,5 @@
-﻿using GridPuzzleSolver.Solvers.KakuroSolver.Utilities;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Solvers.KakuroSolver.Utilities;
 
 namespace GridPuzzleSolver.Solvers.KakuroSolver
 {
