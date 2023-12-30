@@ -1,4 +1,6 @@
-﻿namespace GridPuzzleSolver.Parser
+﻿using GridPuzzleSolver.Components;
+
+namespace GridPuzzleSolver.Parser
 {
     internal interface IParser
     {

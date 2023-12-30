@@ -1,4 +1,5 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Components.Cells;
 using GridPuzzleSolver.Parser;
 using System.Runtime.CompilerServices;
 

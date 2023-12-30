@@ -1,6 +1,6 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 
-namespace GridPuzzleSolver
+namespace GridPuzzleSolver.Components
 {
     /// <summary>
     /// Interface for sections within a puzzle.

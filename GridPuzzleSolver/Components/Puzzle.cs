@@ -1,8 +1,8 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace GridPuzzleSolver
+namespace GridPuzzleSolver.Components
 {
     /// <summary>
     /// Class representing a kakuro puzzle.
