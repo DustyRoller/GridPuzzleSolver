@@ -1,5 +1,4 @@
 ﻿using GridPuzzleSolver.Solvers.KakuroSolver.Parser;
-using GridPuzzleSolver.Solvers.KakuroSolver.Utilities;
 using NUnit.Framework;
 
 namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
@@ -12,6 +11,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
         [TestCase("Easy6x6Puzzle.kak")]
         [TestCase("Medium4x4Puzzle.kak")]
         [TestCase("Hard9x11Puzzle.kak")]
+        [TestCase("Challenging9x17Puzzle.kak")]
         public void Puzzle_Solve_SuccessfullySolvesTestPuzzles(string testPuzzleFileName)
         {
             var testPuzzleDir = Path.Combine("TestPuzzles", "Kakuro");
@@ -24,8 +24,6 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
             var solve = puzzle.Solve();
 
             Assert.IsTrue(solve);
-
-            IntegerPartitionCalculator.Reset();
         }
     }
 }
