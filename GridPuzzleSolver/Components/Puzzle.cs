@@ -10,6 +10,25 @@ namespace GridPuzzleSolver.Components
     internal class Puzzle
     {
         /// <summary>
+        /// List of all of the cells in the puzzle.
+        /// </summary>
+        private readonly List<Cell> cells;
+
+        /// <summary>
+        /// List of all of the puzzle cells in the puzzle.
+        /// </summary>
+        private readonly List<PuzzleCell> puzzleCells;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Puzzle"/> class.
+        /// </summary>
+        public Puzzle()
+        {
+            cells = new List<Cell>();
+            puzzleCells = new List<PuzzleCell>();
+        }
+
+        /// <summary>
         /// Gets all of the Cells that make up the puzzle.
         /// </summary>
         public ReadOnlyCollection<Cell> Cells => cells.AsReadOnly();
@@ -33,25 +52,6 @@ namespace GridPuzzleSolver.Components
         /// Gets or sets the width of the puzzle by number of Cells.
         /// </summary>
         public uint Width { get; set; }
-
-        /// <summary>
-        /// List of all of the cells in the puzzle.
-        /// </summary>
-        private readonly List<Cell> cells;
-
-        /// <summary>
-        /// List of all of the puzzle cells in the puzzle.
-        /// </summary>
-        private readonly List<PuzzleCell> puzzleCells;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Puzzle"/> class.
-        /// </summary>
-        public Puzzle()
-        {
-            cells = new List<Cell>();
-            puzzleCells = new List<PuzzleCell>();
-        }
 
         /// <summary>
         /// Add the given cell to this puzzle.
@@ -92,7 +92,7 @@ namespace GridPuzzleSolver.Components
                 var unsolvedCells = puzzleCells.Where(pc => !pc.Solved);
                 if (unsolvedCells.Any())
                 {
-                    RecursivelySolvePuzzle(unsolvedCells.ToList());
+                    _ = RecursivelySolvePuzzle(unsolvedCells.ToList());
                 }
             }
             catch (GridPuzzleSolverException ex)
@@ -101,8 +101,8 @@ namespace GridPuzzleSolver.Components
                 Console.Error.WriteLine(ex.ToString());
             }
 
-            return puzzleCells.All(pc => pc.Solved) &&
-                   Sections.All(s => s.IsSolved());
+            return puzzleCells.TrueForAll(pc => pc.Solved) &&
+                   Sections.TrueForAll(s => s.IsSolved());
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace GridPuzzleSolver.Components
         /// </summary>
         /// <param name="puzzleCells">The PuzzleCells to solve.</param>
         /// <returns>True if the all the PuzzleCells are solved, otherwise false.</returns>
-        private bool RecursivelySolvePuzzle(List<PuzzleCell> puzzleCells)
+        private static bool RecursivelySolvePuzzle(List<PuzzleCell> puzzleCells)
         {
             if (puzzleCells is null)
             {
@@ -154,7 +154,7 @@ namespace GridPuzzleSolver.Components
 
             // Check if this recursion path has provided us with more
             // possibilities to explore before continuing.
-            if (puzzleCells.All(pc => pc.PossibleValues.Any()))
+            if (puzzleCells.TrueForAll(pc => pc.PossibleValues.Any()))
             {
                 // To save the amount of recursion required keep sorting
                 // the list by the number of possible values.

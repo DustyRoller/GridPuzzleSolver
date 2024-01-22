@@ -9,14 +9,11 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
         [Test]
         public void PuzzleCell_CellValue_ThrowsExceptionIfValueIsGreaterThan9()
         {
-            var puzzleCell = new PuzzleCell
-            {
-                Coordinate = new Coordinate(0u, 0u),
-            };
+            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
 
             var ex = Assert.Throws<GridPuzzleSolverException>(() => puzzleCell.CellValue = 10u);
 
-            Assert.AreEqual($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", ex.Message);
+            Assert.AreEqual($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", ex?.Message);
         }
 
         [Test]
@@ -32,10 +29,7 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
             mockSection.Setup(ms => ms.CalculatePossibleValues())
                        .Returns(sectionPossibilities);
 
-            var puzzleCell = new PuzzleCell
-            {
-                Coordinate = new Coordinate(0u, 0u),
-            };
+            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
 
             puzzleCell.Sections.Add(mockSection.Object);
 
@@ -67,10 +61,7 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
             rowSection.Setup(rs => rs.CalculatePossibleValues())
                       .Returns(rowSectionPossibilities);
 
-            var puzzleCell = new PuzzleCell
-            {
-                Coordinate = new Coordinate(0u, 0u),
-            };
+            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
 
             puzzleCell.Sections.Add(columnSection.Object);
             puzzleCell.Sections.Add(rowSection.Object);

@@ -11,8 +11,8 @@ namespace GridPuzzleSolver.Components.UnitTests
         {
             var puzzle = new Puzzle();
 
-            puzzle.AddCell(new PuzzleCell());
-            puzzle.AddCell(new PuzzleCell());
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
 
             Assert.AreEqual(2, puzzle.NumberOfUnsolvedCells);
         }
@@ -22,9 +22,9 @@ namespace GridPuzzleSolver.Components.UnitTests
         {
             var puzzle = new Puzzle();
 
-            puzzle.AddCell(new PuzzleCell());
-            puzzle.AddCell(new PuzzleCell());
-            puzzle.AddCell(new PuzzleCell()
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 1u,
             });
@@ -37,11 +37,11 @@ namespace GridPuzzleSolver.Components.UnitTests
         {
             var puzzle = new Puzzle();
 
-            puzzle.AddCell(new PuzzleCell()
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 1u,
             });
-            puzzle.AddCell(new PuzzleCell()
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 1u,
             });

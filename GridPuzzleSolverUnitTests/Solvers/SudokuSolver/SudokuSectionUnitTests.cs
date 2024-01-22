@@ -11,7 +11,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
         {
             var section = new SudokuSection();
 
-            section.PuzzleCells.Add(new PuzzleCell());
+            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
 
             var expectedPossibleValues = new List<uint>()
             {
@@ -28,15 +28,15 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
 
             section.PuzzleCells.AddRange(new List<PuzzleCell>
             {
-                new PuzzleCell
+                new PuzzleCell(new Coordinate(0u, 0u))
                 {
                     CellValue = 1u,
                 },
-                new PuzzleCell
+                new PuzzleCell(new Coordinate(0u, 0u))
                 {
                     CellValue = 3u,
                 },
-                new PuzzleCell
+                new PuzzleCell(new Coordinate(0u, 0u))
                 {
                     CellValue = 5u,
                 },
@@ -55,7 +55,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
         {
             var section = new SudokuSection();
 
-            section.PuzzleCells.Add(new PuzzleCell());
+            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
 
             Assert.IsFalse(section.IsSolved());
         }
@@ -65,7 +65,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
         {
             var section = new SudokuSection();
 
-            section.PuzzleCells.Add(new PuzzleCell
+            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 3u,
             });
@@ -74,4 +74,3 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
         }
     }
 }
-

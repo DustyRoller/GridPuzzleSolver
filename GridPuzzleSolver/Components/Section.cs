@@ -33,7 +33,7 @@ namespace GridPuzzleSolver.Components
             // Make sure that all puzzle cells are solved, that the total of
             // their value adds up to the clue value and that they all have
             // unique values.
-            return PuzzleCells.All(pc => pc.Solved) &&
+            return PuzzleCells.TrueForAll(pc => pc.Solved) &&
                    PuzzleCells.Select(pc => pc.CellValue).Distinct().Count() == PuzzleCells.Count;
         }
     }

@@ -10,14 +10,27 @@ namespace GridPuzzleSolver.Components.Cells
     internal class ClueCell : Cell
     {
         /// <summary>
-        /// Gets or sets the Cell's column clue.
+        /// Initializes a new instance of the <see cref="ClueCell"/> class.
         /// </summary>
-        public uint ColumnClue { get; set; }
+        /// <param name="coordinate">The cell's Coordinate.</param>
+        /// <param name="columnClue">The cell's column's clue.</param>
+        /// <param name="rowClue">The cell's row's clue.</param>
+        public ClueCell(Coordinate coordinate, uint columnClue, uint rowClue)
+            : base(coordinate)
+        {
+            ColumnClue = columnClue;
+            RowClue = rowClue;
+        }
 
         /// <summary>
-        /// Gets or sets the Cell's row clue.
+        /// Gets the Cell's column clue.
         /// </summary>
-        public uint RowClue { get; set; }
+        public uint ColumnClue { get; }
+
+        /// <summary>
+        /// Gets the Cell's row clue.
+        /// </summary>
+        public uint RowClue { get; }
 
         /// <summary>
         /// Get a string representation of the cell.

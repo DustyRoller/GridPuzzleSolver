@@ -6,6 +6,18 @@
     /// </summary>
     internal class PuzzleCell : Cell
     {
+        private uint cellValue = 0u;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PuzzleCell"/> class.
+        /// </summary>
+        /// <param name="coordinate">The cell's Coordinate.</param>
+        public PuzzleCell(Coordinate coordinate)
+            : base(coordinate)
+        {
+            Sections = new List<ISection>();
+        }
+
         /// <summary>
         /// Gets or sets the value of the cell, will be 0 if it hasn't been solved yet.
         /// </summary>
@@ -34,8 +46,6 @@
         public List<uint> PossibleValues =>
             Sections.Select(s => s.CalculatePossibleValues())
                     .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues).ToList());
-                                                         //.Intersect(RowSection.CalculatePossibleValues())
-                                                         //.ToList();
 
         /// <summary>
         /// Gets the sections that this cell belongs to.
@@ -46,16 +56,6 @@
         /// Gets a value indicating whether this cell has been solved or not.
         /// </summary>
         public bool Solved => CellValue != 0u;
-
-        private uint cellValue = 0u;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PuzzleCell"/> class.
-        /// </summary>
-        public PuzzleCell()
-        {
-            Sections = new List<ISection>();
-        }
 
         /// <summary>
         /// Get a string representation of the current state of the cell.

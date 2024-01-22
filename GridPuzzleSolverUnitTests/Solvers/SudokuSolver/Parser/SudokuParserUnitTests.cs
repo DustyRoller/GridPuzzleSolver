@@ -9,7 +9,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
     {
         private const string TestPuzzleFileName = "TestPuzzle.sud";
 
-        private readonly string TestPuzzleDir = Path.Combine("TestPuzzles", "Sudoku");
+        private readonly string testPuzzleDir = Path.Combine("TestPuzzles", "Sudoku");
 
         [SetUp]
         public void BaseSetUp()
@@ -30,7 +30,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<FileNotFoundException>(() => parser.ParsePuzzle("randomfile"));
 
-            Assert.AreEqual("Unable to find puzzle file.", ex.Message);
+            Assert.AreEqual("Unable to find puzzle file.", ex?.Message);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(fileName));
 
-            Assert.AreEqual("Invalid file type, expected .sud. (Parameter 'puzzleFilePath')", ex.Message);
+            Assert.AreEqual("Invalid file type, expected .sud. (Parameter 'puzzleFilePath')", ex?.Message);
 
             File.Delete(fileName);
         }
@@ -56,7 +56,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual("Puzzle file is empty. (Parameter 'puzzleFilePath')", ex.Message);
+            Assert.AreEqual("Puzzle file is empty. (Parameter 'puzzleFilePath')", ex?.Message);
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual("Not all rows have 9 columns.", ex.Message);
+            Assert.AreEqual("Not all rows have 9 columns.", ex?.Message);
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual("Puzzle does not have 9 rows.", ex.Message);
+            Assert.AreEqual("Puzzle does not have 9 rows.", ex?.Message);
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual("Failed to parse cell value: ?", ex.Message);
+            Assert.AreEqual("Failed to parse cell value: ?", ex?.Message);
         }
 
         [Test]
@@ -149,13 +149,13 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual("Puzzle contains no solved cells", ex.Message);
+            Assert.AreEqual("Puzzle contains no solved cells", ex?.Message);
         }
 
         [Test]
         public void SudokuParser_ParsePuzzle_Successful()
         {
-            var testFile = Path.Combine(TestPuzzleDir, "EasyPuzzle.sud");
+            var testFile = Path.Combine(testPuzzleDir, "EasyPuzzle.sud");
 
             Assert.IsTrue(File.Exists(testFile));
 
@@ -284,4 +284,3 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
         }
     }
 }
-
