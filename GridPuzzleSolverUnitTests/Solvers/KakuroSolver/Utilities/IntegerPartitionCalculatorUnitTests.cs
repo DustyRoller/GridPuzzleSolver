@@ -15,7 +15,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
             var ex = Assert.Throws<ArgumentException>(() => IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(
                 sum, partitionLength, minimumValue, maximumValue));
 
-            Assert.AreEqual(expectedExceptionMessage, ex.Message);
+            Assert.AreEqual(expectedExceptionMessage, ex?.Message);
         }
 
         [Test]

@@ -9,7 +9,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver
     /// </summary>
     internal class SudokuSection : Section
     {
-        private static readonly List<uint> ValidValues = new()
+        private static readonly List<uint> ValidValues = new ()
         {
             1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u, 9u,
         };

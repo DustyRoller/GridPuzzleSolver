@@ -52,8 +52,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser
 
                 for (var column = 0u; column < cellsStr.Length; ++column)
                 {
-                    var cell = ParseCell(cellsStr[column]);
-                    cell.Coordinate = new Coordinate(column, row);
+                    var cell = ParseCell(new Coordinate(column, row), cellsStr[column]);
 
                     puzzle.AddCell(cell);
                 }
@@ -73,11 +72,12 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser
         /// <summary>
         /// Parse the given cell string to generate a Cell object.
         /// </summary>
+        /// <param name="coordinate">The coordinate to be associated with the cell.</param>
         /// <param name="cellStr">The cell string to be parsed.</param>
         /// <returns>A Cell object.</returns>
-        private static PuzzleCell ParseCell(string cellStr)
+        private static PuzzleCell ParseCell(Coordinate coordinate, string cellStr)
         {
-            var puzzleCell = new PuzzleCell();
+            var puzzleCell = new PuzzleCell(coordinate);
 
             // Square will be either empty or already have a value in it.
             if (cellStr != "-")
@@ -193,14 +193,13 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser
             // Make sure we have 9 rows.
             if (puzzle.Length != SectionSize)
             {
-                // Create parser exception for this.
                 throw new ParserException("Puzzle does not have 9 rows.");
             }
 
             // Make sure every row has 9 columns.
             foreach (var line in puzzle)
             {
-                if (line.Length != SectionSize * 2 + 1)
+                if (line.Length != (SectionSize * 2) + 1)
                 {
                     throw new ParserException("Not all rows have 9 columns.");
                 }

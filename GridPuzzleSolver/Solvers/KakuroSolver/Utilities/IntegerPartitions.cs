@@ -7,6 +7,24 @@
     internal class IntegerPartitions
     {
         /// <summary>
+        /// Underlying integer partition combinations values.
+        /// </summary>
+        private List<List<uint>> values;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IntegerPartitions"/> class.
+        /// </summary>
+        /// <param name="total">The total value of the partition.</param>
+        /// <param name="partitionLength">The length of the partition.</param>
+        /// <param name="values">List of the valid integer partition combinations.</param>
+        public IntegerPartitions(uint total, uint partitionLength, List<List<uint>> values)
+        {
+            PartitionLength = partitionLength;
+            Total = total;
+            this.values = values;
+        }
+
+        /// <summary>
         /// Gets the length of partition.
         /// </summary>
         public uint PartitionLength { get; private set; }
@@ -27,24 +45,6 @@
         {
             get => values.ConvertAll(v => new List<uint>(v));
             private set { values = value; }
-        }
-
-        /// <summary>
-        /// Underlying integer partition combinations values.
-        /// </summary>
-        private List<List<uint>> values;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IntegerPartitions"/> class.
-        /// </summary>
-        /// <param name="total">The total value of the partition.</param>
-        /// <param name="partitionLength">The length of the partition.</param>
-        /// <param name="values">List of the valid integer partition combinations.</param>
-        public IntegerPartitions(uint total, uint partitionLength, List<List<uint>> values)
-        {
-            PartitionLength = partitionLength;
-            Total = total;
-            this.values = values;
         }
     }
 }

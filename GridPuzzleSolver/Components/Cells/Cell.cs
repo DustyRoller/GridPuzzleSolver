@@ -6,8 +6,17 @@
     internal abstract class Cell : ICell
     {
         /// <summary>
-        /// Gets or sets the Cell's Coordinate.
+        /// Initializes a new instance of the <see cref="Cell"/> class.
         /// </summary>
-        public Coordinate Coordinate { get; set; }
+        /// <param name="coordinate">The cell's Coordinate.</param>
+        protected Cell(Coordinate coordinate)
+        {
+            Coordinate = coordinate;
+        }
+
+        /// <summary>
+        /// Gets the Cell's Coordinate.
+        /// </summary>
+        public Coordinate Coordinate { get; }
     }
 }

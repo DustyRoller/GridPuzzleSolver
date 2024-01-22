@@ -3,15 +3,13 @@ using GridPuzzleSolver.Solvers.KakuroSolver.Utilities;
 
 namespace GridPuzzleSolver.Solvers.KakuroSolver
 {
+    /// <summary>
+    /// Class defining the sections that make up a kakuro puzzle.
+    /// </summary>
     internal class KakuroSection : Section
     {
         /// <summary>
-        /// Gets the clue value of this Section.
-        /// </summary>
-        public uint ClueValue { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Section"/> class.
+        /// Initializes a new instance of the <see cref="KakuroSection"/> class.
         /// </summary>
         /// <param name="clueValue">The clue value of this Section.</param>
         public KakuroSection(uint clueValue)
@@ -23,6 +21,11 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver
 
             ClueValue = clueValue;
         }
+
+        /// <summary>
+        /// Gets the clue value of this Section.
+        /// </summary>
+        public uint ClueValue { get; private set; }
 
         /// <summary>
         /// Calculate all of the possible values that can be placed within this
@@ -53,7 +56,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver
         /// <returns>List of integer partitions.</returns>
         private List<List<uint>> CalculateIntegerPartitions()
         {
-            if (PuzzleCells.All(pc => pc.Solved))
+            if (PuzzleCells.TrueForAll(pc => pc.Solved))
             {
                 // This section is solved so return an empty list.
                 return new List<List<uint>>();

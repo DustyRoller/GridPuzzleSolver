@@ -63,8 +63,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
 
                 for (var column = 0u; column < cellsStr.Length; ++column)
                 {
-                    var cell = ParseCell(cellsStr[column]);
-                    cell.Coordinate = new Coordinate(column, row);
+                    var cell = ParseCell(new Coordinate(column, row), cellsStr[column]);
 
                     puzzle.AddCell(cell);
                 }
@@ -78,9 +77,10 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
         /// <summary>
         /// Parse the given cell string to generate a Cell object.
         /// </summary>
+        /// <param name="coordinate">The coordinate to be associated with the cell.</param>
         /// <param name="cellStr">The cell string to be parsed.</param>
         /// <returns>A Cell object.</returns>
-        private static Cell ParseCell(string cellStr)
+        private static Cell ParseCell(Coordinate coordinate, string cellStr)
         {
             Cell cell;
 
@@ -90,15 +90,15 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
             //  'n \ n' - for clue squares.
             if (cellStr == "  -  ")
             {
-                cell = new PuzzleCell();
+                cell = new PuzzleCell(coordinate);
             }
             else if (cellStr.Contains('\\'))
             {
-                cell = ParseClueCell(cellStr);
+                cell = ParseClueCell(coordinate, cellStr);
             }
             else if (cellStr == "  x  ")
             {
-                cell = new BlankCell();
+                cell = new BlankCell(coordinate);
             }
             else
             {
@@ -111,9 +111,10 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
         /// <summary>
         /// Parse the given string to generate a ClueCell object.
         /// </summary>
+        /// <param name="coordinate">The coordinate to be associated with the cell.</param>
         /// <param name="clueCellStr">The clue cell string to parse.</param>
         /// <returns>A ClueCell object.</returns>
-        private static ClueCell ParseClueCell(string clueCellStr)
+        private static ClueCell ParseClueCell(Coordinate coordinate, string clueCellStr)
         {
             // Need to get out the column and row clue.
             var columnClue = 0u;
@@ -130,11 +131,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
                 rowClue = uint.Parse(clues[1].Trim());
             }
 
-            return new ClueCell
-            {
-                ColumnClue = columnClue,
-                RowClue = rowClue,
-            };
+            return new ClueCell(coordinate, columnClue, rowClue);
         }
 
         /// <summary>

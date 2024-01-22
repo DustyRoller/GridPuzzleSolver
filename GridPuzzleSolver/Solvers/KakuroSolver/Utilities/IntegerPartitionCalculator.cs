@@ -9,7 +9,7 @@
         /// As calculating integer partitions can be quite slow, keep a cache
         /// of previously caclulated integer partitions and the known magic numbers.
         /// </summary>
-        private static readonly List<IntegerPartitions> Cache = new(MagicNumbers.MagicNumberValues);
+        private static readonly List<IntegerPartitions> Cache = new (MagicNumbers.MagicNumberValues);
 
         /// <summary>
         /// Calculate the distinct integer partitions for the given set
@@ -43,9 +43,9 @@
                 throw new ArgumentException("Maximum value must be greater than the minimum value.");
             }
 
-            var integerPartitions = Cache.FirstOrDefault(ip => ip.PartitionLength == partitionLength &&
-                                                               ip.Total == total &&
-                                                               ip.Values[0].All(v => v >= minValue && v <= maxValue));
+            var integerPartitions = Cache.Find(ip => ip.PartitionLength == partitionLength &&
+                                                     ip.Total == total &&
+                                                     ip.Values[0].TrueForAll(v => v >= minValue && v <= maxValue));
 
             if (integerPartitions == null)
             {
@@ -79,13 +79,18 @@
             {
                 for (var i = Math.Min(sum, maximumValue); i >= minimumValue; i--)
                 {
+                    if (partitionLength == 0)
+                    {
+                        break;
+                    }
+
                     var recursivePartitions = CalculateDistinctIntegerPartitionsRecursive(sum - i, partitionLength - 1, minimumValue, i);
                     foreach (var recursivePartition in recursivePartitions)
                     {
                         recursivePartition.Add(i);
 
                         // Do any of the other partitions also contain the same numbers in a different order.
-                        if (!partitions.Any(r => r.All(recursivePartition.Contains))
+                        if (!partitions.Exists(r => r.TrueForAll(recursivePartition.Contains))
                             && recursivePartition.Distinct().Count() == recursivePartition.Count
                             && partitionLength == recursivePartition.Count
                             && recursivePartition.Sum() == sum)

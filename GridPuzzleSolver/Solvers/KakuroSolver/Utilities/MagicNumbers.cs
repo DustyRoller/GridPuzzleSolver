@@ -9,7 +9,7 @@
         /// <summary>
         /// Collection of known magic numbers.
         /// </summary>
-        public static readonly List<IntegerPartitions> MagicNumberValues = new()
+        public static readonly List<IntegerPartitions> MagicNumberValues = new ()
         {
             new IntegerPartitions(3, 2, new List<List<uint>>() { new List<uint> { 1, 2, } }),
             new IntegerPartitions(4, 2, new List<List<uint>>() { new List<uint> { 1, 3, } }),
