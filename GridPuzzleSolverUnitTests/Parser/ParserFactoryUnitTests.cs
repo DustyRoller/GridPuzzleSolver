@@ -1,4 +1,5 @@
-﻿using GridPuzzleSolver.Solvers.KakuroSolver.Parser;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Solvers.KakuroSolver.Parser;
 using GridPuzzleSolver.Solvers.SudokuSolver.Parser;
 using NUnit.Framework;
 
@@ -18,7 +19,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 #pragma warning restore CS8604, CS8600
 
-            Assert.AreEqual("Puzzle file is null or empty. (Parameter 'puzzleFile')", ex?.Message);
+            Assert.That("Puzzle file is null or empty. (Parameter 'puzzleFile')", Is.EqualTo(ex?.Message));
         }
 
         [TestCase]
@@ -28,7 +29,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 
-            Assert.AreEqual("Puzzle file is null or empty. (Parameter 'puzzleFile')", ex?.Message);
+            Assert.That("Puzzle file is null or empty. (Parameter 'puzzleFile')", Is.EqualTo(ex?.Message));
         }
 
         [TestCase]
@@ -38,7 +39,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 
-            Assert.AreEqual($"Failed to get file extension from puzzle file - {inputFile}.", ex?.Message);
+            Assert.That($"Failed to get file extension from puzzle file - {inputFile}.", Is.EqualTo(ex?.Message));
         }
 
         [TestCase]
@@ -48,7 +49,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             var ex = Assert.Throws<ParserException>(() => ParserFactory.GetParser(inputFile));
 
-            Assert.AreEqual($"File extension \'{Path.GetExtension(inputFile)}\' not recognised.", ex?.Message);
+            Assert.That($"File extension \'{Path.GetExtension(inputFile)}\' not recognised.", Is.EqualTo(ex?.Message));
         }
 
         [TestCase]
@@ -58,7 +59,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             var parser = ParserFactory.GetParser(inputFile);
 
-            Assert.IsInstanceOf(typeof(KakuroParser), parser);
+            Assert.That(parser, Is.InstanceOf(typeof(KakuroParser)));
         }
 
         [TestCase]
@@ -68,7 +69,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             var parser = ParserFactory.GetParser(inputFile);
 
-            Assert.IsInstanceOf(typeof(SudokuParser), parser);
+            Assert.That(parser, Is.InstanceOf(typeof(SudokuParser)));
         }
     }
 }

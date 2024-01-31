@@ -15,7 +15,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
             var ex = Assert.Throws<ArgumentException>(() => IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(
                 sum, partitionLength, minimumValue, maximumValue));
 
-            Assert.AreEqual(expectedExceptionMessage, ex?.Message);
+            Assert.That(expectedExceptionMessage, Is.EqualTo(ex?.Message));
         }
 
         [Test]
@@ -26,8 +26,8 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.AreEqual(1, partitions.Count);
-            CollectionAssert.AreEqual(new List<uint> { 8, 9, }, partitions[0]);
+            Assert.That(1, Is.EqualTo(partitions.Count));
+            Assert.That(new List<uint> { 8, 9, }, Is.EqualTo(partitions[0]));
         }
 
         [Test]
@@ -38,9 +38,9 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.AreEqual(2, partitions.Count);
-            CollectionAssert.AreEqual(new List<uint> { 1, 4, }, partitions[0]);
-            CollectionAssert.AreEqual(new List<uint> { 2, 3, }, partitions[1]);
+            Assert.That(2, Is.EqualTo(partitions.Count));
+            Assert.That(new List<uint> { 1, 4, }, Is.EqualTo(partitions[0]));
+            Assert.That(new List<uint> { 2, 3, }, Is.EqualTo(partitions[1]));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.IsTrue(partitions.All(p => p.Count == partitionLength));
+            Assert.That(partitions.All(p => p.Count == partitionLength));
 
             // Change the length and try again.
             partitionLength = 5u;
@@ -60,7 +60,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.IsTrue(partitions.All(p => p.Count == partitionLength));
+            Assert.That(partitions.All(p => p.Count == partitionLength));
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.IsTrue(partitions.All(p => p.All(i => i >= minValue)));
+            Assert.That(partitions.All(p => p.All(i => i >= minValue)));
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.IsTrue(partitions.All(p => p.All(i => i <= maxValue)));
+            Assert.That(partitions.All(p => p.All(i => i <= maxValue)));
         }
 
         [Test]
@@ -98,11 +98,11 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.IsTrue(partitions.All(p => p.All(i => i <= maxValue)));
+            Assert.That(partitions.All(p => p.All(i => i <= maxValue)));
 
             var cachedPartitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, 2u, 1u, maxValue);
 
-            CollectionAssert.AreEqual(partitions, cachedPartitions);
+            Assert.That(partitions, Is.EqualTo(cachedPartitions));
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
             var maxValue = 5u;
             var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, 1u, maxValue);
 
-            Assert.AreEqual(0, partitions.Count);
+            Assert.That(0, Is.EqualTo(partitions.Count));
         }
 
         [Test]
@@ -124,21 +124,21 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
             var maxValue = 9u;
             var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, 1u, maxValue);
 
-            Assert.AreEqual(4, partitions.Count);
+            Assert.That(4, Is.EqualTo(partitions.Count));
         }
 
         private static void ValidatePartitions(List<List<uint>> partitions, uint sum)
         {
             // First check that the partitions isn't empty.
-            Assert.IsTrue(partitions.Count > 0);
+            Assert.That(partitions.Count > 0);
 
             // Every partition should add up to the expected total, only have
             // unique values and a unique combination of values compared to the
             // rest of the partitions.
-            Assert.IsTrue(partitions.All(p => p.Sum() == sum));
+            Assert.That(partitions.All(p => p.Sum() == sum));
 
             // Make sure each partition has unique numbers.
-            Assert.IsTrue(partitions.All(p => p.Distinct().Count() == p.Count));
+            Assert.That(partitions.All(p => p.Distinct().Count() == p.Count));
         }
     }
 }

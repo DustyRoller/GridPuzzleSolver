@@ -14,7 +14,7 @@ namespace GridPuzzleSolver.Components.UnitTests
             puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
             puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
 
-            Assert.AreEqual(2, puzzle.NumberOfUnsolvedCells);
+            Assert.That(2, Is.EqualTo(puzzle.NumberOfUnsolvedCells));
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace GridPuzzleSolver.Components.UnitTests
                 CellValue = 1u,
             });
 
-            Assert.AreEqual(2, puzzle.NumberOfUnsolvedCells);
+            Assert.That(2, Is.EqualTo(puzzle.NumberOfUnsolvedCells));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace GridPuzzleSolver.Components.UnitTests
                 CellValue = 1u,
             });
 
-            Assert.AreEqual(0, puzzle.NumberOfUnsolvedCells);
+            Assert.That(0, Is.EqualTo(puzzle.NumberOfUnsolvedCells));
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GridPuzzleSolver.UnitTests
         {
             var coordinate = new Coordinate(5u, 8u);
 
-            Assert.IsFalse(coordinate.Equals(null));
+            Assert.That(!coordinate.Equals(null));
         }
 
         [Test]
@@ -18,7 +18,7 @@ namespace GridPuzzleSolver.UnitTests
         {
             var coordinate = new Coordinate(5u, 8u);
 
-            Assert.IsFalse(coordinate.Equals("not a coordinate"));
+            Assert.That(!coordinate.Equals("not a coordinate"));
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace GridPuzzleSolver.UnitTests
 
             var otherCoordinate = new Coordinate(6u, 12u);
 
-            Assert.IsFalse(coordinate.Equals(otherCoordinate));
+            Assert.That(!coordinate.Equals(otherCoordinate));
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace GridPuzzleSolver.UnitTests
 
             var otherCoordinate = new Coordinate(coordinate.X, 13u);
 
-            Assert.IsFalse(coordinate.Equals(otherCoordinate));
+            Assert.That(!coordinate.Equals(otherCoordinate));
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace GridPuzzleSolver.UnitTests
 
             var otherCoordinate = new Coordinate(coordinate.X, coordinate.Y);
 
-            Assert.IsTrue(coordinate.Equals(otherCoordinate));
+            Assert.That(coordinate.Equals(otherCoordinate));
         }
     }
 }
