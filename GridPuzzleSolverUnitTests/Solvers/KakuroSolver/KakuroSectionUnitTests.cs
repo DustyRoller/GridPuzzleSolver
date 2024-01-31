@@ -22,7 +22,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
 
             var partitions = section.CalculatePossibleValues();
 
-            Assert.AreEqual(0, partitions.Count);
+            Assert.That(0, Is.EqualTo(partitions.Count));
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
                 1u, 3u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
                 1u, 8u, 2u, 7u, 3u, 6u, 4u, 5u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
                 1u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
                 1u, 8u, 2u, 7u, 4u, 5u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, possibleValues);
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
         }
 
         [Test]
@@ -124,7 +124,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
             });
             section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
 
-            Assert.IsFalse(section.IsSolved());
+            Assert.That(!section.IsSolved());
         }
 
         [Test]
@@ -145,7 +145,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
                 CellValue = 2u,
             });
 
-            Assert.IsFalse(section.IsSolved());
+            Assert.That(!section.IsSolved());
         }
 
         [Test]
@@ -166,7 +166,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
                 CellValue = 1u,
             });
 
-            Assert.IsFalse(section.IsSolved());
+            Assert.That(!section.IsSolved());
         }
 
         [Test]
@@ -187,7 +187,7 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
                 CellValue = 9u,
             });
 
-            Assert.IsTrue(section.IsSolved());
+            Assert.That(section.IsSolved());
         }
     }
 }

@@ -16,13 +16,13 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
             var testPuzzleDir = Path.Combine("TestPuzzles", "Sudoku");
             var testFile = Path.Combine(testPuzzleDir, testPuzzleFileName);
 
-            Assert.IsTrue(File.Exists(testFile));
+            Assert.That(File.Exists(testFile));
 
             var puzzle = new SudokuParser().ParsePuzzle(testFile);
 
-            var solve = puzzle.Solve();
+            var solved = puzzle.Solve();
 
-            Assert.IsTrue(solve);
+            Assert.That(solved);
         }
     }
 }

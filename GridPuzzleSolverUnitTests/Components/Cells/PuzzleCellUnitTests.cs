@@ -13,7 +13,7 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
 
             var ex = Assert.Throws<GridPuzzleSolverException>(() => puzzleCell.CellValue = 10u);
 
-            Assert.AreEqual($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", ex?.Message);
+            Assert.That($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", Is.EqualTo(ex?.Message));
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
 
             var possibleValues = puzzleCell.PossibleValues;
 
-            CollectionAssert.AreEqual(sectionPossibilities, possibleValues);
+            Assert.That(sectionPossibilities, Is.EqualTo(possibleValues));
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
 
             var possibleValues = puzzleCell.PossibleValues;
 
-            CollectionAssert.AreEqual(expectedValues, possibleValues);
+            Assert.That(expectedValues, Is.EqualTo(possibleValues));
         }
     }
 }

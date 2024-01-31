@@ -18,7 +18,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
                 1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u, 9u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, section.CalculatePossibleValues());
+            Assert.That(expectedPossibleValues, Is.EqualTo(section.CalculatePossibleValues()));
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
                 2u, 4u, 6u, 7u, 8u, 9u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, section.CalculatePossibleValues());
+            Assert.That(expectedPossibleValues, Is.EqualTo(section.CalculatePossibleValues()));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
 
             section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
 
-            Assert.IsFalse(section.IsSolved());
+            Assert.That(!section.IsSolved());
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
                 CellValue = 3u,
             });
 
-            Assert.IsTrue(section.IsSolved());
+            Assert.That(section.IsSolved());
         }
     }
 }

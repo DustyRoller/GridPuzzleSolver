@@ -17,13 +17,13 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
             var testPuzzleDir = Path.Combine("TestPuzzles", "Kakuro");
             var testFile = Path.Combine(testPuzzleDir, testPuzzleFileName);
 
-            Assert.IsTrue(File.Exists(testFile));
+            Assert.That(File.Exists(testFile));
 
             var puzzle = new KakuroParser().ParsePuzzle(testFile);
 
             var solve = puzzle.Solve();
 
-            Assert.IsTrue(solve);
+            Assert.That(solve);
         }
     }
 }
