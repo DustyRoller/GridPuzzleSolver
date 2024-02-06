@@ -1,7 +1,7 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.UnitTests
+namespace GridPuzzleSolver.Components.UnitTests
 {
     [TestFixture]
     public class PuzzleUnitTests
@@ -11,10 +11,10 @@ namespace GridPuzzleSolver.UnitTests
         {
             var puzzle = new Puzzle();
 
-            puzzle.AddCell(new PuzzleCell());
-            puzzle.AddCell(new PuzzleCell());
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
 
-            Assert.AreEqual(2, puzzle.NumberOfUnsolvedCells);
+            Assert.That(2, Is.EqualTo(puzzle.NumberOfUnsolvedCells));
         }
 
         [Test]
@@ -22,14 +22,14 @@ namespace GridPuzzleSolver.UnitTests
         {
             var puzzle = new Puzzle();
 
-            puzzle.AddCell(new PuzzleCell());
-            puzzle.AddCell(new PuzzleCell());
-            puzzle.AddCell(new PuzzleCell()
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u)));
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 1u,
             });
 
-            Assert.AreEqual(2, puzzle.NumberOfUnsolvedCells);
+            Assert.That(2, Is.EqualTo(puzzle.NumberOfUnsolvedCells));
         }
 
         [Test]
@@ -37,16 +37,16 @@ namespace GridPuzzleSolver.UnitTests
         {
             var puzzle = new Puzzle();
 
-            puzzle.AddCell(new PuzzleCell()
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 1u,
             });
-            puzzle.AddCell(new PuzzleCell()
+            puzzle.AddCell(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 1u,
             });
 
-            Assert.AreEqual(0, puzzle.NumberOfUnsolvedCells);
+            Assert.That(0, Is.EqualTo(puzzle.NumberOfUnsolvedCells));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.Cells.UnitTests
+namespace GridPuzzleSolver.Components.Cells.UnitTests
 {
     [TestFixture]
     public class PuzzleCellUnitTests
@@ -9,14 +9,11 @@ namespace GridPuzzleSolver.Cells.UnitTests
         [Test]
         public void PuzzleCell_CellValue_ThrowsExceptionIfValueIsGreaterThan9()
         {
-            var puzzleCell = new PuzzleCell
-            {
-                Coordinate = new Coordinate(0u, 0u),
-            };
+            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
 
             var ex = Assert.Throws<GridPuzzleSolverException>(() => puzzleCell.CellValue = 10u);
 
-            Assert.AreEqual($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", ex.Message);
+            Assert.That($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", Is.EqualTo(ex?.Message));
         }
 
         [Test]
@@ -32,16 +29,13 @@ namespace GridPuzzleSolver.Cells.UnitTests
             mockSection.Setup(ms => ms.CalculatePossibleValues())
                        .Returns(sectionPossibilities);
 
-            var puzzleCell = new PuzzleCell
-            {
-                Coordinate = new Coordinate(0u, 0u),
-            };
+            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
 
             puzzleCell.Sections.Add(mockSection.Object);
 
             var possibleValues = puzzleCell.PossibleValues;
 
-            CollectionAssert.AreEqual(sectionPossibilities, possibleValues);
+            Assert.That(sectionPossibilities, Is.EqualTo(possibleValues));
         }
 
         [Test]
@@ -67,10 +61,7 @@ namespace GridPuzzleSolver.Cells.UnitTests
             rowSection.Setup(rs => rs.CalculatePossibleValues())
                       .Returns(rowSectionPossibilities);
 
-            var puzzleCell = new PuzzleCell
-            {
-                Coordinate = new Coordinate(0u, 0u),
-            };
+            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
 
             puzzleCell.Sections.Add(columnSection.Object);
             puzzleCell.Sections.Add(rowSection.Object);
@@ -79,7 +70,7 @@ namespace GridPuzzleSolver.Cells.UnitTests
 
             var possibleValues = puzzleCell.PossibleValues;
 
-            CollectionAssert.AreEqual(expectedValues, possibleValues);
+            Assert.That(expectedValues, Is.EqualTo(possibleValues));
         }
     }
 }

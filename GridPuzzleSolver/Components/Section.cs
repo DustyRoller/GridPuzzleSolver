@@ -1,9 +1,9 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
-namespace GridPuzzleSolver
+namespace GridPuzzleSolver.Components
 {
     /// <summary>
     /// A section represents a ClueCell and a list of PuzzleCells.
@@ -33,7 +33,7 @@ namespace GridPuzzleSolver
             // Make sure that all puzzle cells are solved, that the total of
             // their value adds up to the clue value and that they all have
             // unique values.
-            return PuzzleCells.All(pc => pc.Solved) &&
+            return PuzzleCells.TrueForAll(pc => pc.Solved) &&
                    PuzzleCells.Select(pc => pc.CellValue).Distinct().Count() == PuzzleCells.Count;
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace GridPuzzleSolver.Solvers.SudokuSolver
+﻿using GridPuzzleSolver.Components;
+
+namespace GridPuzzleSolver.Solvers.SudokuSolver
 {
     /// <summary>
     /// An object representing a section within a sudoku puzzle. Each section
@@ -7,7 +9,7 @@
     /// </summary>
     internal class SudokuSection : Section
     {
-        private static readonly List<uint> ValidValues = new()
+        private static readonly List<uint> ValidValues = new ()
         {
             1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u, 9u,
         };

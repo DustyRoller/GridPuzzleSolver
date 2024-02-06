@@ -1,4 +1,4 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using NUnit.Framework;
 
 namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
@@ -11,14 +11,14 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
         {
             var section = new SudokuSection();
 
-            section.PuzzleCells.Add(new PuzzleCell());
+            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
 
             var expectedPossibleValues = new List<uint>()
             {
                 1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u, 9u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, section.CalculatePossibleValues());
+            Assert.That(expectedPossibleValues, Is.EqualTo(section.CalculatePossibleValues()));
         }
 
         [Test]
@@ -28,15 +28,15 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
 
             section.PuzzleCells.AddRange(new List<PuzzleCell>
             {
-                new PuzzleCell
+                new PuzzleCell(new Coordinate(0u, 0u))
                 {
                     CellValue = 1u,
                 },
-                new PuzzleCell
+                new PuzzleCell(new Coordinate(0u, 0u))
                 {
                     CellValue = 3u,
                 },
-                new PuzzleCell
+                new PuzzleCell(new Coordinate(0u, 0u))
                 {
                     CellValue = 5u,
                 },
@@ -47,7 +47,7 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
                 2u, 4u, 6u, 7u, 8u, 9u,
             };
 
-            CollectionAssert.AreEqual(expectedPossibleValues, section.CalculatePossibleValues());
+            Assert.That(expectedPossibleValues, Is.EqualTo(section.CalculatePossibleValues()));
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
         {
             var section = new SudokuSection();
 
-            section.PuzzleCells.Add(new PuzzleCell());
+            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
 
-            Assert.IsFalse(section.IsSolved());
+            Assert.That(!section.IsSolved());
         }
 
         [Test]
@@ -65,13 +65,12 @@ namespace GridPuzzleSolver.Solvers.SudokuSolver.UnitTests
         {
             var section = new SudokuSection();
 
-            section.PuzzleCells.Add(new PuzzleCell
+            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
             {
                 CellValue = 3u,
             });
 
-            Assert.IsTrue(section.IsSolved());
+            Assert.That(section.IsSolved());
         }
     }
 }
-
