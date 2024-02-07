@@ -1,4 +1,5 @@
-﻿using GridPuzzleSolver.Cells;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Components.Cells;
 using GridPuzzleSolver.Parser;
 using GridPuzzleSolver.Solvers.SudokuSolver;
 using System.Xml;
@@ -11,12 +12,12 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
     /// </summary>
     internal class KillerSudokuParser : BaseParser
     {
+        private const string SchemaFile = "KillerSudokuSchema.xsd";
+
         /// <summary>
         /// Gets the file extension of the file that the parser will read.
         /// </summary>
         public static string FileExtension => ".ksud";
-
-        private const string SchemaFile = "KillerSudokuSchema.xsd";
 
         public override Puzzle ParsePuzzle(string puzzleFilePath)
         {
@@ -29,7 +30,7 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
             }
 
             var killerSudukoSchema = new XmlSchemaSet();
-            killerSudukoSchema.Add("", SchemaFile);
+            killerSudukoSchema.Add(string.Empty, SchemaFile);
 
             // Now read in the puzzle.
             var xmlDoc = new XmlDocument
@@ -42,7 +43,7 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
 
             // Get elements
             var cellNodesList = xmlDoc.SelectNodes("//puzzle/grid/cells/cell");
-            
+
             // Shouldn't be possible for this to happen but check just in case.
             if (cellNodesList == null || cellNodesList.Count == 0)
             {
@@ -55,7 +56,7 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
             }
 
             var puzzleCells = new List<PuzzleCell>();
-                        
+
             foreach (XmlNode cellNode in cellNodesList)
             {
                 var cellDataValues = cellNode.ChildNodes;
@@ -84,11 +85,10 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
                     throw new ParserException($"Failed to parse value for cell {id}.");
                 }
 
-                puzzleCells.Add(new PuzzleCell
-                {
-                    CellValue = value,
-                    Coordinate = new Coordinate(x, y),
-                });
+                var puzzleCell = new PuzzleCell(new Coordinate(x, y));
+                puzzleCell.CellValue = value;
+
+                puzzleCells.Add(puzzleCell);
             }
 
             // Setup the sections.
@@ -104,7 +104,6 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
             }
 
             var puzzle = new Puzzle();
-
 
             return puzzle;
         }
