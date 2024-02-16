@@ -9,7 +9,7 @@
               <xs:element name="cells">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="cell">
+                    <xs:element minOccurs="81" maxOccurs="81" name="cell">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="id" type="xs:unsignedByte" />
@@ -28,7 +28,7 @@
         <xs:element name="cages">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="cage">
+              <xs:element minOccurs="9" maxOccurs="81" name="cage">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="sum" type="xs:unsignedByte" />

@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestPuzzles\KillerSudoku\" />
     <Folder Include="TestPuzzles\Sudoku\" />
   </ItemGroup>
 
@@ -55,6 +54,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestPuzzles\Kakuro\Medium4x4Puzzle.kak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\KillerSudoku\EmptyPuzzle.ksud">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\KillerSudoku\EasyPuzzle.ksud">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestPuzzles\Sudoku\EasyPuzzle.sod">
