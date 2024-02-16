@@ -2,8 +2,16 @@
 
 namespace GridPuzzleSolver.Parser
 {
+    /// <summary>
+    /// Abstract class providing common functionality for parsers.
+    /// </summary>
     internal abstract class BaseParser : IParser
     {
+        /// <summary>
+        /// Parse the given file to generate a Puzzle, ready to be solved.
+        /// </summary>
+        /// <param name="puzzleFilePath">The path to the file containing the puzzle.</param>
+        /// <returns>A Puzzle object.</returns>
         public abstract Puzzle ParsePuzzle(string puzzleFilePath);
 
         /// <summary>

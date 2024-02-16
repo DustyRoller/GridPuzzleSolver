@@ -19,6 +19,11 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
         /// </summary>
         public static string FileExtension => ".ksud";
 
+        /// <summary>
+        /// Parse the given file to generate a Puzzle, ready to be solved.
+        /// </summary>
+        /// <param name="puzzleFilePath">The path to the file containing the puzzle.</param>
+        /// <returns>A Puzzle object.</returns>
         public override Puzzle ParsePuzzle(string puzzleFilePath)
         {
             ValidateInputFile(puzzleFilePath, FileExtension);

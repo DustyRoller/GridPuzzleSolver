@@ -16,7 +16,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ParserException"/> class.
+        /// Initializes a new instance of the <see cref="GridPuzzleSolverException"/> class.
         /// </summary>
         /// <param name="message">The message to be associate with the exception.</param>
         /// <param name="innerExcepion">The exception that is the cause of the current exception.</param>
