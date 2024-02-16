@@ -99,8 +99,6 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
             // Setup the sections.
             var columnCellGroups = puzzleCells.GroupBy(pc => pc.Coordinate.X);
 
-            var columns = new List<Section>();
-
             foreach (var columnCells in columnCellGroups)
             {
                 var column = new SudokuSection();
@@ -119,7 +117,7 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The event.</param>
         /// <exception cref="ParserException">Thrown when this event occurs.</exception>
-        private static void ValidationEventHandler(object sender, ValidationEventArgs e)
+        private static void ValidationEventHandler(object? sender, ValidationEventArgs e)
         {
             throw new ParserException("Failed to validate puzzle file against the schema.", e.Exception);
         }

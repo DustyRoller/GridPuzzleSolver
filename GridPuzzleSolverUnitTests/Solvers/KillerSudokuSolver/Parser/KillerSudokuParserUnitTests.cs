@@ -10,7 +10,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
     {
         private const string TestPuzzleFileName = "TestPuzzle.ksud";
 
-        private readonly string TestPuzzleDir = Path.Combine("TestPuzzles", "Sudoku");
+        private readonly string testPuzzleDir = Path.Combine("TestPuzzles", "Sudoku");
 
         [SetUp]
         public void BaseSetUp()
