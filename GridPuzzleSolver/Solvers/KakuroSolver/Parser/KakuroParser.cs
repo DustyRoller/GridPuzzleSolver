@@ -43,7 +43,13 @@ namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
             puzzle.Height = (uint)lines.Length;
 
             // Width is minus two because of the starting and trailing '|'.
-            puzzle.Width = (uint)lines[0].Split('|').Length - 2;
+            var firstLineWidth = (uint)lines[0].Split('|').Length;
+            if (firstLineWidth <= 3)
+            {
+                throw new ParserException("Puzzle must be at least two cells wide.");
+            }
+
+            puzzle.Width = firstLineWidth - 2;
 
             // Now make sure every other row has the same number of cells.
             for (var i = 1u; i < lines.Length; ++i)
