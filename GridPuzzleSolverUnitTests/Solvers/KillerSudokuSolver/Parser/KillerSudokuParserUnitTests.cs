@@ -31,7 +31,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
             var parser = new KillerSudokuParser();
             var ex = Assert.Throws<FileNotFoundException>(() => parser.ParsePuzzle("randomfile"));
 
-            Assert.AreEqual("Unable to find puzzle file.", ex.Message);
+            Assert.That("Unable to find puzzle file.", Is.EqualTo(ex?.Message));
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
             var parser = new KillerSudokuParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(fileName));
 
-            Assert.AreEqual("Invalid file type, expected .ksud. (Parameter 'puzzleFilePath')", ex.Message);
+            Assert.That("Invalid file type, expected .ksud. (Parameter 'puzzleFilePath')", Is.EqualTo(ex?.Message));
 
             File.Delete(fileName);
         }
@@ -57,7 +57,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
             var parser = new KillerSudokuParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual("Puzzle file is empty. (Parameter 'puzzleFilePath')", ex.Message);
+            Assert.That("Puzzle file is empty. (Parameter 'puzzleFilePath')", Is.EqualTo(ex?.Message));
 
             File.Delete(TestPuzzleFileName);
         }
@@ -92,7 +92,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
             var parser = new KillerSudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual("Failed to validate puzzle file against the schema.", ex.Message);
+            Assert.That("Failed to validate puzzle file against the schema.", Is.EqualTo(ex?.Message));
         }
 
         [Test]
@@ -171,7 +171,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
             var parser = new KillerSudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.AreEqual($"Puzzle only contains {id + 1}, expected 81.", ex.Message);
+            Assert.That($"Puzzle only contains {id + 1}, expected 81.", Is.EqualTo(ex?.Message));
         }
     }
 }
