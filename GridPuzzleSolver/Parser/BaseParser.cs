@@ -19,7 +19,7 @@ namespace GridPuzzleSolver.Parser
         /// </summary>
         /// <param name="puzzleFilePath">The path to the file containing the puzzle.</param>
         /// <param name="expectedFileExtension">The expected file extension for the puzzle file.</param>
-        protected void ValidateInputFile(string puzzleFilePath, string expectedFileExtension)
+        protected static void ValidateInputFile(string puzzleFilePath, string expectedFileExtension)
         {
             if (!File.Exists(puzzleFilePath))
             {
