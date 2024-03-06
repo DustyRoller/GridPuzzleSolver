@@ -16,7 +16,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
         public void BaseSetUp()
         {
             // If the test file already exists fail the unit test.
-            Assert.IsFalse(File.Exists(TestPuzzleFileName), $"Test file {TestPuzzleFileName} already exists");
+            Assert.That(!File.Exists(TestPuzzleFileName), $"Test file {TestPuzzleFileName} already exists");
         }
 
         [TearDown]
