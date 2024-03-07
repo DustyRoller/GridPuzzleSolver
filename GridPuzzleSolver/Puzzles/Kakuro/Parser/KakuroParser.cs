@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("KakuroSolverUnitTests")]
 
-namespace GridPuzzleSolver.Solvers.KakuroSolver.Parser
+namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
 {
     /// <summary>
     /// Class to parse Kakuro puzzles from text files.

@@ -1,7 +1,7 @@
 ﻿using GridPuzzleSolver.Components;
-using GridPuzzleSolver.Solvers.KakuroSolver.Utilities;
+using GridPuzzleSolver.Puzzles.Kakuro.Utilities;
 
-namespace GridPuzzleSolver.Solvers.KakuroSolver
+namespace GridPuzzleSolver.Puzzles.Kakuro
 {
     /// <summary>
     /// Class defining the sections that make up a kakuro puzzle.
