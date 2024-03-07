@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities.UnitTests
+namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities.UnitTests
 {
     [TestFixture]
     public class MagicNumbersUnitTests

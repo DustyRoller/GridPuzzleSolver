@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Text;
 
-namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser.UnitTests
+namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
 {
     [TestFixture]
     public class SudokuParserUnitTests

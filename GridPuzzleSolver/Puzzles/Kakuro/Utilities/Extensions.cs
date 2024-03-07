@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities
+﻿namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities
 {
     /// <summary>
     /// Extension class to provide useful extension functions.
