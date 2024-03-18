@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities
+﻿namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities
 {
     /// <summary>
     /// Class to calculate integer partitions for given number combinations.

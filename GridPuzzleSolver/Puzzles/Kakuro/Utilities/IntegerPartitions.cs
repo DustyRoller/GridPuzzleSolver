@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver.Solvers.KakuroSolver.Utilities
+﻿namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities
 {
     /// <summary>
     /// Class representing an integer partition, used to keep track of

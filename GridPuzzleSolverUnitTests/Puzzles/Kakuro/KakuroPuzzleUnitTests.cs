@@ -1,7 +1,7 @@
-﻿using GridPuzzleSolver.Solvers.KakuroSolver.Parser;
+﻿using GridPuzzleSolver.Puzzles.Kakuro.Parser;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
+namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
 {
     [TestFixture]
     public class KakuroPuzzleUnitTests

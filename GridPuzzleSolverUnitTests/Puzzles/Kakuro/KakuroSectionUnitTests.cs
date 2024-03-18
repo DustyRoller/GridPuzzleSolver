@@ -1,7 +1,7 @@
 ﻿using GridPuzzleSolver.Components.Cells;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.Solvers.KakuroSolver.UnitTests
+namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
 {
     [TestFixture]
     public class KakuroSectionUnitTests

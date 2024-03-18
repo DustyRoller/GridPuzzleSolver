@@ -1,5 +1,5 @@
-﻿using GridPuzzleSolver.Solvers.KakuroSolver.Parser;
-using GridPuzzleSolver.Solvers.SudokuSolver.Parser;
+﻿using GridPuzzleSolver.Puzzles.Kakuro.Parser;
+using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 
 namespace GridPuzzleSolver.Parser
 {

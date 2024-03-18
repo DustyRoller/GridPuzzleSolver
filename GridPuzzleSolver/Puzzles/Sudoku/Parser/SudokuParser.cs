@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("SudokuSolverUnitTests")]
 
-namespace GridPuzzleSolver.Solvers.SudokuSolver.Parser
+namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
 {
     /// <summary>
     /// Class to parse Sudoku puzzles from text files.
