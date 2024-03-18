@@ -1,11 +1,11 @@
 ﻿using GridPuzzleSolver.Components;
 using GridPuzzleSolver.Components.Cells;
 using GridPuzzleSolver.Parser;
-using GridPuzzleSolver.Solvers.SudokuSolver;
+using GridPuzzleSolver.Puzzles.Sudoku;
 using System.Xml;
 using System.Xml.Schema;
 
-namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
+namespace GridPuzzleSolver.Puzzles.KillerSudoku.Parser
 {
     /// <summary>
     /// Class to parse Killer Sudoku puzzles from XML files.
@@ -57,7 +57,7 @@ namespace GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser
 
             if (cellNodesList.Count != 81)
             {
-                throw new ParserException($"Puzzle only contains {cellNodesList.Count}, expected 81.");
+                throw new ParserException($"Puzzle only contains {cellNodesList.Count} cells, expected 81.");
             }
 
             var puzzleCells = new List<PuzzleCell>();

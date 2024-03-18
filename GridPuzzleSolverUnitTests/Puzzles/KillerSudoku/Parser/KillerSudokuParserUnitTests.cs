@@ -1,16 +1,14 @@
-﻿using GridPuzzleSolver;
-using GridPuzzleSolver.Solvers.KillerSudokuSolver.Parser;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Xml;
 
-namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
+namespace GridPuzzleSolver.Puzzles.KillerSudoku.Parser.UnitTests
 {
     [TestFixture]
     public class KillerSudokuParserUnitTests
     {
         private const string TestPuzzleFileName = "TestPuzzle.ksud";
 
-        private readonly string testPuzzleDir = Path.Combine("TestPuzzles", "Sudoku");
+        private readonly string testPuzzleDir = Path.Combine("TestPuzzles", "KillerSudoku");
 
         [SetUp]
         public void BaseSetUp()
@@ -171,7 +169,7 @@ namespace GridPuzzleSolverUnitTests.Solvers.KillerSudokuSolver.Parser
             var parser = new KillerSudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That($"Puzzle only contains {id + 1}, expected 81.", Is.EqualTo(ex?.Message));
+            Assert.That($"Puzzle only contains {cellsNode.ChildNodes.Count} cells, expected 81.", Is.EqualTo(ex?.Message));
         }
     }
 }
