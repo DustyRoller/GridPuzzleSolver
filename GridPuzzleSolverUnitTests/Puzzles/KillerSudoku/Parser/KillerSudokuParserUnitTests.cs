@@ -96,6 +96,20 @@ namespace GridPuzzleSolver.Puzzles.KillerSudoku.Parser.UnitTests
         [Test]
         public void KillerSudokuParser_ParsePuzzle_FailsWithPuzzleWithInvalidNumberOfCells()
         {
+            var xmlDoc = CreateTestPuzzle(8);
+
+            xmlDoc.Save(TestPuzzleFileName);
+
+            var parser = new KillerSudokuParser();
+            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
+
+            var numCells = xmlDoc.SelectNodes("//puzzle/grid/cells/cell")?.Count;
+
+            Assert.That($"Puzzle only contains {numCells} cells, expected 81.", Is.EqualTo(ex?.Message));
+        }
+
+        private static XmlDocument CreateTestPuzzle(int numColumns = 9, int numRows = 9)
+        {
             var xmlDoc = new XmlDocument();
             var puzzleNode = xmlDoc.CreateElement("puzzle");
 
@@ -105,9 +119,9 @@ namespace GridPuzzleSolver.Puzzles.KillerSudoku.Parser.UnitTests
 
             // Create the cells.
             var id = 0;
-            for (int column = 0; column < 8; ++column)
+            for (int column = 0; column < numColumns; ++column)
             {
-                for (int row = 0; row < 9; ++row)
+                for (int row = 0; row < numRows; ++row)
                 {
                     var cellNode = xmlDoc.CreateElement("cell");
                     var cellIdNode = xmlDoc.CreateElement("id");
@@ -164,12 +178,7 @@ namespace GridPuzzleSolver.Puzzles.KillerSudoku.Parser.UnitTests
 
             xmlDoc.AppendChild(puzzleNode);
 
-            xmlDoc.Save(TestPuzzleFileName);
-
-            var parser = new KillerSudokuParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
-
-            Assert.That($"Puzzle only contains {cellsNode.ChildNodes.Count} cells, expected 81.", Is.EqualTo(ex?.Message));
+            return xmlDoc;
         }
     }
 }
