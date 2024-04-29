@@ -9,7 +9,7 @@
         /// <summary>
         /// Underlying integer partition combinations values.
         /// </summary>
-        private List<List<uint>> values;
+        private readonly List<List<uint>> values;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IntegerPartitions"/> class.
@@ -41,10 +41,6 @@
         /// The list returned is a deep copy of the original allowing the user
         /// to modifiy the list as required.
         /// </remarks>
-        public List<List<uint>> Values
-        {
-            get => values.ConvertAll(v => new List<uint>(v));
-            private set { values = value; }
-        }
+        public List<List<uint>> Values => values.ConvertAll(v => new List<uint>(v));
     }
 }
