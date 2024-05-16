@@ -13,7 +13,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities.UnitTests
             // can determine which value was wrong, if any.
             foreach (var mn in MagicNumbers.MagicNumberValues)
             {
-                Assert.That(mn.Values[0].Sum(v => v) == mn.Total, $"{mn.Total} - {mn.PartitionLength}");
+                Assert.That(mn.Values[0].Sum(v => v), Is.EqualTo(mn.Total), $"{mn.Total} - {mn.PartitionLength}");
             }
         }
 

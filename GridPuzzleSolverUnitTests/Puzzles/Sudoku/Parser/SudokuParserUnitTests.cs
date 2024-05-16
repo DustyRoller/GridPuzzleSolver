@@ -30,7 +30,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<FileNotFoundException>(() => parser.ParsePuzzle("randomfile"));
 
-            Assert.That("Unable to find puzzle file.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Unable to find puzzle file."));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(fileName));
 
-            Assert.That("Invalid file type, expected .sud. (Parameter 'puzzleFilePath')", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Invalid file type, expected .sud. (Parameter 'puzzleFilePath')"));
 
             File.Delete(fileName);
         }
@@ -56,7 +56,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Puzzle file is empty. (Parameter 'puzzleFilePath')", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file is empty. (Parameter 'puzzleFilePath')"));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Not all rows have 9 columns.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Not all rows have 9 columns."));
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Puzzle does not have 9 rows.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle does not have 9 rows."));
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Failed to parse cell value: ?", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Failed to parse cell value: ?"));
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Puzzle contains no solved cells", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle contains no solved cells"));
         }
 
         [Test]
@@ -162,8 +162,8 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             var parser = new SudokuParser();
             var puzzle = parser.ParsePuzzle(testFile);
 
-            Assert.That(81, Is.EqualTo(puzzle.Cells.Count));
-            Assert.That(27, Is.EqualTo(puzzle.Sections.Count));
+            Assert.That(puzzle.Cells, Has.Count.EqualTo(81));
+            Assert.That(puzzle.Sections, Has.Count.EqualTo(27));
 
             // Assert that the cell coordinates are correct.
             var index = 0;
@@ -172,7 +172,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             {
                 for (var x = 0u; x < 9; ++x)
                 {
-                    Assert.That(new Coordinate(x, y), Is.EqualTo(puzzle.Cells[index].Coordinate));
+                    Assert.That(puzzle.Cells[index].Coordinate, Is.EqualTo(new Coordinate(x, y)));
 
                     index++;
                 }
@@ -192,95 +192,95 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
                 Assert.That(rowSections[i].PuzzleCells.All(c => c.Coordinate.X == i));
             }
 
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[0]).CellValue));
-            Assert.That(4u, Is.EqualTo(((PuzzleCell)puzzle.Cells[1]).CellValue));
-            Assert.That(2u, Is.EqualTo(((PuzzleCell)puzzle.Cells[2]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[3]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[4]).CellValue));
-            Assert.That(5u, Is.EqualTo(((PuzzleCell)puzzle.Cells[5]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[6]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[7]).CellValue));
-            Assert.That(6u, Is.EqualTo(((PuzzleCell)puzzle.Cells[8]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[0]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[1]).CellValue, Is.EqualTo(4u));
+            Assert.That(((PuzzleCell)puzzle.Cells[2]).CellValue, Is.EqualTo(2u));
+            Assert.That(((PuzzleCell)puzzle.Cells[3]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[4]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[5]).CellValue, Is.EqualTo(5u));
+            Assert.That(((PuzzleCell)puzzle.Cells[6]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[7]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[8]).CellValue, Is.EqualTo(6u));
 
-            Assert.That(1u, Is.EqualTo(((PuzzleCell)puzzle.Cells[9]).CellValue));
-            Assert.That(9u, Is.EqualTo(((PuzzleCell)puzzle.Cells[10]).CellValue));
-            Assert.That(7u, Is.EqualTo(((PuzzleCell)puzzle.Cells[11]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[12]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[13]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[14]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[15]).CellValue));
-            Assert.That(4u, Is.EqualTo(((PuzzleCell)puzzle.Cells[16]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[17]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[9]).CellValue, Is.EqualTo(1u));
+            Assert.That(((PuzzleCell)puzzle.Cells[10]).CellValue, Is.EqualTo(9u));
+            Assert.That(((PuzzleCell)puzzle.Cells[11]).CellValue, Is.EqualTo(7u));
+            Assert.That(((PuzzleCell)puzzle.Cells[12]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[13]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[14]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[15]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[16]).CellValue, Is.EqualTo(4u));
+            Assert.That(((PuzzleCell)puzzle.Cells[17]).CellValue, Is.EqualTo(0u));
 
-            Assert.That(5u, Is.EqualTo(((PuzzleCell)puzzle.Cells[18]).CellValue));
-            Assert.That(6u, Is.EqualTo(((PuzzleCell)puzzle.Cells[19]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[20]).CellValue));
-            Assert.That(4u, Is.EqualTo(((PuzzleCell)puzzle.Cells[21]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[22]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[23]).CellValue));
-            Assert.That(1u, Is.EqualTo(((PuzzleCell)puzzle.Cells[24]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[25]).CellValue));
-            Assert.That(9u, Is.EqualTo(((PuzzleCell)puzzle.Cells[26]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[18]).CellValue, Is.EqualTo(5u));
+            Assert.That(((PuzzleCell)puzzle.Cells[19]).CellValue, Is.EqualTo(6u));
+            Assert.That(((PuzzleCell)puzzle.Cells[20]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[21]).CellValue, Is.EqualTo(4u));
+            Assert.That(((PuzzleCell)puzzle.Cells[22]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[23]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[24]).CellValue, Is.EqualTo(1u));
+            Assert.That(((PuzzleCell)puzzle.Cells[25]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[26]).CellValue, Is.EqualTo(9u));
 
-            Assert.That(8u, Is.EqualTo(((PuzzleCell)puzzle.Cells[27]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[28]).CellValue));
-            Assert.That(1u, Is.EqualTo(((PuzzleCell)puzzle.Cells[29]).CellValue));
-            Assert.That(3u, Is.EqualTo(((PuzzleCell)puzzle.Cells[30]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[31]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[32]).CellValue));
-            Assert.That(2u, Is.EqualTo(((PuzzleCell)puzzle.Cells[33]).CellValue));
-            Assert.That(6u, Is.EqualTo(((PuzzleCell)puzzle.Cells[34]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[35]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[27]).CellValue, Is.EqualTo(8u));
+            Assert.That(((PuzzleCell)puzzle.Cells[28]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[29]).CellValue, Is.EqualTo(1u));
+            Assert.That(((PuzzleCell)puzzle.Cells[30]).CellValue, Is.EqualTo(3u));
+            Assert.That(((PuzzleCell)puzzle.Cells[31]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[32]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[33]).CellValue, Is.EqualTo(2u));
+            Assert.That(((PuzzleCell)puzzle.Cells[34]).CellValue, Is.EqualTo(6u));
+            Assert.That(((PuzzleCell)puzzle.Cells[35]).CellValue, Is.EqualTo(0u));
 
-            Assert.That(9u, Is.EqualTo(((PuzzleCell)puzzle.Cells[36]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[37]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[38]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[39]).CellValue));
-            Assert.That(7u, Is.EqualTo(((PuzzleCell)puzzle.Cells[40]).CellValue));
-            Assert.That(1u, Is.EqualTo(((PuzzleCell)puzzle.Cells[41]).CellValue));
-            Assert.That(4u, Is.EqualTo(((PuzzleCell)puzzle.Cells[42]).CellValue));
-            Assert.That(5u, Is.EqualTo(((PuzzleCell)puzzle.Cells[43]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[44]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[36]).CellValue, Is.EqualTo(9u));
+            Assert.That(((PuzzleCell)puzzle.Cells[37]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[38]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[39]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[40]).CellValue, Is.EqualTo(7u));
+            Assert.That(((PuzzleCell)puzzle.Cells[41]).CellValue, Is.EqualTo(1u));
+            Assert.That(((PuzzleCell)puzzle.Cells[42]).CellValue, Is.EqualTo(4u));
+            Assert.That(((PuzzleCell)puzzle.Cells[43]).CellValue, Is.EqualTo(5u));
+            Assert.That(((PuzzleCell)puzzle.Cells[44]).CellValue, Is.EqualTo(0u));
 
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[45]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[46]).CellValue));
-            Assert.That(3u, Is.EqualTo(((PuzzleCell)puzzle.Cells[47]).CellValue));
-            Assert.That(2u, Is.EqualTo(((PuzzleCell)puzzle.Cells[48]).CellValue));
-            Assert.That(5u, Is.EqualTo(((PuzzleCell)puzzle.Cells[49]).CellValue));
-            Assert.That(6u, Is.EqualTo(((PuzzleCell)puzzle.Cells[50]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[51]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[52]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[53]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[45]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[46]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[47]).CellValue, Is.EqualTo(3u));
+            Assert.That(((PuzzleCell)puzzle.Cells[48]).CellValue, Is.EqualTo(2u));
+            Assert.That(((PuzzleCell)puzzle.Cells[49]).CellValue, Is.EqualTo(5u));
+            Assert.That(((PuzzleCell)puzzle.Cells[50]).CellValue, Is.EqualTo(6u));
+            Assert.That(((PuzzleCell)puzzle.Cells[51]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[52]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[53]).CellValue, Is.EqualTo(0u));
 
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[54]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[55]).CellValue));
-            Assert.That(5u, Is.EqualTo(((PuzzleCell)puzzle.Cells[56]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[57]).CellValue));
-            Assert.That(3u, Is.EqualTo(((PuzzleCell)puzzle.Cells[58]).CellValue));
-            Assert.That(2u, Is.EqualTo(((PuzzleCell)puzzle.Cells[59]).CellValue));
-            Assert.That(7u, Is.EqualTo(((PuzzleCell)puzzle.Cells[60]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[61]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[62]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[54]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[55]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[56]).CellValue, Is.EqualTo(5u));
+            Assert.That(((PuzzleCell)puzzle.Cells[57]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[58]).CellValue, Is.EqualTo(3u));
+            Assert.That(((PuzzleCell)puzzle.Cells[59]).CellValue, Is.EqualTo(2u));
+            Assert.That(((PuzzleCell)puzzle.Cells[60]).CellValue, Is.EqualTo(7u));
+            Assert.That(((PuzzleCell)puzzle.Cells[61]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[62]).CellValue, Is.EqualTo(0u));
 
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[63]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[64]).CellValue));
-            Assert.That(4u, Is.EqualTo(((PuzzleCell)puzzle.Cells[65]).CellValue));
-            Assert.That(5u, Is.EqualTo(((PuzzleCell)puzzle.Cells[66]).CellValue));
-            Assert.That(9u, Is.EqualTo(((PuzzleCell)puzzle.Cells[67]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[68]).CellValue));
-            Assert.That(6u, Is.EqualTo(((PuzzleCell)puzzle.Cells[69]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[70]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[71]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[63]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[64]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[65]).CellValue, Is.EqualTo(4u));
+            Assert.That(((PuzzleCell)puzzle.Cells[66]).CellValue, Is.EqualTo(5u));
+            Assert.That(((PuzzleCell)puzzle.Cells[67]).CellValue, Is.EqualTo(9u));
+            Assert.That(((PuzzleCell)puzzle.Cells[68]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[69]).CellValue, Is.EqualTo(6u));
+            Assert.That(((PuzzleCell)puzzle.Cells[70]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[71]).CellValue, Is.EqualTo(0u));
 
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[72]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[73]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[74]).CellValue));
-            Assert.That(7u, Is.EqualTo(((PuzzleCell)puzzle.Cells[75]).CellValue));
-            Assert.That(6u, Is.EqualTo(((PuzzleCell)puzzle.Cells[76]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[77]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[78]).CellValue));
-            Assert.That(8u, Is.EqualTo(((PuzzleCell)puzzle.Cells[79]).CellValue));
-            Assert.That(0u, Is.EqualTo(((PuzzleCell)puzzle.Cells[80]).CellValue));
+            Assert.That(((PuzzleCell)puzzle.Cells[72]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[73]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[74]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[75]).CellValue, Is.EqualTo(7u));
+            Assert.That(((PuzzleCell)puzzle.Cells[76]).CellValue, Is.EqualTo(6u));
+            Assert.That(((PuzzleCell)puzzle.Cells[77]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[78]).CellValue, Is.EqualTo(0u));
+            Assert.That(((PuzzleCell)puzzle.Cells[79]).CellValue, Is.EqualTo(8u));
+            Assert.That(((PuzzleCell)puzzle.Cells[80]).CellValue, Is.EqualTo(0u));
         }
     }
 }

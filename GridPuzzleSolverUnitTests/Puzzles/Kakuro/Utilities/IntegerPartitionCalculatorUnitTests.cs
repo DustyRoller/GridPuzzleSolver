@@ -26,8 +26,8 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.That(1, Is.EqualTo(partitions.Count));
-            Assert.That(new List<uint> { 8, 9, }, Is.EqualTo(partitions[0]));
+            Assert.That(partitions, Has.Count.EqualTo(1));
+            Assert.That(partitions[0], Is.EqualTo(new List<uint> { 8, 9, }));
         }
 
         [Test]
@@ -38,9 +38,9 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities.UnitTests
 
             ValidatePartitions(partitions, sum);
 
-            Assert.That(2, Is.EqualTo(partitions.Count));
-            Assert.That(new List<uint> { 1, 4, }, Is.EqualTo(partitions[0]));
-            Assert.That(new List<uint> { 2, 3, }, Is.EqualTo(partitions[1]));
+            Assert.That(partitions, Has.Count.EqualTo(2));
+            Assert.That(partitions[0], Is.EqualTo(new List<uint> { 1, 4, }));
+            Assert.That(partitions[1], Is.EqualTo(new List<uint> { 2, 3, }));
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities.UnitTests
             var maxValue = 5u;
             var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, 1u, maxValue);
 
-            Assert.That(0, Is.EqualTo(partitions.Count));
+            Assert.That(partitions, Is.Empty);
         }
 
         [Test]
@@ -124,13 +124,13 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Utilities.UnitTests
             var maxValue = 9u;
             var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, 1u, maxValue);
 
-            Assert.That(4, Is.EqualTo(partitions.Count));
+            Assert.That(partitions, Has.Count.EqualTo(4));
         }
 
         private static void ValidatePartitions(List<List<uint>> partitions, uint sum)
         {
             // First check that the partitions isn't empty.
-            Assert.That(partitions.Count > 0);
+            Assert.That(partitions, Is.Not.Empty);
 
             // Every partition should add up to the expected total, only have
             // unique values and a unique combination of values compared to the

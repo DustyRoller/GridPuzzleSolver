@@ -22,7 +22,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
 
             var partitions = section.CalculatePossibleValues();
 
-            Assert.That(0, Is.EqualTo(partitions.Count));
+            Assert.That(partitions, Is.Empty);
         }
 
         [Test]

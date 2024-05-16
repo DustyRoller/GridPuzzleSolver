@@ -17,7 +17,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             var parser = new KakuroParser();
             var ex = Assert.Throws<FileNotFoundException>(() => parser.ParsePuzzle("randomfile"));
 
-            Assert.That("Unable to find puzzle file.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Unable to find puzzle file."));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             var parser = new KakuroParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(fileName));
 
-            Assert.That("Invalid file type, expected .kak. (Parameter 'puzzleFilePath')", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Invalid file type, expected .kak. (Parameter 'puzzleFilePath')"));
 
             File.Delete(fileName);
         }
@@ -43,7 +43,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             var parser = new KakuroParser();
             var ex = Assert.Throws<ArgumentException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Puzzle file is empty. (Parameter 'puzzleFilePath')", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file is empty. (Parameter 'puzzleFilePath')"));
 
             File.Delete(TestPuzzleFileName);
         }
@@ -62,7 +62,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             var parser = new KakuroParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Puzzle must be at least two cells wide.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle must be at least two cells wide."));
 
             File.Delete(TestPuzzleFileName);
         }
@@ -81,7 +81,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             var parser = new KakuroParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Mismatch in row width on row 2.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Mismatch in row width on row 2."));
 
             File.Delete(TestPuzzleFileName);
         }
@@ -99,7 +99,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             var parser = new KakuroParser();
             var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
 
-            Assert.That("Found invalid cell data: ?.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Found invalid cell data: ?."));
 
             File.Delete(TestPuzzleFileName);
         }
@@ -114,9 +114,9 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             var parser = new KakuroParser();
             var puzzle = parser.ParsePuzzle(testFile);
 
-            Assert.That(25, Is.EqualTo(puzzle.Cells.Count));
-            Assert.That(5u, Is.EqualTo(puzzle.Width));
-            Assert.That(5u, Is.EqualTo(puzzle.Height));
+            Assert.That(puzzle.Cells, Has.Count.EqualTo(25));
+            Assert.That(puzzle.Width, Is.EqualTo(5u));
+            Assert.That(puzzle.Height, Is.EqualTo(5u));
 
             // Assert that the cell coordinates are correct.
             var index = 0;
@@ -125,39 +125,39 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
             {
                 for (var x = 0u; x < puzzle.Width; ++x)
                 {
-                    Assert.That(new Coordinate(x, y), Is.EqualTo(puzzle.Cells[index].Coordinate));
+                    Assert.That(puzzle.Cells[index].Coordinate, Is.EqualTo(new Coordinate(x, y)));
 
                     index++;
                 }
             }
 
             Assert.That(puzzle.Cells[0], Is.InstanceOf(typeof(BlankCell)));
-            Assert.That(17u, Is.EqualTo(((ClueCell)puzzle.Cells[1]).ColumnClue));
-            Assert.That(24u, Is.EqualTo(((ClueCell)puzzle.Cells[2]).ColumnClue));
+            Assert.That(((ClueCell)puzzle.Cells[1]).ColumnClue, Is.EqualTo(17u));
+            Assert.That(((ClueCell)puzzle.Cells[2]).ColumnClue, Is.EqualTo(24u));
             Assert.That(puzzle.Cells[3], Is.InstanceOf(typeof(BlankCell)));
             Assert.That(puzzle.Cells[4], Is.InstanceOf(typeof(BlankCell)));
 
-            Assert.That(16u, Is.EqualTo(((ClueCell)puzzle.Cells[5]).RowClue));
+            Assert.That(((ClueCell)puzzle.Cells[5]).RowClue, Is.EqualTo(16u));
             Assert.That(puzzle.Cells[6], Is.InstanceOf(typeof(PuzzleCell)));
             Assert.That(puzzle.Cells[7], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(20u, Is.EqualTo(((ClueCell)puzzle.Cells[8]).ColumnClue));
+            Assert.That(((ClueCell)puzzle.Cells[8]).ColumnClue, Is.EqualTo(20u));
             Assert.That(puzzle.Cells[9], Is.InstanceOf(typeof(BlankCell)));
 
-            Assert.That(23u, Is.EqualTo(((ClueCell)puzzle.Cells[10]).RowClue));
+            Assert.That(((ClueCell)puzzle.Cells[10]).RowClue, Is.EqualTo(23u));
             Assert.That(puzzle.Cells[11], Is.InstanceOf(typeof(PuzzleCell)));
             Assert.That(puzzle.Cells[12], Is.InstanceOf(typeof(PuzzleCell)));
             Assert.That(puzzle.Cells[13], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(15u, Is.EqualTo(((ClueCell)puzzle.Cells[14]).ColumnClue));
+            Assert.That(((ClueCell)puzzle.Cells[14]).ColumnClue, Is.EqualTo(15u));
 
             Assert.That(puzzle.Cells[15], Is.InstanceOf(typeof(BlankCell)));
-            Assert.That(23u, Is.EqualTo(((ClueCell)puzzle.Cells[16]).RowClue));
+            Assert.That(((ClueCell)puzzle.Cells[16]).RowClue, Is.EqualTo(23u));
             Assert.That(puzzle.Cells[17], Is.InstanceOf(typeof(PuzzleCell)));
             Assert.That(puzzle.Cells[18], Is.InstanceOf(typeof(PuzzleCell)));
             Assert.That(puzzle.Cells[19], Is.InstanceOf(typeof(PuzzleCell)));
 
             Assert.That(puzzle.Cells[20], Is.InstanceOf(typeof(BlankCell)));
             Assert.That(puzzle.Cells[21], Is.InstanceOf(typeof(BlankCell)));
-            Assert.That(14u, Is.EqualTo(((ClueCell)puzzle.Cells[22]).RowClue));
+            Assert.That(((ClueCell)puzzle.Cells[22]).RowClue, Is.EqualTo(14u));
             Assert.That(puzzle.Cells[13], Is.InstanceOf(typeof(PuzzleCell)));
             Assert.That(puzzle.Cells[24], Is.InstanceOf(typeof(PuzzleCell)));
         }
