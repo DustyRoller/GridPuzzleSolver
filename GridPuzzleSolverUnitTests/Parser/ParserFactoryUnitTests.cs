@@ -18,7 +18,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 #pragma warning restore CS8604, CS8600
 
-            Assert.That("Puzzle file is null or empty. (Parameter 'puzzleFile')", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file is null or empty. (Parameter 'puzzleFile')"));
         }
 
         [TestCase]
@@ -28,7 +28,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
 
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 
-            Assert.That("Puzzle file is null or empty. (Parameter 'puzzleFile')", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file is null or empty. (Parameter 'puzzleFile')"));
         }
 
         [TestCase]
