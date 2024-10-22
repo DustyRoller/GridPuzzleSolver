@@ -8,7 +8,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
     public class ParserFactoryUnitTests
     {
         [TestCase]
-        public void ParserFactory_GetParser_ThrowsExceptionWithNullFileName()
+        public void ParserFactory_GetParser_ThrowsExceptionWithNullFileExtension()
         {
 // Converting null literal or possible null value to non-nullable type.
 // Possible null reference argument.
@@ -18,33 +18,23 @@ namespace GridPuzzleSolver.Parser.UnitTests
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 #pragma warning restore CS8604, CS8600
 
-            Assert.That(ex?.Message, Is.EqualTo("Puzzle file is null or empty. (Parameter 'puzzleFile')"));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file extension is null or empty. (Parameter 'puzzleFileExtension')"));
         }
 
         [TestCase]
-        public void ParserFactory_GetParser_ThrowsExceptionWithEmptyFileName()
+        public void ParserFactory_GetParser_ThrowsExceptionWithEmptyFileExtension()
         {
             var inputFile = string.Empty;
 
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 
-            Assert.That(ex?.Message, Is.EqualTo("Puzzle file is null or empty. (Parameter 'puzzleFile')"));
-        }
-
-        [TestCase]
-        public void ParserFactory_GetParser_ThrowsExceptionWithInvalidFileName()
-        {
-            var inputFile = "adodgyfilename";
-
-            var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
-
-            Assert.That($"Failed to get file extension from puzzle file - {inputFile}.", Is.EqualTo(ex?.Message));
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file extension is null or empty. (Parameter 'puzzleFileExtension')"));
         }
 
         [TestCase]
         public void ParserFactory_GetParser_ThrowsExceptionWithUnknownFileExtension()
         {
-            var inputFile = "puzzlefile.txt";
+            var inputFile = ".txt";
 
             var ex = Assert.Throws<ParserException>(() => ParserFactory.GetParser(inputFile));
 
@@ -54,7 +44,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
         [TestCase]
         public void ParserFactory_GetParser_ReturnsKakuroParser()
         {
-            var inputFile = "puzzlefile.kak";
+            var inputFile = ".kak";
 
             var parser = ParserFactory.GetParser(inputFile);
 
@@ -64,7 +54,7 @@ namespace GridPuzzleSolver.Parser.UnitTests
         [TestCase]
         public void ParserFactory_GetParser_ReturnsSudokuParser()
         {
-            var inputFile = "puzzlefile.sud";
+            var inputFile = ".sud";
 
             var parser = ParserFactory.GetParser(inputFile);
 
