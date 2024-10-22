@@ -1,8 +1,7 @@
 ﻿namespace GridPuzzleSolver
 {
     /// <summary>
-    /// Exception class for any exception thrown within the project that
-    /// relates to the solving of a Kakuro puzzle.
+    /// Exception class for any exception thrown during the solving of a puzzle.
     /// </summary>
     public class GridPuzzleSolverException : Exception
     {

@@ -5,7 +5,7 @@ using System.Text;
 namespace GridPuzzleSolver.Components
 {
     /// <summary>
-    /// Class representing a kakuro puzzle.
+    /// Class representing a puzzle.
     /// </summary>
     internal class Puzzle
     {
