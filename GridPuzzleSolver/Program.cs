@@ -1,6 +1,8 @@
-﻿using GridPuzzleSolver.Parser;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Parser;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 [assembly: InternalsVisibleTo("GridPuzzleSolverUnitTests")]
 
@@ -11,6 +13,23 @@ namespace GridPuzzleSolver
     /// </summary>
     internal static class Program
     {
+        /// <summary>
+        /// a.
+        /// </summary>
+        /// <typeparam name="T">b.</typeparam>
+        /// <param name="filepath">c.</param>
+        /// <returns>d.</returns>
+        public static T? DeserializeToObject<T>(string filepath)
+            where T : class
+        {
+            var xmlSerializer = new XmlSerializer(typeof(T));
+
+            using (var streamReader = new StreamReader(filepath))
+            {
+                return xmlSerializer.Deserialize(streamReader) as T;
+            }
+        }
+
         /// <summary>
         /// Runs the grid solver program. Parses the given puzzle file and attempts to solve it.
         /// </summary>
@@ -34,10 +53,26 @@ namespace GridPuzzleSolver
                     $"Failed to get file extension from puzzle file - {puzzleFilePath}.");
             }
 
-            // Get the parser for the given puzzle type.
-            var parser = ParserFactory.GetParser(puzzleFileExtension);
+            Puzzle? puzzle;
 
-            var puzzle = parser.ParsePuzzle(puzzleFilePath);
+            if (puzzleFileExtension == ".xml")
+            {
+                puzzle = DeserializeToObject<Puzzle>(puzzleFilePath);
+                if (puzzle == null)
+                {
+                    throw new ArgumentException("Failed to deserialize");
+                }
+
+                Console.WriteLine($"Height: {puzzle.Height}");
+                Console.WriteLine($"Width: {puzzle.Width}");
+            }
+            else
+            {
+                // Get the parser for the given puzzle type.
+                var parser = ParserFactory.GetParser(puzzleFileExtension);
+
+                puzzle = parser.ParsePuzzle(puzzleFilePath);
+            }
 
             // Time how long it takes to solve the puzzle.
             var stopwatch = Stopwatch.StartNew();
