@@ -1,6 +1,8 @@
-﻿using GridPuzzleSolver.Parser;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Parser;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 [assembly: InternalsVisibleTo("GridPuzzleSolverUnitTests")]
 
@@ -11,6 +13,23 @@ namespace GridPuzzleSolver
     /// </summary>
     internal static class Program
     {
+        /// <summary>
+        /// a.
+        /// </summary>
+        /// <typeparam name="T">b.</typeparam>
+        /// <param name="filepath">c.</param>
+        /// <returns>d.</returns>
+        public static T? DeserializeToObject<T>(string filepath)
+            where T : class
+        {
+            var xmlSerializer = new XmlSerializer(typeof(T));
+
+            using (var streamReader = new StreamReader(filepath))
+            {
+                return xmlSerializer.Deserialize(streamReader) as T;
+            }
+        }
+
         private static void Main(string[] args)
         {
             if (args.Length != 1)
@@ -19,35 +38,14 @@ namespace GridPuzzleSolver
                 Environment.Exit(1);
             }
 
-            // Get the correct parser for the given puzzle type.
-            var parser = ParserFactory.GetParser(args[0]);
-
-            var puzzle = parser.ParsePuzzle(args[0]);
-
-            // Time how long it takes to solve the puzzle.
-            var stopwatch = Stopwatch.StartNew();
-
-            if (puzzle.Solve())
+            var puzzle = DeserializeToObject<Puzzle>(args[0]);
+            if (puzzle == null)
             {
-                Console.WriteLine("Successfully solved puzzle");
-            }
-            else
-            {
-                Console.WriteLine("Failed to solve puzzle\n");
-                Console.WriteLine($"{puzzle.NumberOfUnsolvedCells} cells remain unsolved");
+                throw new ArgumentException("Failed to deserialize");
             }
 
-            // Stop the stopwatch.
-            stopwatch.Stop();
-
-            // Print out the puzzle.
-            Console.WriteLine();
-            Console.WriteLine(puzzle.ToString());
-
-            // Print out how long it took to solve the puzzle.
-            Console.WriteLine();
-            var timeTaken = (stopwatch.ElapsedMilliseconds / 1000.0).ToString("F2");
-            Console.WriteLine($"Time taken: {timeTaken}s");
+            Console.WriteLine($"Height: {puzzle.Height}");
+            Console.WriteLine($"Width: {puzzle.Width}");
         }
     }
 }

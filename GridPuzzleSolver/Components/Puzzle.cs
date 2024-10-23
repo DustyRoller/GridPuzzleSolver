@@ -1,13 +1,15 @@
 ﻿using GridPuzzleSolver.Components.Cells;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace GridPuzzleSolver.Components
 {
     /// <summary>
     /// Class representing a puzzle.
     /// </summary>
-    internal class Puzzle
+    [XmlRoot(ElementName = "Puzzle")]
+    public class Puzzle
     {
         /// <summary>
         /// List of all of the cells in the puzzle.
@@ -29,13 +31,9 @@ namespace GridPuzzleSolver.Components
         }
 
         /// <summary>
-        /// Gets all of the Cells that make up the puzzle.
-        /// </summary>
-        public ReadOnlyCollection<Cell> Cells => cells.AsReadOnly();
-
-        /// <summary>
         /// Gets or sets the height of the puzzle by number of Cells.
         /// </summary>
+        [XmlElement(ElementName = "Height")]
         public uint Height { get; set; }
 
         /// <summary>
@@ -44,28 +42,20 @@ namespace GridPuzzleSolver.Components
         public int NumberOfUnsolvedCells => puzzleCells.Count(pc => !pc.Solved);
 
         /// <summary>
-        /// Gets or sets the sections of cells that make up this puzzle.
-        /// </summary>
-        public List<Section> Sections { get; set; } = new List<Section>();
-
-        /// <summary>
         /// Gets or sets the width of the puzzle by number of Cells.
         /// </summary>
+        [XmlElement(ElementName = "Width")]
         public uint Width { get; set; }
 
         /// <summary>
-        /// Add the given cell to this puzzle.
+        /// Gets all of the Cells that make up the puzzle.
         /// </summary>
-        /// <param name="cell">The cell to add.</param>
-        public void AddCell(Cell cell)
-        {
-            cells.Add(cell);
+        internal ReadOnlyCollection<Cell> Cells => cells.AsReadOnly();
 
-            if (cell is PuzzleCell puzzleCell)
-            {
-                puzzleCells.Add(puzzleCell);
-            }
-        }
+        /// <summary>
+        /// Gets or sets the sections of cells that make up this puzzle.
+        /// </summary>
+        internal List<Section> Sections { get; set; } = new List<Section>();
 
         /// <summary>
         /// Solve the puzzle.
@@ -129,6 +119,20 @@ namespace GridPuzzleSolver.Components
             sb.Append('|');
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Add the given cell to this puzzle.
+        /// </summary>
+        /// <param name="cell">The cell to add.</param>
+        internal void AddCell(Cell cell)
+        {
+            cells.Add(cell);
+
+            if (cell is PuzzleCell puzzleCell)
+            {
+                puzzleCells.Add(puzzleCell);
+            }
         }
 
         /// <summary>
