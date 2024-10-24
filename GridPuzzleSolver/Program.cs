@@ -78,16 +78,6 @@ namespace GridPuzzleSolver
             // Time how long it takes to solve the puzzle.
             var stopwatch = Stopwatch.StartNew();
 
-            if (puzzle.Solve())
-            {
-                Console.WriteLine("Successfully solved puzzle");
-            }
-            else
-            {
-                Console.WriteLine("Failed to solve puzzle\n");
-                Console.WriteLine($"{puzzle.NumberOfUnsolvedCells} cells remain unsolved");
-            }
-
             // Stop the stopwatch.
             stopwatch.Stop();
 

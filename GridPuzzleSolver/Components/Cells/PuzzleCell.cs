@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Linq;
+using System.Xml.Serialization;
 
 namespace GridPuzzleSolver.Components.Cells
 {
@@ -36,9 +37,21 @@ namespace GridPuzzleSolver.Components.Cells
         /// sections that this cell belongs to, and returns all of the common
         /// values into a single list.
         /// </remarks>
-        public List<uint> PossibleValues =>
-            Sections.Select(s => s.CalculatePossibleValues())
-                    .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues).ToList());
+        public List<uint> PossibleValues
+        {
+            get
+            {
+                if (Sections.Any())
+                {
+                    return Sections.Select(s => s.CalculatePossibleValues())
+                        .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues).ToList());
+                }
+                else
+                {
+                    return new List<uint>();
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the sections that this cell belongs to.

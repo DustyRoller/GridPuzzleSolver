@@ -172,7 +172,12 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
             {
                 for (var x = 0u; x < 9; ++x)
                 {
-                    Assert.That(puzzle.Cells[index].Coordinate, Is.EqualTo(new Coordinate(x, y)));
+                    var expectedCoordinate = new Coordinate
+                    {
+                        X = x,
+                        Y = y,
+                    };
+                    Assert.That(puzzle.Cells[index].Coordinate, Is.EqualTo(expectedCoordinate));
 
                     index++;
                 }

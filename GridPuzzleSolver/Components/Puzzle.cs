@@ -29,18 +29,13 @@ namespace GridPuzzleSolver.Components
         /// </summary>
         [XmlArray("known_cells")]
         [XmlArrayItem("cell")]
-        public List<PuzzleCell> PuzzleCells { get; set; } = new List<PuzzleCell>();
+        public List<PuzzleCell>? PuzzleCells { get; set; }
 
         /// <summary>
         /// Gets or sets the height of the puzzle by number of Cells.
         /// </summary>
         [XmlElement("height")]
         public uint Height { get; set; }
-
-        /// <summary>
-        /// Gets the number of currently unsolved puzzle cells.
-        /// </summary>
-        public int NumberOfUnsolvedCells => PuzzleCells.Count(pc => !pc.Solved);
 
         /// <summary>
         /// Gets or sets the puzzle type.
@@ -63,44 +58,6 @@ namespace GridPuzzleSolver.Components
         /// Gets or sets the sections of cells that make up this puzzle.
         /// </summary>
         internal List<Section> Sections { get; set; } = new List<Section>();
-
-        /// <summary>
-        /// Solve the puzzle.
-        /// </summary>
-        /// <returns>True if the puzzle was solved, otherwise false.</returns>
-        public bool Solve()
-        {
-            try
-            {
-                // Search for cells that only have one possible value as these
-                // can be solved straight away.
-                var solveableCells = PuzzleCells.Where(pc => !pc.Solved && pc.PossibleValues.Count == 1)
-                                                .ToList();
-                while (solveableCells.Any())
-                {
-                    solveableCells.ForEach(sc => sc.CellValue = sc.PossibleValues[0]);
-
-                    solveableCells = PuzzleCells.Where(pc => !pc.Solved && pc.PossibleValues.Count == 1)
-                                                .ToList();
-                }
-
-                // If there are still unsolved cells then we can recursively
-                // attempt to assign them values until we get a solution.
-                var unsolvedCells = PuzzleCells.Where(pc => !pc.Solved);
-                if (unsolvedCells.Any())
-                {
-                    _ = RecursivelySolvePuzzle(unsolvedCells.ToList());
-                }
-            }
-            catch (GridPuzzleSolverException ex)
-            {
-                Console.Error.WriteLine("Caught exception whilst solving puzzle");
-                Console.Error.WriteLine(ex.ToString());
-            }
-
-            return PuzzleCells.TrueForAll(pc => pc.Solved) &&
-                   Sections.TrueForAll(s => s.IsSolved());
-        }
 
         /// <summary>
         /// Get a string representation of the current state of the puzzle.
@@ -126,20 +83,6 @@ namespace GridPuzzleSolver.Components
             sb.Append('|');
 
             return sb.ToString();
-        }
-
-        /// <summary>
-        /// Add the given cell to this puzzle.
-        /// </summary>
-        /// <param name="cell">The cell to add.</param>
-        internal void AddCell(Cell cell)
-        {
-            cells.Add(cell);
-
-            if (cell is PuzzleCell puzzleCell)
-            {
-                PuzzleCells.Add(puzzleCell);
-            }
         }
 
         /// <summary>

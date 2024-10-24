@@ -9,7 +9,10 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
         [Test]
         public void PuzzleCell_CellValue_ThrowsExceptionIfValueIsGreaterThan9()
         {
-            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
+            var puzzleCell = new PuzzleCell()
+            {
+                Coordinate = new Coordinate(),
+            };
 
             var ex = Assert.Throws<GridPuzzleSolverException>(() => puzzleCell.CellValue = 10u);
 
@@ -17,9 +20,24 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
         }
 
         [Test]
+        public void PuzzleCell_PossibleValues_ReturnsEmptyListIfNoSectionsSet()
+        {
+            var puzzleCell = new PuzzleCell()
+            {
+                Coordinate = new Coordinate(),
+            };
+
+            var expectedPossibleValues = new List<uint>();
+
+            var possibleValues = puzzleCell.PossibleValues;
+
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
+        }
+
+        [Test]
         public void PuzzleCell_PossibleValues_ReturnsEveryValueForGivenSections()
         {
-            var mockSection = new Mock<ISection>();
+            var mockSection = new Mock<Section>();
 
             var sectionPossibilities = new List<uint>
             {
@@ -29,7 +47,10 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
             mockSection.Setup(ms => ms.CalculatePossibleValues())
                        .Returns(sectionPossibilities);
 
-            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
+            var puzzleCell = new PuzzleCell()
+            {
+                Coordinate = new Coordinate(),
+            };
 
             puzzleCell.Sections.Add(mockSection.Object);
 
@@ -41,7 +62,7 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
         [Test]
         public void PuzzleCell_PossibleValues_ReturnsOnlyCommonValuesFromBothSections()
         {
-            var columnSection = new Mock<ISection>();
+            var columnSection = new Mock<Section>();
 
             var columnSectionPossibilities = new List<uint>
             {
@@ -51,7 +72,7 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
             columnSection.Setup(cs => cs.CalculatePossibleValues())
                          .Returns(columnSectionPossibilities);
 
-            var rowSection = new Mock<ISection>();
+            var rowSection = new Mock<Section>();
 
             var rowSectionPossibilities = new List<uint>
             {
@@ -61,16 +82,19 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
             rowSection.Setup(rs => rs.CalculatePossibleValues())
                       .Returns(rowSectionPossibilities);
 
-            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
+            var puzzleCell = new PuzzleCell()
+            {
+                Coordinate = new Coordinate(),
+            };
 
             puzzleCell.Sections.Add(columnSection.Object);
             puzzleCell.Sections.Add(rowSection.Object);
 
-            var expectedValues = columnSectionPossibilities.Intersect(rowSectionPossibilities);
+            var expectedPossibleValues = columnSectionPossibilities.Intersect(rowSectionPossibilities);
 
             var possibleValues = puzzleCell.PossibleValues;
 
-            Assert.That(expectedValues, Is.EqualTo(possibleValues));
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
         }
     }
 }

@@ -45,57 +45,9 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
 
             ValidatePuzzleSize(lines);
 
-            for (var row = 0u; row < lines.Length; ++row)
-            {
-                // Cells within the line will be delimited by '|'.
-                var cellsStr = lines[row].Split('|', StringSplitOptions.RemoveEmptyEntries);
-
-                for (var column = 0u; column < cellsStr.Length; ++column)
-                {
-                    var cell = ParseCell(cellsStr[column]);
-
-                    cell.Coordinate = new Coordinate
-                    {
-                        X = column,
-                        Y = row,
-                    };
-
-                    puzzle.AddCell(cell);
-                }
-            }
-
             ParseSections(puzzle);
 
-            // Ensure that there is at least one solved cell.
-            if (puzzle.NumberOfUnsolvedCells == 81)
-            {
-                throw new ParserException("Puzzle contains no solved cells");
-            }
-
             return puzzle;
-        }
-
-        /// <summary>
-        /// Parse the given cell string to generate a Cell object.
-        /// </summary>
-        /// <param name="cellStr">The cell string to be parsed.</param>
-        /// <returns>A Cell object.</returns>
-        private static PuzzleCell ParseCell(string cellStr)
-        {
-            var puzzleCell = new PuzzleCell();
-
-            // Square will be either empty or already have a value in it.
-            if (cellStr != "-")
-            {
-                if (!uint.TryParse(cellStr, out uint cellValue))
-                {
-                    throw new ParserException($"Failed to parse cell value: {cellStr}");
-                }
-
-                puzzleCell.CellValue = cellValue;
-            }
-
-            return puzzleCell;
         }
 
         private static void ParseSections(Puzzle puzzle)
