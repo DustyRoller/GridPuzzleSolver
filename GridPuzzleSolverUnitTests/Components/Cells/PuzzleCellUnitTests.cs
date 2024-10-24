@@ -17,6 +17,18 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
         }
 
         [Test]
+        public void PuzzleCell_PossibleValues_ReturnsEmptyListIfNoSectionsSet()
+        {
+            var puzzleCell = new PuzzleCell(new Coordinate(0u, 0u));
+
+            var expectedPossibleValues = new List<uint>();
+
+            var possibleValues = puzzleCell.PossibleValues;
+
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
+        }
+
+        [Test]
         public void PuzzleCell_PossibleValues_ReturnsEveryValueForGivenSections()
         {
             var mockSection = new Mock<ISection>();
@@ -66,11 +78,11 @@ namespace GridPuzzleSolver.Components.Cells.UnitTests
             puzzleCell.Sections.Add(columnSection.Object);
             puzzleCell.Sections.Add(rowSection.Object);
 
-            var expectedValues = columnSectionPossibilities.Intersect(rowSectionPossibilities);
+            var expectedPossibleValues = columnSectionPossibilities.Intersect(rowSectionPossibilities);
 
             var possibleValues = puzzleCell.PossibleValues;
 
-            Assert.That(expectedValues, Is.EqualTo(possibleValues));
+            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
         }
     }
 }
