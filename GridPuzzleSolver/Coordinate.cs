@@ -1,31 +1,24 @@
-﻿namespace GridPuzzleSolver
+﻿using System.Xml.Serialization;
+
+namespace GridPuzzleSolver
 {
     /// <summary>
     /// Coordinate of a cell within a puzzle, describing its X and Y position
     /// within the puzzle grid, starting 0, 0 at the top left hand corner.
     /// </summary>
-    internal class Coordinate
+    public class Coordinate
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Coordinate"/> class.
+        /// Gets or sets the Coordinate's X position.
         /// </summary>
-        /// <param name="x">The X coordinate.</param>
-        /// <param name="y">The Y coordinate.</param>
-        public Coordinate(uint x, uint y)
-        {
-            X = x;
-            Y = y;
-        }
+        [XmlElement("x")]
+        public uint X { get; set; }
 
         /// <summary>
-        /// Gets the Coordinate's X position.
+        /// Gets or sets the Coordinate's Y position.
         /// </summary>
-        public uint X { get; private set; }
-
-        /// <summary>
-        /// Gets the Coordinate's Y position.
-        /// </summary>
-        public uint Y { get; private set; }
+        [XmlElement("y")]
+        public uint Y { get; set; }
 
         /// <summary>
         /// Does this Coordinate equal the given object.

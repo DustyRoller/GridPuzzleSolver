@@ -17,32 +17,41 @@ namespace GridPuzzleSolver.Components
         private readonly List<Cell> cells;
 
         /// <summary>
-        /// List of all of the puzzle cells in the puzzle.
-        /// </summary>
-        private readonly List<PuzzleCell> puzzleCells;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Puzzle"/> class.
         /// </summary>
         public Puzzle()
         {
             cells = new List<Cell>();
-            puzzleCells = new List<PuzzleCell>();
         }
+
+        /// <summary>
+        /// Gets or sets the puzzle's clue cells.
+        /// </summary>
+        [XmlArray("known_cells")]
+        [XmlArrayItem("cell")]
+        public List<PuzzleCell> PuzzleCells { get; set; } = new List<PuzzleCell>();
 
         /// <summary>
         /// Gets or sets the height of the puzzle by number of Cells.
         /// </summary>
+        [XmlElement("height")]
         public uint Height { get; set; }
 
         /// <summary>
         /// Gets the number of currently unsolved puzzle cells.
         /// </summary>
-        public int NumberOfUnsolvedCells => puzzleCells.Count(pc => !pc.Solved);
+        public int NumberOfUnsolvedCells => PuzzleCells.Count(pc => !pc.Solved);
+
+        /// <summary>
+        /// Gets or sets the puzzle type.
+        /// </summary>
+        [XmlElement("type")]
+        public string Type { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the width of the puzzle by number of Cells.
         /// </summary>
+        [XmlElement("width")]
         public uint Width { get; set; }
 
         /// <summary>
@@ -65,19 +74,19 @@ namespace GridPuzzleSolver.Components
             {
                 // Search for cells that only have one possible value as these
                 // can be solved straight away.
-                var solveableCells = puzzleCells.Where(pc => !pc.Solved && pc.PossibleValues.Count == 1)
+                var solveableCells = PuzzleCells.Where(pc => !pc.Solved && pc.PossibleValues.Count == 1)
                                                 .ToList();
                 while (solveableCells.Any())
                 {
                     solveableCells.ForEach(sc => sc.CellValue = sc.PossibleValues[0]);
 
-                    solveableCells = puzzleCells.Where(pc => !pc.Solved && pc.PossibleValues.Count == 1)
+                    solveableCells = PuzzleCells.Where(pc => !pc.Solved && pc.PossibleValues.Count == 1)
                                                 .ToList();
                 }
 
                 // If there are still unsolved cells then we can recursively
                 // attempt to assign them values until we get a solution.
-                var unsolvedCells = puzzleCells.Where(pc => !pc.Solved);
+                var unsolvedCells = PuzzleCells.Where(pc => !pc.Solved);
                 if (unsolvedCells.Any())
                 {
                     _ = RecursivelySolvePuzzle(unsolvedCells.ToList());
@@ -89,7 +98,7 @@ namespace GridPuzzleSolver.Components
                 Console.Error.WriteLine(ex.ToString());
             }
 
-            return puzzleCells.TrueForAll(pc => pc.Solved) &&
+            return PuzzleCells.TrueForAll(pc => pc.Solved) &&
                    Sections.TrueForAll(s => s.IsSolved());
         }
 
@@ -129,7 +138,7 @@ namespace GridPuzzleSolver.Components
 
             if (cell is PuzzleCell puzzleCell)
             {
-                puzzleCells.Add(puzzleCell);
+                PuzzleCells.Add(puzzleCell);
             }
         }
 

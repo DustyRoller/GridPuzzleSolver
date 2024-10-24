@@ -1,22 +1,16 @@
-﻿namespace GridPuzzleSolver.Components.Cells
+﻿using System.Xml.Serialization;
+
+namespace GridPuzzleSolver.Components.Cells
 {
     /// <summary>
     /// Base Cell class.
     /// </summary>
-    internal abstract class Cell : ICell
+    public abstract class Cell : ICell
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Cell"/> class.
+        /// Gets or sets the Cell's Coordinate.
         /// </summary>
-        /// <param name="coordinate">The cell's Coordinate.</param>
-        protected Cell(Coordinate coordinate)
-        {
-            Coordinate = coordinate;
-        }
-
-        /// <summary>
-        /// Gets the Cell's Coordinate.
-        /// </summary>
-        public Coordinate Coordinate { get; }
+        [XmlElement("coordinates")]
+        public Coordinate Coordinate { get; set; } = new Coordinate();
     }
 }

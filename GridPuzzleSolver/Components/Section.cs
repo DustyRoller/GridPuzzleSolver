@@ -10,7 +10,7 @@ namespace GridPuzzleSolver.Components
     /// The sum of the values of the PuzzleCells must add up to the value
     /// of the ClueCell.
     /// </summary>
-    internal abstract class Section : ISection
+    public abstract class Section : ISection
     {
         /// <summary>
         /// Gets the list of PuzzleCells that make up this section.

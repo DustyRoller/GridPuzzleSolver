@@ -65,6 +65,7 @@ namespace GridPuzzleSolver
 
                 Console.WriteLine($"Height: {puzzle.Height}");
                 Console.WriteLine($"Width: {puzzle.Width}");
+                Console.WriteLine($"type: {puzzle.Type}");
             }
             else
             {

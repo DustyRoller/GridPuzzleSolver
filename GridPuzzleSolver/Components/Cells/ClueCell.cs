@@ -7,16 +7,14 @@ namespace GridPuzzleSolver.Components.Cells
     /// either or both a horizontal or vertical clue, enabling the puzzle
     /// to be solved.
     /// </summary>
-    internal class ClueCell : Cell
+    public class ClueCell : Cell
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ClueCell"/> class.
         /// </summary>
-        /// <param name="coordinate">The cell's Coordinate.</param>
         /// <param name="columnClue">The cell's column's clue.</param>
         /// <param name="rowClue">The cell's row's clue.</param>
-        public ClueCell(Coordinate coordinate, uint columnClue, uint rowClue)
-            : base(coordinate)
+        public ClueCell(uint columnClue, uint rowClue)
         {
             ColumnClue = columnClue;
             RowClue = rowClue;

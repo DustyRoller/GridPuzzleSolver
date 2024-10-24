@@ -1,4 +1,14 @@
 <puzzle>
+  <type>Sudoku</type>
   <height>9</height>
   <width>9</width>
+  <known_cells>
+    <cell>
+      <coordinates>
+        <x>1</x>
+        <y>0</y>
+      </coordinates>
+      <value>1</value>
+    </cell>
+  </known_cells>
 </puzzle>
