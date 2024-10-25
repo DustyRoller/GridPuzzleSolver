@@ -8,15 +8,23 @@ namespace GridPuzzleSolver.UnitTests
         [Test]
         public void Coordinate_Equals_ReturnsFalseForNull()
         {
-            var coordinate = new Coordinate(5u, 8u);
+            var coordinate = new Coordinate
+            {
+                X = 5u,
+                Y = 8u,
+            };
 
-            Assert.That(!coordinate.Equals(null));
+            Assert.That(coordinate, Is.Not.EqualTo(null));
         }
 
         [Test]
         public void Coordinate_Equals_ReturnsFalseForNonCoordinateObject()
         {
-            var coordinate = new Coordinate(5u, 8u);
+            var coordinate = new Coordinate
+            {
+                X = 5u,
+                Y = 8u,
+            };
 
             Assert.That(!coordinate.Equals("not a coordinate"));
         }
@@ -24,31 +32,55 @@ namespace GridPuzzleSolver.UnitTests
         [Test]
         public void Coordinate_Equals_ReturnsFalseForCoordinateWithDifferentValues()
         {
-            var coordinate = new Coordinate(5u, 8u);
+            var coordinate = new Coordinate
+            {
+                X = 5u,
+                Y = 8u,
+            };
 
-            var otherCoordinate = new Coordinate(6u, 12u);
+            var otherCoordinate = new Coordinate
+            {
+                X = 6u,
+                Y = 12u,
+            };
 
-            Assert.That(!coordinate.Equals(otherCoordinate));
+            Assert.That(coordinate, Is.Not.EqualTo(otherCoordinate));
         }
 
         [Test]
         public void Coordinate_Equals_ReturnsFalseForCoordinateWithDifferentValue()
         {
-            var coordinate = new Coordinate(5u, 8u);
+            var coordinate = new Coordinate
+            {
+                X = 5u,
+                Y = 8u,
+            };
 
-            var otherCoordinate = new Coordinate(coordinate.X, 13u);
+            var otherCoordinate = new Coordinate
+            {
+                X = coordinate.X,
+                Y = 13u,
+            };
 
-            Assert.That(!coordinate.Equals(otherCoordinate));
+            Assert.That(coordinate, Is.Not.EqualTo(otherCoordinate));
         }
 
         [Test]
         public void Coordinate_Equals_Successful()
         {
-            var coordinate = new Coordinate(5u, 8u);
+            var coordinate = new Coordinate
+            {
+                X = 5u,
+                Y = 8u,
+            };
 
-            var otherCoordinate = new Coordinate(coordinate.X, coordinate.Y);
+            var otherCoordinate = new Coordinate
+            {
+                X = coordinate.X,
+                Y = coordinate.Y,
+            };
 
-            Assert.That(coordinate.Equals(otherCoordinate));
+            Assert.That(coordinate, Is.EqualTo(otherCoordinate));
         }
     }
 }

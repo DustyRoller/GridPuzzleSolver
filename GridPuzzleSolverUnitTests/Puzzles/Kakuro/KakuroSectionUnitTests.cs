@@ -11,11 +11,11 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         {
             var section = new KakuroSection(4u);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
@@ -31,8 +31,8 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
             // 4 will be a magic number if there are two cells.
             var section = new KakuroSection(4u);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
+            section.PuzzleCells.Add(new PuzzleCell());
+            section.PuzzleCells.Add(new PuzzleCell());
 
             var possibleValues = section.CalculatePossibleValues();
 
@@ -50,8 +50,8 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
             var sectionClueValue = 9u;
             var section = new KakuroSection(sectionClueValue);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
+            section.PuzzleCells.Add(new PuzzleCell());
+            section.PuzzleCells.Add(new PuzzleCell());
 
             var possibleValues = section.CalculatePossibleValues();
 
@@ -69,11 +69,11 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
             var sectionClueValue = 4u;
             var section = new KakuroSection(sectionClueValue);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 3u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
+            section.PuzzleCells.Add(new PuzzleCell());
 
             var possibleValues = section.CalculatePossibleValues();
 
@@ -92,12 +92,12 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
             var section = new KakuroSection(sectionClueValue);
 
             var solvedPuzzleCellValue = 3u;
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = solvedPuzzleCellValue,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
+            section.PuzzleCells.Add(new PuzzleCell());
+            section.PuzzleCells.Add(new PuzzleCell());
 
             var possibleValues = section.CalculatePossibleValues();
 
@@ -114,15 +114,15 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         {
             var section = new KakuroSection(12u);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 2u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u)));
+            section.PuzzleCells.Add(new PuzzleCell());
 
             Assert.That(!section.IsSolved());
         }
@@ -132,15 +132,15 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         {
             var section = new KakuroSection(12u);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 2u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 2u,
             });
@@ -153,15 +153,15 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         {
             var section = new KakuroSection(3u);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
@@ -174,15 +174,15 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         {
             var section = new KakuroSection(12u);
 
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 2u,
             });
-            section.PuzzleCells.Add(new PuzzleCell(new Coordinate(0u, 0u))
+            section.PuzzleCells.Add(new PuzzleCell()
             {
                 CellValue = 9u,
             });

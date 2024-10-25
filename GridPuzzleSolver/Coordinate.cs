@@ -7,25 +7,14 @@
     internal class Coordinate
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Coordinate"/> class.
+        /// Gets or sets the Coordinate's X position.
         /// </summary>
-        /// <param name="x">The X coordinate.</param>
-        /// <param name="y">The Y coordinate.</param>
-        public Coordinate(uint x, uint y)
-        {
-            X = x;
-            Y = y;
-        }
+        public uint X { get; set; }
 
         /// <summary>
-        /// Gets the Coordinate's X position.
+        /// Gets or sets the Coordinate's Y position.
         /// </summary>
-        public uint X { get; private set; }
-
-        /// <summary>
-        /// Gets the Coordinate's Y position.
-        /// </summary>
-        public uint Y { get; private set; }
+        public uint Y { get; set; }
 
         /// <summary>
         /// Does this Coordinate equal the given object.
