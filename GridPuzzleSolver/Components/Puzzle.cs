@@ -1,38 +1,14 @@
 ﻿using GridPuzzleSolver.Components.Cells;
-using System.Collections.ObjectModel;
 using System.Text;
 
 namespace GridPuzzleSolver.Components
 {
     /// <summary>
-    /// Class representing a puzzle.
+    /// Base class representing a grid based puzzle, every puzzle will be made
+    /// up of PuzzleCells to be solved and a number of Sections.
     /// </summary>
-    internal class Puzzle
+    internal abstract class Puzzle
     {
-        /// <summary>
-        /// List of all of the cells in the puzzle.
-        /// </summary>
-        private readonly List<Cell> cells;
-
-        /// <summary>
-        /// List of all of the puzzle cells in the puzzle.
-        /// </summary>
-        private readonly List<PuzzleCell> puzzleCells;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Puzzle"/> class.
-        /// </summary>
-        public Puzzle()
-        {
-            cells = new List<Cell>();
-            puzzleCells = new List<PuzzleCell>();
-        }
-
-        /// <summary>
-        /// Gets all of the Cells that make up the puzzle.
-        /// </summary>
-        public ReadOnlyCollection<Cell> Cells => cells.AsReadOnly();
-
         /// <summary>
         /// Gets or sets the height of the puzzle by number of Cells.
         /// </summary>
@@ -40,13 +16,14 @@ namespace GridPuzzleSolver.Components
 
         /// <summary>
         /// Gets the number of currently unsolved puzzle cells.
+        /// Gets or sets the puzzle type.
         /// </summary>
-        public int NumberOfUnsolvedCells => puzzleCells.Count(pc => !pc.Solved);
+        public int NumberOfUnsolvedCells => Cells.OfType<PuzzleCell>().Count(pc => !pc.Solved);
 
         /// <summary>
-        /// Gets or sets the sections of cells that make up this puzzle.
+        /// Gets or sets the puzzle's cells.
         /// </summary>
-        public List<Section> Sections { get; set; } = new List<Section>();
+        public List<Cell> Cells { get; set; } = new List<Cell>();
 
         /// <summary>
         /// Gets or sets the width of the puzzle by number of Cells.
@@ -54,18 +31,9 @@ namespace GridPuzzleSolver.Components
         public uint Width { get; set; }
 
         /// <summary>
-        /// Add the given cell to this puzzle.
+        /// Gets or sets the sections of cells that make up this puzzle.
         /// </summary>
-        /// <param name="cell">The cell to add.</param>
-        public void AddCell(Cell cell)
-        {
-            cells.Add(cell);
-
-            if (cell is PuzzleCell puzzleCell)
-            {
-                puzzleCells.Add(puzzleCell);
-            }
-        }
+        internal List<Section> Sections { get; set; } = new List<Section>();
 
         /// <summary>
         /// Solve the puzzle.
@@ -73,6 +41,8 @@ namespace GridPuzzleSolver.Components
         /// <returns>True if the puzzle was solved, otherwise false.</returns>
         public bool Solve()
         {
+            var puzzleCells = Cells.OfType<PuzzleCell>();
+
             try
             {
                 // Search for cells that only have one possible value as these
@@ -101,7 +71,7 @@ namespace GridPuzzleSolver.Components
                 Console.Error.WriteLine(ex.ToString());
             }
 
-            return puzzleCells.TrueForAll(pc => pc.Solved) &&
+            return puzzleCells.All(pc => pc.Solved) &&
                    Sections.TrueForAll(s => s.IsSolved());
         }
 
@@ -113,7 +83,7 @@ namespace GridPuzzleSolver.Components
         {
             var sb = new StringBuilder();
 
-            for (var i = 0; i < cells.Count; ++i)
+            for (var i = 0; i < Cells.Count; ++i)
             {
                 sb.Append('|');
 
@@ -123,7 +93,7 @@ namespace GridPuzzleSolver.Components
                     sb.Append('|');
                 }
 
-                sb.Append(cells[i].ToString());
+                sb.Append(Cells[i].ToString());
             }
 
             sb.Append('|');

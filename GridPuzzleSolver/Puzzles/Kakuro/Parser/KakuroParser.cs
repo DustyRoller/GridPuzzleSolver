@@ -34,7 +34,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
         {
             ValidateInputFile(puzzleFilePath, FileExtension);
 
-            var puzzle = new Puzzle();
+            var puzzle = new KakuroPuzzle();
 
             // Now read in the puzzle.
             var lines = File.ReadAllLines(puzzleFilePath);
@@ -76,7 +76,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
                         Y = row,
                     };
 
-                    puzzle.AddCell(cell);
+                    puzzle.Cells.Add(cell);
                 }
             }
 
