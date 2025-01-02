@@ -155,7 +155,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
         private static void ParseColumnSection(Puzzle puzzle, ClueCell clueCell, int cellIndex)
         {
-            var section = new KakuroSection(clueCell.ColumnClue);
+            var section = new KakuroSection
+            {
+                ClueValue = clueCell.ColumnClue,
+            };
 
             // Find all clue cells in the column until there is a break.
             for (var j = (int)(cellIndex + puzzle.Width); j < puzzle.Height * puzzle.Width; j += (int)puzzle.Width)
@@ -185,7 +188,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
         private static void ParseRowSection(Puzzle puzzle, ClueCell clueCell, int cellIndex)
         {
-            var section = new KakuroSection(clueCell.RowClue);
+            var section = new KakuroSection
+            {
+                ClueValue = clueCell.RowClue,
+            };
 
             // Find all clue cells in the row until there is a break.
             for (var j = cellIndex + 1; j < puzzle.Height * puzzle.Width; ++j)

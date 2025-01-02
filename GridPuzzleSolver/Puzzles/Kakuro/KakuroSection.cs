@@ -9,23 +9,26 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
     internal class KakuroSection : Section
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KakuroSection"/> class.
+        /// The sections clue value.
         /// </summary>
-        /// <param name="clueValue">The clue value of this Section.</param>
-        public KakuroSection(uint clueValue)
-        {
-            if (clueValue == 0u)
-            {
-                throw new ArgumentException("Clue value must be greater than 0.");
-            }
-
-            ClueValue = clueValue;
-        }
+        private uint clueValue;
 
         /// <summary>
-        /// Gets the clue value of this Section.
+        /// Gets or sets the clue value of this Section.
         /// </summary>
-        public uint ClueValue { get; private set; }
+        public uint ClueValue
+        {
+            get => clueValue;
+            set
+            {
+                if (value == 0u)
+                {
+                    throw new ArgumentException("Clue value must be greater than 0.");
+                }
+
+                clueValue = value;
+            }
+        }
 
         /// <summary>
         /// Calculate all of the possible values that can be placed within this
@@ -66,9 +69,9 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
 
             var solvedPuzzleCells = PuzzleCells.FindAll(pc => pc.Solved);
             var numSolvedCells = solvedPuzzleCells.Count;
-            var clueValue = ClueValue - (uint)solvedPuzzleCells.Sum(pc => pc.CellValue);
+            var remainingClueValue = ClueValue - (uint)solvedPuzzleCells.Sum(pc => pc.CellValue);
 
-            if (clueValue == 0)
+            if (remainingClueValue == 0)
             {
                 // This would only happen if our solving has gone wrong somewhere.
                 throw new GridPuzzleSolverException("Invalid clue value of 0 found");
@@ -78,15 +81,15 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
             // value will be.
             if (numSolvedCells == PuzzleCells.Count - 1)
             {
-                partitions = new List<List<uint>>() { new List<uint> { clueValue, } };
+                partitions = new List<List<uint>>() { new List<uint> { remainingClueValue, } };
             }
             else
             {
                 // Need to actually calculate the partitions.
-                var maxValue = clueValue <= 9 ? clueValue - 1 : 9;
+                var maxValue = remainingClueValue <= 9 ? remainingClueValue - 1 : 9;
                 var numCells = (uint)(PuzzleCells.Count - numSolvedCells);
 
-                partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(clueValue, numCells, 1u, maxValue);
+                partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(remainingClueValue, numCells, 1u, maxValue);
 
                 // Remove any partitions that contain a solved value.
                 foreach (var solvedPuzzleCell in solvedPuzzleCells)
