@@ -9,7 +9,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         [Test]
         public void KakuroSection_CalculatePossibleValues_ReturnsEmptyListsIfAllPuzzleCellsSolved()
         {
-            var section = new KakuroSection(4u);
+            var section = new KakuroSection
+            {
+                ClueValue = 4u,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell()
             {
@@ -29,7 +32,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValuesForMagicNumber()
         {
             // 4 will be a magic number if there are two cells.
-            var section = new KakuroSection(4u);
+            var section = new KakuroSection
+            {
+                ClueValue = 4u,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell());
             section.PuzzleCells.Add(new PuzzleCell());
@@ -48,7 +54,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValues()
         {
             var sectionClueValue = 9u;
-            var section = new KakuroSection(sectionClueValue);
+            var section = new KakuroSection
+            {
+                ClueValue = sectionClueValue,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell());
             section.PuzzleCells.Add(new PuzzleCell());
@@ -67,7 +76,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         public void KakuroSection_CalculatePossibleValues_ReturnsSingleValueIfOnlyOneUnsolvedPuzzleCell()
         {
             var sectionClueValue = 4u;
-            var section = new KakuroSection(sectionClueValue);
+            var section = new KakuroSection
+            {
+                ClueValue = sectionClueValue,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell()
             {
@@ -89,7 +101,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         public void KakuroSection_CalculatePossibleValues_ReturnsExpectedValuesWithSolvedPuzzleCell()
         {
             var sectionClueValue = 12u;
-            var section = new KakuroSection(sectionClueValue);
+            var section = new KakuroSection
+            {
+                ClueValue = sectionClueValue,
+            };
 
             var solvedPuzzleCellValue = 3u;
             section.PuzzleCells.Add(new PuzzleCell()
@@ -112,7 +127,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         [Test]
         public void KakuroSection_IsSolved_ReturnsFalseIfNotAllCellsAreSolved()
         {
-            var section = new KakuroSection(12u);
+            var section = new KakuroSection
+            {
+                ClueValue = 12u,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell()
             {
@@ -130,7 +148,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         [Test]
         public void KakuroSection_IsSolved_ReturnsFalseIfSumOfCellsIsNotEqualToClueValue()
         {
-            var section = new KakuroSection(12u);
+            var section = new KakuroSection
+            {
+                ClueValue = 12u,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell()
             {
@@ -151,7 +172,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         [Test]
         public void KakuroSection_IsSolved_ReturnsFalseIfCellsHaveDuplicatedValues()
         {
-            var section = new KakuroSection(3u);
+            var section = new KakuroSection
+            {
+                ClueValue = 3u,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell()
             {
@@ -172,7 +196,10 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
         [Test]
         public void KakuroSection_IsSolved_ReturnsTrueForValidCompletedSection()
         {
-            var section = new KakuroSection(12u);
+            var section = new KakuroSection
+            {
+                ClueValue = 12u,
+            };
 
             section.PuzzleCells.Add(new PuzzleCell()
             {
