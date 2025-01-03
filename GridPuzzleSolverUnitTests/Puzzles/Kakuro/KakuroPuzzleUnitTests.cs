@@ -1,4 +1,5 @@
-﻿using GridPuzzleSolver.Puzzles.Kakuro.Parser;
+﻿using GridPuzzleSolver.Components.Cells;
+using GridPuzzleSolver.Puzzles.Kakuro.Parser;
 using NUnit.Framework;
 
 namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
@@ -6,6 +7,49 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.UnitTests
     [TestFixture]
     public class KakuroPuzzleUnitTests
     {
+        [Test]
+        public void KakuroPuzzle_NumberOfUnsolvedCells_SuccessfullyReturnsNumberOfUnsolvedCellsIfNoneAreSolved()
+        {
+            var puzzle = new KakuroPuzzle();
+
+            puzzle.Cells.Add(new PuzzleCell());
+            puzzle.Cells.Add(new PuzzleCell());
+
+            Assert.That(puzzle.NumberOfUnsolvedCells, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void KakuroPuzzle_NumberOfUnsolvedCells_SuccessfullyReturnsNumberOfUnsolvedCellsIfSomeAreSolved()
+        {
+            var puzzle = new KakuroPuzzle();
+
+            puzzle.Cells.Add(new PuzzleCell());
+            puzzle.Cells.Add(new PuzzleCell());
+            puzzle.Cells.Add(new PuzzleCell()
+            {
+                CellValue = 1u,
+            });
+
+            Assert.That(puzzle.NumberOfUnsolvedCells, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void KakuroPuzzle_NumberOfUnsolvedCells_SuccessfullyReturnsZeroIfAllCellsAreSolved()
+        {
+            var puzzle = new KakuroPuzzle();
+
+            puzzle.Cells.Add(new PuzzleCell()
+            {
+                CellValue = 1u,
+            });
+            puzzle.Cells.Add(new PuzzleCell()
+            {
+                CellValue = 1u,
+            });
+
+            Assert.That(puzzle.NumberOfUnsolvedCells, Is.EqualTo(0));
+        }
+
         [TestCase("Easy4x4Puzzle.kak")]
         [TestCase("Easy4x4Puzzle2.kak")]
         [TestCase("Easy6x6Puzzle.kak")]

@@ -38,7 +38,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
         {
             ValidateInputFile(puzzleFilePath, FileExtension);
 
-            var puzzle = new Puzzle();
+            var puzzle = new SudokuPuzzle();
 
             // Now read in the puzzle.
             var lines = File.ReadAllLines(puzzleFilePath);
@@ -59,7 +59,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
                     };
                     var cell = ParseCell(coordinate, cellsStr[column]);
 
-                    puzzle.AddCell(cell);
+                    puzzle.Cells.Add(cell);
                 }
             }
 
@@ -107,8 +107,8 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
             for (int i = 0; i < 9; ++i)
             {
                 // Get the column section cells.
-                var columnCells = puzzle.Cells.Where(c => c.Coordinate.Y == i)
-                                              .Select(c => (PuzzleCell)c)
+                var columnCells = puzzle.Cells.OfType<PuzzleCell>()
+                                              .Where(c => c.Coordinate.Y == i)
                                               .ToList();
 
                 var columnSection = new SudokuSection();
@@ -121,8 +121,8 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
                 columnCells.ForEach(cc => cc.Sections.Add(columnSection));
 
                 // Get the row section cells.
-                var rowCells = puzzle.Cells.Where(c => c.Coordinate.X == i)
-                                           .Select(c => (PuzzleCell)c)
+                var rowCells = puzzle.Cells.OfType<PuzzleCell>()
+                                           .Where(c => c.Coordinate.X == i)
                                            .ToList();
 
                 var rowSection = new SudokuSection();
