@@ -1,8 +1,10 @@
-﻿using GridPuzzleSolver.Puzzles.Kakuro.Parser;
+﻿using GridPuzzleSolver;
+using GridPuzzleSolver.Parser;
+using GridPuzzleSolver.Puzzles.Kakuro.Parser;
 using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.Parser.UnitTests
+namespace GridPuzzleSolverUnitTests.Parser
 {
     [TestFixture]
     public class ParserFactoryUnitTests
@@ -10,8 +12,8 @@ namespace GridPuzzleSolver.Parser.UnitTests
         [TestCase]
         public void ParserFactory_GetParser_ThrowsExceptionWithNullFileExtension()
         {
-// Converting null literal or possible null value to non-nullable type.
-// Possible null reference argument.
+            // Converting null literal or possible null value to non-nullable type.
+            // Possible null reference argument.
 #pragma warning disable CS8600, CS8604
             string inputFile = null;
 

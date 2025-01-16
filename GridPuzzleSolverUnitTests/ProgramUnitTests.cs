@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+﻿using GridPuzzleSolver;
+using NUnit.Framework;
 
-namespace GridPuzzleSolver.UnitTests
+namespace GridPuzzleSolverUnitTests
 {
     [TestFixture]
     public class ProgramUnitTests

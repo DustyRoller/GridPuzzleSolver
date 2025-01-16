@@ -1,8 +1,10 @@
-﻿using GridPuzzleSolver.Components.Cells;
+﻿using GridPuzzleSolver;
+using GridPuzzleSolver.Components.Cells;
+using GridPuzzleSolver.Puzzles.Kakuro.Parser;
 using NUnit.Framework;
 using System.Text;
 
-namespace GridPuzzleSolver.Puzzles.Kakuro.Parser.UnitTests
+namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Parser
 {
     [TestFixture]
     public class KakuroParserUnitTests
