@@ -1,7 +1,10 @@
-﻿using Moq;
+﻿using GridPuzzleSolver;
+using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Components.Cells;
+using Moq;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.Components.Cells.UnitTests
+namespace GridPuzzleSolverUnitTests.Components.Cells
 {
     [TestFixture]
     public class PuzzleCellUnitTests

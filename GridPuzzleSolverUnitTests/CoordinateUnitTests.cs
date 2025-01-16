@@ -1,6 +1,7 @@
+using GridPuzzleSolver;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.UnitTests
+namespace GridPuzzleSolverUnitTests
 {
     [TestFixture]
     public class CoordinateUnitTests

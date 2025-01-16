@@ -1,8 +1,10 @@
-﻿using GridPuzzleSolver.Components.Cells;
+﻿using GridPuzzleSolver;
+using GridPuzzleSolver.Components.Cells;
+using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using NUnit.Framework;
 using System.Text;
 
-namespace GridPuzzleSolver.Puzzles.Sudoku.Parser.UnitTests
+namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
 {
     [TestFixture]
     public class SudokuParserUnitTests
