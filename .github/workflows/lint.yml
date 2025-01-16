@@ -3,13 +3,17 @@ name: lint
 on: [push]
 
 jobs:
-   sonarqube:
-     runs-on: ubuntu-latest
-     steps:
-       - name: checkout code
-         uses: actions/checkout@v3
+  sonarqube:
 
- install .net
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 6.0.x
 
       - name: Install SonarLint
         run: dotnet tool install -g SonarLint.CLI
