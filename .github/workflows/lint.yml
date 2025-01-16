@@ -3,7 +3,7 @@ name: lint
 on: [push]
 
 jobs:
-  sonarqube:
+  build:
 
     runs-on: ubuntu-latest
 
