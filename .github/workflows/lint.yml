@@ -1,0 +1,24 @@
+name: lint
+
+on: [push]
+
+jobs:
+   sonarqube:
+     runs-on: ubuntu-latest
+     steps:
+       - name: checkout code
+         uses: actions/checkout@v3
+
+ install .net
+
+      - name: Install SonarLint
+        run: dotnet tool install -g SonarLint.CLI
+
+      - name: Run SonarLint
+        run: sonarlint analyze --project "Yourproject.csproj" --output "sonarlint-report.xml"
+
+      - name: Upload SonarLint report
+        uses: actions/upload-artifact@v3
+        with:
+          name: sonarlint-report
+          path: sonarlint-report.xml
