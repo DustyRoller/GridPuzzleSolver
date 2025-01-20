@@ -19,7 +19,9 @@ jobs:
       run: dotnet tool install -g dotnet-sonarscanner
 
     - name: Run SonarLint
-      run: dotnet sonarscanner begin --project "GridPuzzleSolver.csproj" --output "sonarlint-report.xml"
+      run: dotnet sonarscanner begin /k:"local" /d:sonar.mode=local /d:sonar.projectname="GridPuzzleSolver"
+          dotnet build GridPuzzleSolver.csproj
+          sonarscanner end /d:sonar.mode=local
 
     - name: Upload SonarLint report
       uses: actions/upload-artifact@v3
