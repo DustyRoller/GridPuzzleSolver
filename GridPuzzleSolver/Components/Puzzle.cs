@@ -5,10 +5,15 @@ namespace GridPuzzleSolver.Components
 {
     /// <summary>
     /// Base class representing a grid based puzzle, every puzzle will be made
-    /// up of PuzzleCells to be solved and a number of Sections.
+    /// up of Cells to be solved and a number of Sections.
     /// </summary>
     internal abstract class Puzzle
     {
+        /// <summary>
+        /// Gets or sets the puzzle's cells.
+        /// </summary>
+        public List<Cell> Cells { get; set; } = new List<Cell>();
+
         /// <summary>
         /// Gets or sets the height of the puzzle by number of Cells.
         /// </summary>
@@ -16,14 +21,8 @@ namespace GridPuzzleSolver.Components
 
         /// <summary>
         /// Gets the number of currently unsolved puzzle cells.
-        /// Gets or sets the puzzle type.
         /// </summary>
         public int NumberOfUnsolvedCells => Cells.OfType<PuzzleCell>().Count(pc => !pc.Solved);
-
-        /// <summary>
-        /// Gets or sets the puzzle's cells.
-        /// </summary>
-        public List<Cell> Cells { get; set; } = new List<Cell>();
 
         /// <summary>
         /// Gets or sets the width of the puzzle by number of Cells.
