@@ -10,7 +10,7 @@
         /// Gets or sets the Coordinate's X position.
         /// </summary>
         public uint X { get; set; }
-
+    
         /// <summary>
         /// Gets or sets the Coordinate's Y position.
         /// </summary>
