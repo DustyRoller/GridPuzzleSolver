@@ -22,7 +22,7 @@ jobs:
       run: dotnet sonarscanner begin /k:"local" /d:sonar.mode=local /d:sonar.projectname="GridPuzzleSolver" /o:"org"
     - name: run analysis sonar
       run: |
-        dotnet sonarscanner end /d:sonar.mode=local
+        dotnet sonarscanner end
     - name: Upload SonarLint report
       uses: actions/upload-artifact@v3
       with:
