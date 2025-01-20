@@ -3,35 +3,17 @@ name: lint
 on: [push]
 
 jobs:
-  build:
+  dotnet-format:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
-
     - name: Restore dependencies
       run: dotnet restore
-
-    - name: Install SonarLint
-      run: dotnet tool install -g dotnet-sonarscanner
-
-    - name: Run SonarLint
-      run: dotnet sonarscanner begin /k:"local" /d:sonar.mode=local /d:sonar.projectname="GridPuzzleSolver" /o:"org"
-
-    - name: Build
-      run: dotnet build --no-restore
-
-    - name: run analysis sonar
-      run: |
-        dotnet sonarscanner end
-    - name: Upload SonarLint report
-      uses: actions/upload-artifact@v3
-      with:
-        name: sonarlint-report
-        path: sonarlint-report.xml
+    - name: Format
+      run: dotnet format --verify-no-changes --verbosity diagnostic
