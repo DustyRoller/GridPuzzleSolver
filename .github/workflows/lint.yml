@@ -20,7 +20,6 @@ jobs:
 
     - name: Run SonarLint
       run: dotnet sonarscanner begin /k:"local" /d:sonar.mode=local /d:sonar.projectname="GridPuzzleSolver"
-          dotnet build GridPuzzleSolver.csproj
     - name: run analysis sonar
       run: |
         dotnet sonarscanner end /d:sonar.mode=local
