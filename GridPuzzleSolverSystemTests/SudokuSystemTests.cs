@@ -11,6 +11,11 @@ namespace GridPuzzleSolverSystemTests
         [TestCase("MediumPuzzle.sud")]
         [TestCase("HardPuzzle.sud")]
         [TestCase("ExpertPuzzle.sud")]
+        [TestCase("EasyPuzzle.xml")]
+        [TestCase("EasyPuzzle2.xml")]
+        [TestCase("MediumPuzzle.xml")]
+        [TestCase("HardPuzzle.xml")]
+        [TestCase("ExpertPuzzle.xml")]
         public void Sudoku_SolveTestPuzzles(string testPuzzleFileName)
         {
             var testPuzzleDir = Path.Combine("TestPuzzles", "Sudoku");

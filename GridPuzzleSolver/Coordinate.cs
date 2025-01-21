@@ -1,19 +1,23 @@
-﻿namespace GridPuzzleSolver
+﻿using System.Xml.Serialization;
+
+namespace GridPuzzleSolver
 {
     /// <summary>
     /// Coordinate of a cell within a puzzle, describing its X and Y position
     /// within the puzzle grid, starting 0, 0 at the top left hand corner.
     /// </summary>
-    internal class Coordinate
+    public class Coordinate
     {
         /// <summary>
         /// Gets or sets the Coordinate's X position.
         /// </summary>
+        [XmlElement("x")]
         public uint X { get; set; }
 
         /// <summary>
         /// Gets or sets the Coordinate's Y position.
         /// </summary>
+        [XmlElement("y")]
         public uint Y { get; set; }
 
         /// <summary>

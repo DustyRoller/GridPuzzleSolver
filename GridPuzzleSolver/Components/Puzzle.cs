@@ -1,14 +1,22 @@
 ﻿using GridPuzzleSolver.Components.Cells;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace GridPuzzleSolver.Components
 {
     /// <summary>
     /// Base class representing a grid based puzzle, every puzzle will be made
-    /// up of Cells to be solved and a number of Sections.
+    /// up of a number of Cells and Sections.
     /// </summary>
-    internal abstract class Puzzle
+    public abstract class Puzzle
     {
+        /// <summary>
+        /// Gets or sets the puzzle's cells.
+        /// </summary>
+        [XmlArray("known-cells")]
+        [XmlArrayItem("cell")]
+        public List<PuzzleCell> SolvedCells { get; set; } = new List<PuzzleCell>();
+
         /// <summary>
         /// Gets or sets the puzzle's cells.
         /// </summary>
@@ -33,6 +41,11 @@ namespace GridPuzzleSolver.Components
         /// Gets or sets the sections of cells that make up this puzzle.
         /// </summary>
         internal List<Section> Sections { get; set; } = new List<Section>();
+
+        /// <summary>
+        /// Complete the puzzle, creating any missing cells.
+        /// </summary>
+        public abstract void CompletePuzzle();
 
         /// <summary>
         /// Solve the puzzle.

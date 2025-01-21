@@ -63,7 +63,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
                 }
             }
 
-            ParseSections(puzzle);
+            puzzle.CreateSections();
 
             // Ensure that there is at least one solved cell.
             if (puzzle.NumberOfUnsolvedCells == 81)
@@ -99,72 +99,6 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
             }
 
             return puzzleCell;
-        }
-
-        private static void ParseSections(Puzzle puzzle)
-        {
-            // Get all the column and row sections.
-            for (int i = 0; i < 9; ++i)
-            {
-                // Get the column section cells.
-                var columnCells = puzzle.Cells.OfType<PuzzleCell>()
-                                              .Where(c => c.Coordinate.Y == i)
-                                              .ToList();
-
-                var columnSection = new SudokuSection();
-                columnSection.PuzzleCells.AddRange(columnCells);
-
-                // Add the column section to the puzzle.
-                puzzle.Sections.Add(columnSection);
-
-                // Set the column section on each cell.
-                columnCells.ForEach(cc => cc.Sections.Add(columnSection));
-
-                // Get the row section cells.
-                var rowCells = puzzle.Cells.OfType<PuzzleCell>()
-                                           .Where(c => c.Coordinate.X == i)
-                                           .ToList();
-
-                var rowSection = new SudokuSection();
-                rowSection.PuzzleCells.AddRange(rowCells);
-
-                // Add the row section to the puzzle.
-                puzzle.Sections.Add(rowSection);
-
-                // Set the row section on each cell.
-                rowCells.ForEach(rc => rc.Sections.Add(rowSection));
-            }
-
-            // Get all of the 3x3 squares from within the puzzle,
-            // this is a pretty ugly way of doing it but works for now.
-            var squareStartingIndexes = new List<int>()
-            {
-                0, 3, 6, 27, 30, 33, 54, 57, 60,
-            };
-
-            foreach (var startingIndex in squareStartingIndexes)
-            {
-                var index = startingIndex;
-                var squareCells = new List<PuzzleCell>();
-                for (int x = 0; x < 3; ++x)
-                {
-                    for (int y = 0; y < 3; ++y)
-                    {
-                        squareCells.Add((PuzzleCell)puzzle.Cells[index]);
-                        ++index;
-                    }
-
-                    index += 6;
-                }
-
-                var squareSection = new SudokuSection();
-                squareSection.PuzzleCells.AddRange(squareCells);
-
-                // Set the square section on each cell.
-                squareCells.ForEach(sc => sc.Sections.Add(squareSection));
-
-                puzzle.Sections.Add(squareSection);
-            }
         }
 
         /// <summary>

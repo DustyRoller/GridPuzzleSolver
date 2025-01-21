@@ -1,7 +1,6 @@
 ﻿using GridPuzzleSolver;
-using GridPuzzleSolver.Components;
 using GridPuzzleSolver.Components.Cells;
-using Moq;
+using GridPuzzleSolver.Puzzles.Sudoku;
 using NUnit.Framework;
 
 namespace GridPuzzleSolverUnitTests.Components.Cells
@@ -26,66 +25,65 @@ namespace GridPuzzleSolverUnitTests.Components.Cells
 
             var expectedPossibleValues = new List<uint>();
 
-            var possibleValues = puzzleCell.PossibleValues;
+            var actualPossibleValues = puzzleCell.PossibleValues;
 
-            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
+            Assert.That(expectedPossibleValues, Is.EqualTo(actualPossibleValues));
         }
 
         [Test]
         public void PuzzleCell_PossibleValues_ReturnsEveryValueForGivenSections()
         {
-            var mockSection = new Mock<ISection>();
+            var section = new SudokuSection();
 
-            var sectionPossibilities = new List<uint>
+            var puzzleCell = new PuzzleCell();
+
+            puzzleCell.Sections.Add(section);
+
+            var expectedPossibleValues = new List<uint>
             {
                 1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u, 9u,
             };
 
-            mockSection.Setup(ms => ms.CalculatePossibleValues())
-                       .Returns(sectionPossibilities);
+            var actualPossibleValues = puzzleCell.PossibleValues;
 
-            var puzzleCell = new PuzzleCell();
-
-            puzzleCell.Sections.Add(mockSection.Object);
-
-            var possibleValues = puzzleCell.PossibleValues;
-
-            Assert.That(sectionPossibilities, Is.EqualTo(possibleValues));
+            Assert.That(expectedPossibleValues, Is.EqualTo(actualPossibleValues));
         }
 
         [Test]
         public void PuzzleCell_PossibleValues_ReturnsOnlyCommonValuesFromBothSections()
         {
-            var columnSection = new Mock<ISection>();
-
-            var columnSectionPossibilities = new List<uint>
+            var section1 = new SudokuSection();
+            section1.PuzzleCells.Add(new PuzzleCell
             {
-                1u, 2u, 3u,
-            };
-
-            columnSection.Setup(cs => cs.CalculatePossibleValues())
-                         .Returns(columnSectionPossibilities);
-
-            var rowSection = new Mock<ISection>();
-
-            var rowSectionPossibilities = new List<uint>
+                CellValue = 1,
+            });
+            section1.PuzzleCells.Add(new PuzzleCell
             {
-                2u, 3u, 4u, 5u,
-            };
+                CellValue = 2,
+            });
 
-            rowSection.Setup(rs => rs.CalculatePossibleValues())
-                      .Returns(rowSectionPossibilities);
+            var section2 = new SudokuSection();
+            section2.PuzzleCells.Add(new PuzzleCell
+            {
+                CellValue = 8,
+            });
+            section2.PuzzleCells.Add(new PuzzleCell
+            {
+                CellValue = 9,
+            });
 
             var puzzleCell = new PuzzleCell();
+            puzzleCell.Sections.Add(section1);
+            puzzleCell.Sections.Add(section2);
 
-            puzzleCell.Sections.Add(columnSection.Object);
-            puzzleCell.Sections.Add(rowSection.Object);
+            var expectedPossibleValues = new List<uint>
+            {
+                 3u, 4u, 5u, 6u, 7u,
+            };
 
-            var expectedPossibleValues = columnSectionPossibilities.Intersect(rowSectionPossibilities);
+            var actualPossibleValues = puzzleCell.PossibleValues;
 
-            var possibleValues = puzzleCell.PossibleValues;
-
-            Assert.That(expectedPossibleValues, Is.EqualTo(possibleValues));
+            Assert.That(expectedPossibleValues, Is.EqualTo(actualPossibleValues));
         }
     }
 }
