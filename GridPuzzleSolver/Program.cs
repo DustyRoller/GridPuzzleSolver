@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GridPuzzleSolverUnitTests")]
+[assembly: InternalsVisibleTo("GridPuzzleSolverSystemTests")]
 
 namespace GridPuzzleSolver
 {
@@ -15,9 +16,10 @@ namespace GridPuzzleSolver
         /// Runs the grid solver program. Parses the given puzzle file and attempts to solve it.
         /// </summary>
         /// <param name="puzzleFilePath">The path to the puzzle file containing the puzzle to be solved.</param>
+        /// <returns>True if the puzzle was solved, otherwise false.</returns>
         /// <exception cref="ArgumentException">Thrown if the puzzle file path is invalid.</exception>
         /// <exception cref="ParserException">Thrown if no suitable parser for the puzzle is found.</exception>
-        public static void Run(string puzzleFilePath)
+        public static bool Run(string puzzleFilePath)
         {
             // Validate the input.
             if (string.IsNullOrEmpty(puzzleFilePath))
@@ -42,7 +44,9 @@ namespace GridPuzzleSolver
             // Time how long it takes to solve the puzzle.
             var stopwatch = Stopwatch.StartNew();
 
-            if (puzzle.Solve())
+            var solved = puzzle.Solve();
+
+            if (solved)
             {
                 Console.WriteLine("Successfully solved puzzle");
             }
@@ -63,9 +67,11 @@ namespace GridPuzzleSolver
             Console.WriteLine();
             var timeTaken = (stopwatch.ElapsedMilliseconds / 1000.0).ToString("F2");
             Console.WriteLine($"Time taken: {timeTaken}s");
+
+            return solved;
         }
 
-        private static void Main(string[] args)
+        private static int Main(string[] args)
         {
             if (args.Length != 1)
             {
@@ -73,7 +79,7 @@ namespace GridPuzzleSolver
                 Environment.Exit(1);
             }
 
-            Run(args[0]);
+            return Run(args[0]) ? 0 : 1;
         }
     }
 }
