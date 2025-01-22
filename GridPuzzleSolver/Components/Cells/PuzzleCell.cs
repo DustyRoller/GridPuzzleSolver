@@ -21,7 +21,7 @@ namespace GridPuzzleSolver.Components.Cells
             {
                 if (value > 9)
                 {
-                    throw new GridPuzzleSolverException($"Puzzle cell value cannot be greater than 9. {Coordinate}.");
+                    throw new GridPuzzleSolverException($"Puzzle cell value cannot be greater than 9. {Coordinates}.");
                 }
 
                 cellValue = value;

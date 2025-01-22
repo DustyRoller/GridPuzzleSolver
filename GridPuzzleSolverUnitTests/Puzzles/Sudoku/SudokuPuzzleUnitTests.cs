@@ -26,7 +26,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku
             var solvedPuzzleCell = new PuzzleCell
             {
                 CellValue = 1,
-                Coordinate = new Coordinate
+                Coordinates = new Coordinates
                 {
                     X = 0,
                     Y = 0,
@@ -47,8 +47,8 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku
             {
                 for (var y = 0u; y < 9; ++y)
                 {
-                    Assert.That(puzzle.Cells[index].Coordinate.X, Is.EqualTo(x));
-                    Assert.That(puzzle.Cells[index].Coordinate.Y, Is.EqualTo(y));
+                    Assert.That(puzzle.Cells[index].Coordinates.X, Is.EqualTo(x));
+                    Assert.That(puzzle.Cells[index].Coordinates.Y, Is.EqualTo(y));
 
                     index++;
                 }
@@ -64,8 +64,8 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku
 
             for (int i = 0; i < 9; ++i)
             {
-                Assert.That(columnSections[i].PuzzleCells.All(c => c.Coordinate.Y == i));
-                Assert.That(rowSections[i].PuzzleCells.All(c => c.Coordinate.X == i));
+                Assert.That(columnSections[i].PuzzleCells.All(c => c.Coordinates.Y == i));
+                Assert.That(rowSections[i].PuzzleCells.All(c => c.Coordinates.X == i));
             }
         }
 

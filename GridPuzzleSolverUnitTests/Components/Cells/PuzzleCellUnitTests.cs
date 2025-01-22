@@ -15,7 +15,7 @@ namespace GridPuzzleSolverUnitTests.Components.Cells
 
             var ex = Assert.Throws<GridPuzzleSolverException>(() => puzzleCell.CellValue = 10u);
 
-            Assert.That($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinate}.", Is.EqualTo(ex?.Message));
+            Assert.That($"Puzzle cell value cannot be greater than 9. {puzzleCell.Coordinates}.", Is.EqualTo(ex?.Message));
         }
 
         [Test]

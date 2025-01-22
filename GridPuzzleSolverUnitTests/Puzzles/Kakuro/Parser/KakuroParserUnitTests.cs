@@ -120,20 +120,20 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Parser
             Assert.That(puzzle.Width, Is.EqualTo(5u));
             Assert.That(puzzle.Height, Is.EqualTo(5u));
 
-            // Assert that the cell coordinates are correct.
+            // Assert that the cell's coordinates are correct.
             var index = 0;
 
             for (var y = 0u; y < puzzle.Height; ++y)
             {
                 for (var x = 0u; x < puzzle.Width; ++x)
                 {
-                    var expectedCoordinate = new Coordinate
+                    var expectedCoordinates = new Coordinates
                     {
                         X = x,
                         Y = y,
                     };
 
-                    Assert.That(puzzle.Cells[index].Coordinate, Is.EqualTo(expectedCoordinate));
+                    Assert.That(puzzle.Cells[index].Coordinates, Is.EqualTo(expectedCoordinates));
 
                     index++;
                 }
