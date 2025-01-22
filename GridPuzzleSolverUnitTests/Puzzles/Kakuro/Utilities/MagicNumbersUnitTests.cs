@@ -28,7 +28,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Utilities
             mn.Values[0].RemoveAt(0);
 
             // Make sure the number of values hasn't actually changed.
-            Assert.That(originalLength, Is.EqualTo(mn.Values[0].Count));
+            Assert.That(mn.Values[0], Has.Count.EqualTo(originalLength));
         }
     }
 }
