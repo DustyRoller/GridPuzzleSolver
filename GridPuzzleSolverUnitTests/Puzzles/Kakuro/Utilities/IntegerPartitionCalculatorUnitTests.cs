@@ -20,7 +20,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Utilities
         }
 
         [Test]
-        public void IntegerPartitionCalulator_CalculateDistinctIntegerPartitions_ReturnsExpectedValueForMagicNumber()
+        public void IntegerPartitionCalulator_CalculateDistinctIntegerPartitions_ReturnsSinglePartitionForMagicNumber()
         {
             var sum = 17u;
             var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, 2u, 1u, 9u);
@@ -32,16 +32,15 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Utilities
         }
 
         [Test]
-        public void IntegerPartitionCalulator_CalculateDistinctIntegerPartitions_ReturnsExpectedValue()
+        [TestCaseSource(nameof(GetIntegerPartitionTestData))]
+        public void IntegerPartitionCalulator_CalculateDistinctIntegerPartitions_ReturnsExpectedValues(
+            uint sum, uint partitionLength, uint minimumValue, uint maximumValue, List<List<uint>> expectedPartitions)
         {
-            var sum = 5u;
-            var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, 2u, 1u, 4u);
+            var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, minimumValue, maximumValue);
 
             ValidatePartitions(partitions, sum);
 
-            Assert.That(partitions, Has.Count.EqualTo(2));
-            Assert.That(partitions[0], Is.EqualTo(new List<uint> { 1, 4, }));
-            Assert.That(partitions[1], Is.EqualTo(new List<uint> { 2, 3, }));
+            Assert.That(partitions, Is.EqualTo(expectedPartitions));
         }
 
         [Test]
@@ -117,17 +116,6 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Utilities
             Assert.That(partitions, Is.Empty);
         }
 
-        [Test]
-        public void IntegerPartitionCalulator_CalculateDistinctIntegerPartitions_ReturnsAnEmptyListIfUnableToFindPartitionsa()
-        {
-            var sum = 11u;
-            var partitionLength = 2u;
-            var maxValue = 9u;
-            var partitions = IntegerPartitionCalculator.CalculateDistinctIntegerPartitions(sum, partitionLength, 1u, maxValue);
-
-            Assert.That(partitions, Has.Count.EqualTo(4));
-        }
-
         private static void ValidatePartitions(List<List<uint>> partitions, uint sum)
         {
             // First check that the partitions isn't empty.
@@ -140,6 +128,45 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Utilities
 
             // Make sure each partition has unique numbers.
             Assert.That(partitions.All(p => p.Distinct().Count() == p.Count));
+        }
+
+        /// <summary>
+        /// Create integer partition test data.
+        /// </summary>
+        /// <returns>Data containing integer partition parameters and expected results.</returns>
+        private static IEnumerable<TestCaseData> GetIntegerPartitionTestData()
+        {
+            yield return new TestCaseData(11u, 2u, 1u, 9u, new List<List<uint>>
+            {
+                new List<uint>
+                {
+                    2u, 9u,
+                },
+                new List<uint>
+                {
+                    3u, 8u,
+                },
+                new List<uint>
+                {
+                    4u, 7u,
+                },
+                new List<uint>
+                {
+                    5u, 6u,
+                },
+            });
+
+            yield return new TestCaseData(5u, 2u, 1u, 4u, new List<List<uint>>
+            {
+                new List<uint>
+                {
+                    1u, 4u,
+                },
+                new List<uint>
+                {
+                    2u, 3u,
+                },
+            });
         }
     }
 }
