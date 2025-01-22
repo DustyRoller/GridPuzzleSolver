@@ -45,6 +45,7 @@
 
             var integerPartitions = Cache.Find(ip => ip.PartitionLength == partitionLength &&
                                                      ip.Total == total &&
+                                                     ip.Values.Any() &&
                                                      ip.Values[0].TrueForAll(v => v >= minValue && v <= maxValue));
 
             if (integerPartitions == null)
