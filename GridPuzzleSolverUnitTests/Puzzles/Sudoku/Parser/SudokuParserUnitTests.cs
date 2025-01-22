@@ -167,15 +167,15 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             Assert.That(puzzle.Cells, Has.Count.EqualTo(81));
             Assert.That(puzzle.Sections, Has.Count.EqualTo(27));
 
-            // Assert that the cell coordinates are correct.
+            // Assert that the cell's coordinates are correct.
             var index = 0;
 
             for (var y = 0u; y < 9; ++y)
             {
                 for (var x = 0u; x < 9; ++x)
                 {
-                    Assert.That(puzzle.Cells[index].Coordinate.X, Is.EqualTo(x));
-                    Assert.That(puzzle.Cells[index].Coordinate.Y, Is.EqualTo(y));
+                    Assert.That(puzzle.Cells[index].Coordinates.X, Is.EqualTo(x));
+                    Assert.That(puzzle.Cells[index].Coordinates.Y, Is.EqualTo(y));
 
                     index++;
                 }
@@ -191,8 +191,8 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
 
             for (int i = 0; i < 9; ++i)
             {
-                Assert.That(columnSections[i].PuzzleCells.All(c => c.Coordinate.Y == i));
-                Assert.That(rowSections[i].PuzzleCells.All(c => c.Coordinate.X == i));
+                Assert.That(columnSections[i].PuzzleCells.All(c => c.Coordinates.Y == i));
+                Assert.That(rowSections[i].PuzzleCells.All(c => c.Coordinates.X == i));
             }
 
             Assert.That(((PuzzleCell)puzzle.Cells[0]).CellValue, Is.EqualTo(0u));

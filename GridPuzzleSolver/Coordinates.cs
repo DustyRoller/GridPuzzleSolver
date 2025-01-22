@@ -3,10 +3,10 @@
 namespace GridPuzzleSolver
 {
     /// <summary>
-    /// Coordinate of a cell within a puzzle, describing its X and Y position
+    /// Coordinates of a cell within a puzzle, describing its X and Y position
     /// within the puzzle grid, starting 0, 0 at the top left hand corner.
     /// </summary>
-    public class Coordinate
+    public class Coordinates
     {
         /// <summary>
         /// Gets or sets the Coordinate's X position.
@@ -21,7 +21,7 @@ namespace GridPuzzleSolver
         public uint Y { get; set; }
 
         /// <summary>
-        /// Does this Coordinate equal the given object.
+        /// Does this Coordinates object equal the given object.
         /// </summary>
         /// <param name="obj">The object to be comparing against.</param>
         /// <returns>True if the Coordinates are equal, otherwise false.</returns>
@@ -33,23 +33,23 @@ namespace GridPuzzleSolver
                 return false;
             }
 
-            var otherCoordinate = (Coordinate)obj;
-            return (X == otherCoordinate.X) && (Y == otherCoordinate.Y);
+            var otherCoordinates = (Coordinates)obj;
+            return (X == otherCoordinates.X) && (Y == otherCoordinates.Y);
         }
 
         /// <summary>
-        /// Get the Coordinate's hash code.
+        /// Get the Coordinates' hash code.
         /// </summary>
-        /// <returns>The Coordinate's hash code.</returns>
+        /// <returns>The Coordinates' hash code.</returns>
         public override int GetHashCode()
         {
             return (int)(X ^ Y);
         }
 
         /// <summary>
-        /// Get a string representation of the Coordinate.
+        /// Get a string representation of the Coordinates.
         /// </summary>
-        /// <returns>The string representation fo the Coordinate.</returns>
+        /// <returns>The string representation fo the Coordinates.</returns>
         public override string ToString()
         {
             return $"{X},{Y}";

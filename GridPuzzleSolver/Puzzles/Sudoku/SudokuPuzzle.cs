@@ -36,15 +36,15 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
             {
                 for (uint c = 0u; c < Height; c++)
                 {
-                    var coordinate = new Coordinate
+                    var coordinates = new Coordinates
                     {
                         X = r,
                         Y = c,
                     };
 
-                    Cells.Add(SolvedCells.FirstOrDefault(c => c.Coordinate.Equals(coordinate), new PuzzleCell()
+                    Cells.Add(SolvedCells.FirstOrDefault(c => c.Coordinates.Equals(coordinates), new PuzzleCell()
                     {
-                        Coordinate = coordinate,
+                        Coordinates = coordinates,
                     }));
                 }
             }
@@ -63,12 +63,12 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
             {
                 // Create the column section.
                 CreateSection(Cells.OfType<PuzzleCell>()
-                                   .Where(c => c.Coordinate.Y == i)
+                                   .Where(c => c.Coordinates.Y == i)
                                    .ToList());
 
                 // Create the row section.
                 CreateSection(Cells.OfType<PuzzleCell>()
-                                   .Where(c => c.Coordinate.X == i)
+                                   .Where(c => c.Coordinates.X == i)
                                    .ToList());
             }
 

@@ -52,12 +52,12 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
 
                 for (var column = 0u; column < cellsStr.Length; ++column)
                 {
-                    var coordinate = new Coordinate
+                    var coordinates = new Coordinates
                     {
                         X = column,
                         Y = row,
                     };
-                    var cell = ParseCell(coordinate, cellsStr[column]);
+                    var cell = ParseCell(coordinates, cellsStr[column]);
 
                     puzzle.Cells.Add(cell);
                 }
@@ -77,14 +77,14 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
         /// <summary>
         /// Parse the given cell string to generate a Cell object.
         /// </summary>
-        /// <param name="coordinate">The coordinate to be associated with the cell.</param>
+        /// <param name="coordinates">The coordinates to be associated with the cell.</param>
         /// <param name="cellStr">The cell string to be parsed.</param>
         /// <returns>A Cell object.</returns>
-        private static PuzzleCell ParseCell(Coordinate coordinate, string cellStr)
+        private static PuzzleCell ParseCell(Coordinates coordinates, string cellStr)
         {
             var puzzleCell = new PuzzleCell
             {
-                Coordinate = coordinate,
+                Coordinates = coordinates,
             };
 
             // Square will be either empty or already have a value in it.

@@ -8,9 +8,9 @@ namespace GridPuzzleSolver.Components.Cells
     public abstract class Cell : ICell
     {
         /// <summary>
-        /// Gets or sets the Cell's Coordinate.
+        /// Gets or sets the Cell's Coordinates.
         /// </summary>
         [XmlElement("coordinates")]
-        public Coordinate Coordinate { get; set; } = new Coordinate();
+        public Coordinates Coordinates { get; set; } = new Coordinates();
     }
 }

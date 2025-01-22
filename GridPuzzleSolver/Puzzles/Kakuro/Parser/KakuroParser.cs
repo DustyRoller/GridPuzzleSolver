@@ -70,7 +70,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
                 for (var column = 0u; column < cellsStr.Length; ++column)
                 {
                     var cell = ParseCell(cellsStr[column]);
-                    cell.Coordinate = new Coordinate
+                    cell.Coordinates = new Coordinates
                     {
                         X = column,
                         Y = row,
