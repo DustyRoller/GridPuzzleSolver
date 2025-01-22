@@ -12,5 +12,13 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
         /// Gets or sets the puzzle's clue cells.
         /// </summary>
         public List<ClueCell> ClueCells { get; set; } = new List<ClueCell>();
+
+        /// <summary>
+        /// Complete the puzzle, creating any missing cells.
+        /// </summary>
+        public override void CompletePuzzle()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
