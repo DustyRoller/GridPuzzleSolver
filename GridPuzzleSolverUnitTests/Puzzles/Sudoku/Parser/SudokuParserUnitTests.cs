@@ -1,5 +1,5 @@
-﻿using GridPuzzleSolver;
-using GridPuzzleSolver.Components.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
+using GridPuzzleSolver.Parser;
 using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using NUnit.Framework;
 using System.Text;

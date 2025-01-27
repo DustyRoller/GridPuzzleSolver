@@ -25,7 +25,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         public override void CompletePuzzle()
         {
             // Ensure that there is at least one solved cell.
-            if (!SolvedCells.Any())
+            if (SolvedCells.Count == 0)
             {
                 throw new GridPuzzleSolverException("Puzzle contains no solved cells.");
             }

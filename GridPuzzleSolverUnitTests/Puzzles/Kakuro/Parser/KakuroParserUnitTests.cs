@@ -1,5 +1,6 @@
 ﻿using GridPuzzleSolver;
 using GridPuzzleSolver.Components.Cells;
+using GridPuzzleSolver.Parser;
 using GridPuzzleSolver.Puzzles.Kakuro.Parser;
 using NUnit.Framework;
 using System.Text;
@@ -139,35 +140,35 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Parser
                 }
             }
 
-            Assert.That(puzzle.Cells[0], Is.InstanceOf(typeof(BlankCell)));
+            Assert.That(puzzle.Cells[0], Is.InstanceOf<BlankCell>());
             Assert.That(((ClueCell)puzzle.Cells[1]).ColumnClue, Is.EqualTo(17u));
             Assert.That(((ClueCell)puzzle.Cells[2]).ColumnClue, Is.EqualTo(24u));
-            Assert.That(puzzle.Cells[3], Is.InstanceOf(typeof(BlankCell)));
-            Assert.That(puzzle.Cells[4], Is.InstanceOf(typeof(BlankCell)));
+            Assert.That(puzzle.Cells[3], Is.InstanceOf<BlankCell>());
+            Assert.That(puzzle.Cells[4], Is.InstanceOf<BlankCell>());
 
             Assert.That(((ClueCell)puzzle.Cells[5]).RowClue, Is.EqualTo(16u));
-            Assert.That(puzzle.Cells[6], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(puzzle.Cells[7], Is.InstanceOf(typeof(PuzzleCell)));
+            Assert.That(puzzle.Cells[6], Is.InstanceOf<PuzzleCell>());
+            Assert.That(puzzle.Cells[7], Is.InstanceOf<PuzzleCell>());
             Assert.That(((ClueCell)puzzle.Cells[8]).ColumnClue, Is.EqualTo(20u));
-            Assert.That(puzzle.Cells[9], Is.InstanceOf(typeof(BlankCell)));
+            Assert.That(puzzle.Cells[9], Is.InstanceOf<BlankCell>());
 
             Assert.That(((ClueCell)puzzle.Cells[10]).RowClue, Is.EqualTo(23u));
-            Assert.That(puzzle.Cells[11], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(puzzle.Cells[12], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(puzzle.Cells[13], Is.InstanceOf(typeof(PuzzleCell)));
+            Assert.That(puzzle.Cells[11], Is.InstanceOf<PuzzleCell>());
+            Assert.That(puzzle.Cells[12], Is.InstanceOf<PuzzleCell>());
+            Assert.That(puzzle.Cells[13], Is.InstanceOf<PuzzleCell>());
             Assert.That(((ClueCell)puzzle.Cells[14]).ColumnClue, Is.EqualTo(15u));
 
-            Assert.That(puzzle.Cells[15], Is.InstanceOf(typeof(BlankCell)));
+            Assert.That(puzzle.Cells[15], Is.InstanceOf<BlankCell>());
             Assert.That(((ClueCell)puzzle.Cells[16]).RowClue, Is.EqualTo(23u));
-            Assert.That(puzzle.Cells[17], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(puzzle.Cells[18], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(puzzle.Cells[19], Is.InstanceOf(typeof(PuzzleCell)));
+            Assert.That(puzzle.Cells[17], Is.InstanceOf<PuzzleCell>());
+            Assert.That(puzzle.Cells[18], Is.InstanceOf<PuzzleCell>());
+            Assert.That(puzzle.Cells[19], Is.InstanceOf<PuzzleCell>());
 
-            Assert.That(puzzle.Cells[20], Is.InstanceOf(typeof(BlankCell)));
-            Assert.That(puzzle.Cells[21], Is.InstanceOf(typeof(BlankCell)));
+            Assert.That(puzzle.Cells[20], Is.InstanceOf<BlankCell>());
+            Assert.That(puzzle.Cells[21], Is.InstanceOf<BlankCell>());
             Assert.That(((ClueCell)puzzle.Cells[22]).RowClue, Is.EqualTo(14u));
-            Assert.That(puzzle.Cells[13], Is.InstanceOf(typeof(PuzzleCell)));
-            Assert.That(puzzle.Cells[24], Is.InstanceOf(typeof(PuzzleCell)));
+            Assert.That(puzzle.Cells[13], Is.InstanceOf<PuzzleCell>());
+            Assert.That(puzzle.Cells[24], Is.InstanceOf<PuzzleCell>());
         }
     }
 }
