@@ -1,5 +1,4 @@
-﻿using GridPuzzleSolver;
-using GridPuzzleSolver.Parser;
+﻿using GridPuzzleSolver.Parser;
 using GridPuzzleSolver.Puzzles.Kakuro.Parser;
 using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using NUnit.Framework;
@@ -50,7 +49,7 @@ namespace GridPuzzleSolverUnitTests.Parser
 
             var parser = ParserFactory.GetParser(inputFile);
 
-            Assert.That(parser, Is.InstanceOf(typeof(KakuroParser)));
+            Assert.That(parser, Is.InstanceOf<KakuroParser>());
         }
 
         [TestCase]
@@ -60,7 +59,7 @@ namespace GridPuzzleSolverUnitTests.Parser
 
             var parser = ParserFactory.GetParser(inputFile);
 
-            Assert.That(parser, Is.InstanceOf(typeof(SudokuParser)));
+            Assert.That(parser, Is.InstanceOf<SudokuParser>());
         }
     }
 }

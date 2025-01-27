@@ -40,7 +40,7 @@ namespace GridPuzzleSolver.Components.Cells
         {
             get
             {
-                if (!Sections.Any())
+                if (Sections.Count == 0)
                 {
                     return new List<uint>();
                 }

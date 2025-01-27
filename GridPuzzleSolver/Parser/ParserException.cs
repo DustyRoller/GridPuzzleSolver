@@ -1,4 +1,4 @@
-﻿namespace GridPuzzleSolver
+﻿namespace GridPuzzleSolver.Parser
 {
     /// <summary>
     /// Exception class for exceptions throw whilst parsing a puzzle.

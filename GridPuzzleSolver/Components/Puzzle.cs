@@ -61,7 +61,7 @@ namespace GridPuzzleSolver.Components
                 // can be solved straight away.
                 var solveableCells = puzzleCells.Where(pc => !pc.Solved && pc.PossibleValues.Count == 1)
                                                 .ToList();
-                while (solveableCells.Any())
+                while (solveableCells.Count != 0)
                 {
                     solveableCells.ForEach(sc => sc.CellValue = sc.PossibleValues[0]);
 
@@ -121,13 +121,10 @@ namespace GridPuzzleSolver.Components
         /// <returns>True if the all the PuzzleCells are solved, otherwise false.</returns>
         private static bool RecursivelySolvePuzzle(List<PuzzleCell> puzzleCells)
         {
-            if (puzzleCells is null)
-            {
-                throw new ArgumentNullException(nameof(puzzleCells));
-            }
+            ArgumentNullException.ThrowIfNull(puzzleCells);
 
             // Reached the end of the recursion.
-            if (!puzzleCells.Any())
+            if (puzzleCells.Count == 0)
             {
                 return true;
             }
@@ -136,7 +133,7 @@ namespace GridPuzzleSolver.Components
 
             // Check if this recursion path has provided us with more
             // possibilities to explore before continuing.
-            if (puzzleCells.TrueForAll(pc => pc.PossibleValues.Any()))
+            if (puzzleCells.TrueForAll(pc => pc.PossibleValues.Count != 0))
             {
                 // To save the amount of recursion required keep sorting
                 // the list by the number of possible values.
