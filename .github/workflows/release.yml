@@ -39,7 +39,7 @@ jobs:
       run: cd build && zip GridPuzzleSolver-${{ env.RELEASE_VERSION }}.zip *.exe
 
     - name: Create release
-      uses: ncipollo/release-action@v1.13.0
+      uses: ncipollo/release-action@v1.16.0
       with:
         artifacts: "./build/GridPuzzleSolver-${{ env.RELEASE_VERSION }}.zip"
         bodyFile: "README.md"
