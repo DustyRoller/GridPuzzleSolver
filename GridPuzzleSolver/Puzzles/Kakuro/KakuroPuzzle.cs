@@ -9,9 +9,14 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
     internal class KakuroPuzzle : Puzzle
     {
         /// <summary>
-        /// Gets or sets the puzzle's clue cells.
+        /// Gets or sets the complete set of the puzzle's cells.
         /// </summary>
-        public List<ClueCell> ClueCells { get; set; } = new List<ClueCell>();
+        public List<Cell> AllCells { get; set; } = new List<Cell>();
+
+        /// <summary>
+        /// Gets the complete set of the puzzle's cells.
+        /// </summary>
+        public override List<PuzzleCell> Cells => GetPuzzleCells();
 
         /// <summary>
         /// Complete the puzzle, creating any missing cells.
@@ -19,6 +24,15 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
         public override void CompletePuzzle()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Get this puzzle's puzzle cells.
+        /// </summary>
+        /// <returns>List of this puzzle's puzzle cells.</returns>
+        private List<PuzzleCell> GetPuzzleCells()
+        {
+            return AllCells.OfType<PuzzleCell>().ToList();
         }
     }
 }

@@ -76,7 +76,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
                         Y = row,
                     };
 
-                    puzzle.Cells.Add(cell);
+                    puzzle.AllCells.Add(cell);
                 }
             }
 
@@ -153,7 +153,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
         /// <param name="puzzle">The Puzzle to parse the section out of.</param>
         /// <param name="clueCell">The ClueCell that the section originates from.</param>
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
-        private static void ParseColumnSection(Puzzle puzzle, ClueCell clueCell, int cellIndex)
+        private static void ParseColumnSection(KakuroPuzzle puzzle, ClueCell clueCell, int cellIndex)
         {
             var section = new KakuroSection
             {
@@ -163,12 +163,12 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
             // Find all clue cells in the column until there is a break.
             for (var j = (int)(cellIndex + puzzle.Width); j < puzzle.Height * puzzle.Width; j += (int)puzzle.Width)
             {
-                if (puzzle.Cells[j] is not PuzzleCell)
+                if (puzzle.AllCells[j] is not PuzzleCell)
                 {
                     break;
                 }
 
-                var puzzleCell = (PuzzleCell)puzzle.Cells[j];
+                var puzzleCell = (PuzzleCell)puzzle.AllCells[j];
 
                 section.PuzzleCells.Add(puzzleCell);
 
@@ -186,7 +186,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
         /// <param name="puzzle">The Puzzle to parse the section out of.</param>
         /// <param name="clueCell">The ClueCell that the section originates from.</param>
         /// <param name="cellIndex">The index of where the ClueCell is in the puzzle.</param>
-        private static void ParseRowSection(Puzzle puzzle, ClueCell clueCell, int cellIndex)
+        private static void ParseRowSection(KakuroPuzzle puzzle, ClueCell clueCell, int cellIndex)
         {
             var section = new KakuroSection
             {
@@ -196,12 +196,12 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
             // Find all clue cells in the row until there is a break.
             for (var j = cellIndex + 1; j < puzzle.Height * puzzle.Width; ++j)
             {
-                if (puzzle.Cells[j] is not PuzzleCell)
+                if (puzzle.AllCells[j] is not PuzzleCell)
                 {
                     break;
                 }
 
-                var puzzleCell = (PuzzleCell)puzzle.Cells[j];
+                var puzzleCell = (PuzzleCell)puzzle.AllCells[j];
 
                 section.PuzzleCells.Add(puzzleCell);
 
@@ -217,23 +217,25 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
         /// Parse out all of the sections from the given puzzle.
         /// </summary>
         /// <param name="puzzle">The Puzzle to parse the sections from.</param>
-        private static void ParseSections(Puzzle puzzle)
+        private static void ParseSections(KakuroPuzzle puzzle)
         {
             // Need to generate segments that can be solved.
-            for (var i = 0; i < puzzle.Cells.Count; ++i)
+            for (var i = 0; i < puzzle.AllCells.Count; ++i)
             {
-                if (puzzle.Cells[i] is ClueCell clueCell)
+                if (puzzle.AllCells[i] is not ClueCell clueCell)
                 {
-                    // Depending on which direction clue the cell has determines which way segment will be created.
-                    if (clueCell.ColumnClue != 0u)
-                    {
-                        ParseColumnSection(puzzle, clueCell, i);
-                    }
+                    continue;
+                }
 
-                    if (clueCell.RowClue != 0u)
-                    {
-                        ParseRowSection(puzzle, clueCell, i);
-                    }
+                // Depending on which direction clue the cell has determines which way segment will be created.
+                if (clueCell.ColumnClue != 0u)
+                {
+                    ParseColumnSection(puzzle, clueCell, i);
+                }
+
+                if (clueCell.RowClue != 0u)
+                {
+                    ParseRowSection(puzzle, clueCell, i);
                 }
             }
         }

@@ -12,8 +12,8 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         {
             var puzzle = new KakuroPuzzle();
 
-            puzzle.Cells.Add(new PuzzleCell());
-            puzzle.Cells.Add(new PuzzleCell());
+            puzzle.AllCells.Add(new PuzzleCell());
+            puzzle.AllCells.Add(new PuzzleCell());
 
             Assert.That(puzzle.NumberOfUnsolvedCells, Is.EqualTo(2));
         }
@@ -23,9 +23,9 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         {
             var puzzle = new KakuroPuzzle();
 
-            puzzle.Cells.Add(new PuzzleCell());
-            puzzle.Cells.Add(new PuzzleCell());
-            puzzle.Cells.Add(new PuzzleCell()
+            puzzle.AllCells.Add(new PuzzleCell());
+            puzzle.AllCells.Add(new PuzzleCell());
+            puzzle.AllCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
@@ -38,11 +38,11 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
         {
             var puzzle = new KakuroPuzzle();
 
-            puzzle.Cells.Add(new PuzzleCell()
+            puzzle.AllCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });
-            puzzle.Cells.Add(new PuzzleCell()
+            puzzle.AllCells.Add(new PuzzleCell()
             {
                 CellValue = 1u,
             });

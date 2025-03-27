@@ -11,13 +11,13 @@ namespace GridPuzzleSolver
         /// <summary>
         /// Gets or sets the Coordinate's X position.
         /// </summary>
-        [XmlElement("x")]
+        [XmlAttribute("x")]
         public uint X { get; set; }
 
         /// <summary>
         /// Gets or sets the Coordinate's Y position.
         /// </summary>
-        [XmlElement("y")]
+        [XmlAttribute("y")]
         public uint Y { get; set; }
 
         /// <summary>
