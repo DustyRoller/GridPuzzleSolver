@@ -11,16 +11,11 @@ namespace GridPuzzleSolver.Components
     public abstract class Puzzle
     {
         /// <summary>
-        /// Gets or sets the puzzle's cells.
+        /// Gets the puzzle's cells.
         /// </summary>
-        [XmlArray("known-cells")]
-        [XmlArrayItem("cell")]
-        public List<PuzzleCell> SolvedCells { get; set; } = new List<PuzzleCell>();
-
-        /// <summary>
-        /// Gets or sets the puzzle's cells.
-        /// </summary>
-        public List<Cell> Cells { get; set; } = new List<Cell>();
+        [XmlArray("Cells")]
+        [XmlArrayItem("Cell")]
+        public virtual List<PuzzleCell> Cells { get; } = new List<PuzzleCell>();
 
         /// <summary>
         /// Gets or sets the height of the puzzle by number of Cells.

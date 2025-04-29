@@ -5,12 +5,12 @@ namespace GridPuzzleSolver.Components.Cells
     /// <summary>
     /// Base Cell class.
     /// </summary>
-    public abstract class Cell : ICell
+    public class Cell : ICell
     {
         /// <summary>
         /// Gets or sets the Cell's Coordinates.
         /// </summary>
-        [XmlElement("coordinates")]
+        [XmlElement("Coordinates")]
         public Coordinates Coordinates { get; set; } = new Coordinates();
     }
 }

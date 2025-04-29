@@ -7,7 +7,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
     /// <summary>
     /// Class representing a Sudoku puzzle.
     /// </summary>
-    [XmlRoot("sudoku-puzzle")]
+    [XmlRoot("SudokuPuzzle")]
     public class SudokuPuzzle : Puzzle
     {
         /// <summary>
@@ -25,28 +25,14 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         public override void CompletePuzzle()
         {
             // Ensure that there is at least one solved cell.
-            if (SolvedCells.Count == 0)
+            if (!Cells.Any(c => c.Solved))
             {
                 throw new GridPuzzleSolverException("Puzzle contains no solved cells.");
             }
 
-            // Populate the Cells list by either using the Cells in the
-            // SolvedCells list or by creating new cells.
-            for (uint r = 0u; r < Width; r++)
+            if (Cells.Count != 81)
             {
-                for (uint c = 0u; c < Height; c++)
-                {
-                    var coordinates = new Coordinates
-                    {
-                        X = r,
-                        Y = c,
-                    };
-
-                    Cells.Add(SolvedCells.FirstOrDefault(c => c.Coordinates.Equals(coordinates), new PuzzleCell()
-                    {
-                        Coordinates = coordinates,
-                    }));
-                }
+                throw new GridPuzzleSolverException($"Puzzle should contain 81 cells but contains: {Cells.Count}");
             }
 
             // Now create the sections to complete the puzzle.
@@ -87,7 +73,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
                 {
                     for (int y = 0; y < 3; ++y)
                     {
-                        squareCells.Add((PuzzleCell)Cells[index]);
+                        squareCells.Add(Cells[index]);
                         ++index;
                     }
 
@@ -104,6 +90,11 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         /// <param name="cells">The cells that make up the section.</param>
         private void CreateSection(List<PuzzleCell> cells)
         {
+            if (cells.Count != 9)
+            {
+                throw new GridPuzzleSolverException($"Section can only contain 9 cells but received: {Cells.Count}");
+            }
+
             var section = new SudokuSection();
             section.PuzzleCells.AddRange(cells);
 

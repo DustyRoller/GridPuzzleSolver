@@ -13,7 +13,7 @@ namespace GridPuzzleSolver.Components.Cells
         /// <summary>
         /// Gets or sets the value of the cell, will be 0 if it hasn't been solved yet.
         /// </summary>
-        [XmlElement("value")]
+        [XmlAttribute("value")]
         public uint CellValue
         {
             get => cellValue;
