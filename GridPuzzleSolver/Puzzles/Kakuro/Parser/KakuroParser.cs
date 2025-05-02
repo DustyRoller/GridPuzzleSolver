@@ -1,9 +1,6 @@
 ﻿using GridPuzzleSolver.Components;
 using GridPuzzleSolver.Components.Cells;
 using GridPuzzleSolver.Parser;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("KakuroSolverUnitTests")]
 
 namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
 {
@@ -76,7 +73,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
                         Y = row,
                     };
 
-                    puzzle.AllCells.Add(cell);
+                    puzzle.Cells.Add(cell);
                 }
             }
 
@@ -163,12 +160,12 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
             // Find all clue cells in the column until there is a break.
             for (var j = (int)(cellIndex + puzzle.Width); j < puzzle.Height * puzzle.Width; j += (int)puzzle.Width)
             {
-                if (puzzle.AllCells[j] is not PuzzleCell)
+                if (puzzle.Cells[j] is not PuzzleCell)
                 {
                     break;
                 }
 
-                var puzzleCell = (PuzzleCell)puzzle.AllCells[j];
+                var puzzleCell = (PuzzleCell)puzzle.Cells[j];
 
                 section.PuzzleCells.Add(puzzleCell);
 
@@ -196,12 +193,12 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
             // Find all clue cells in the row until there is a break.
             for (var j = cellIndex + 1; j < puzzle.Height * puzzle.Width; ++j)
             {
-                if (puzzle.AllCells[j] is not PuzzleCell)
+                if (puzzle.Cells[j] is not PuzzleCell)
                 {
                     break;
                 }
 
-                var puzzleCell = (PuzzleCell)puzzle.AllCells[j];
+                var puzzleCell = (PuzzleCell)puzzle.Cells[j];
 
                 section.PuzzleCells.Add(puzzleCell);
 
@@ -220,9 +217,9 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
         private static void ParseSections(KakuroPuzzle puzzle)
         {
             // Need to generate segments that can be solved.
-            for (var i = 0; i < puzzle.AllCells.Count; ++i)
+            for (var i = 0; i < puzzle.Cells.Count; ++i)
             {
-                if (puzzle.AllCells[i] is not ClueCell clueCell)
+                if (puzzle.Cells[i] is not ClueCell clueCell)
                 {
                     continue;
                 }

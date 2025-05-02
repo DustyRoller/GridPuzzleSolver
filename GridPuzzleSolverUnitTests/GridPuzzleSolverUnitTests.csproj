@@ -36,6 +36,9 @@
     <None Update="TestPuzzles\Sudoku\EasyPuzzle.sud">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestPuzzles\Sudoku\EasyPuzzle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

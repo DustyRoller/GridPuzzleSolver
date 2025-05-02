@@ -11,11 +11,11 @@ namespace GridPuzzleSolver.Components
     public abstract class Puzzle
     {
         /// <summary>
-        /// Gets the puzzle's cells.
+        /// Gets or sets the puzzle's cells.
         /// </summary>
         [XmlArray("Cells")]
         [XmlArrayItem("Cell")]
-        public virtual List<PuzzleCell> Cells { get; } = new List<PuzzleCell>();
+        public List<Cell> Cells { get; set; } = new List<Cell>();
 
         /// <summary>
         /// Gets or sets the height of the puzzle by number of Cells.
@@ -25,7 +25,7 @@ namespace GridPuzzleSolver.Components
         /// <summary>
         /// Gets the number of currently unsolved puzzle cells.
         /// </summary>
-        public int NumberOfUnsolvedCells => Cells.OfType<PuzzleCell>().Count(pc => !pc.Solved);
+        public int NumberOfUnsolvedCells => GetPuzzleCells().Count(pc => !pc.Solved);
 
         /// <summary>
         /// Gets or sets the width of the puzzle by number of Cells.
@@ -106,6 +106,15 @@ namespace GridPuzzleSolver.Components
             sb.Append('|');
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Gets the puzzle's puzzle cells.
+        /// </summary>
+        /// <returns>List of the puzzle's puzzle cells.</returns>
+        protected List<PuzzleCell> GetPuzzleCells()
+        {
+            return Cells.OfType<PuzzleCell>().ToList();
         }
 
         /// <summary>

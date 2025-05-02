@@ -1,7 +1,4 @@
 ﻿using GridPuzzleSolver.Components.Cells;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace GridPuzzleSolver.Components
 {
