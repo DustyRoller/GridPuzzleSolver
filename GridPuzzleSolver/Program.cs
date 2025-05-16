@@ -1,12 +1,12 @@
 ﻿using GridPuzzleSolver.Components;
 using GridPuzzleSolver.Parser;
-using GridPuzzleSolver.Puzzles.Sudoku;
+using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
-[assembly: InternalsVisibleTo("GridPuzzleSolverUnitTests")]
 [assembly: InternalsVisibleTo("GridPuzzleSolverSystemTests")]
+[assembly: InternalsVisibleTo("GridPuzzleSolverUnitTests")]
 
 namespace GridPuzzleSolver
 {
@@ -15,23 +15,6 @@ namespace GridPuzzleSolver
     /// </summary>
     internal static class Program
     {
-        /// <summary>
-        /// Deserialize the data within the given XML file in object of type T.
-        /// </summary>
-        /// <typeparam name="T">The type of object to be created.</typeparam>
-        /// <param name="filePath">The path to the XML file to be read in.</param>
-        /// <returns>If successful an object of type T, otherwise null.</returns>
-        public static T? DeserializeToObject<T>(string filePath)
-            where T : class
-        {
-            var xmlSerializer = new XmlSerializer(typeof(T));
-
-            using (var streamReader = new StreamReader(filePath))
-            {
-                return xmlSerializer.Deserialize(streamReader) as T;
-            }
-        }
-
         /// <summary>
         /// Runs the grid solver program. Parses the given puzzle file and attempts to solve it.
         /// </summary>
@@ -60,15 +43,24 @@ namespace GridPuzzleSolver
 
             if (puzzleFileExtension == ".xml")
             {
-                puzzle = DeserializeToObject<SudokuPuzzle>(puzzleFilePath);
-                if (puzzle == null)
+                var xmlDoc = XDocument.Load(puzzleFilePath);
+                if (xmlDoc == null)
                 {
-                    throw new ArgumentException("Failed to deserialize");
+                    throw new ParserException($"Failed to load puzzle file - {puzzleFilePath}");
                 }
 
-                // The XML file will not contain the complete puzzle so we
-                // need to now fill in any missing cells.
-                puzzle.CompletePuzzle();
+                var rootValue = xmlDoc.Root?.Name;
+
+                if (rootValue == "SudokuPuzzle")
+                {
+                    Console.WriteLine("Parsing suduko puzzle");
+
+                    puzzle = new SudokuXmlParser().ParsePuzzle(xmlDoc);
+                }
+                else
+                {
+                    throw new ParserException($"Invalid root node - {xmlDoc.Root?.Name}");
+                }
             }
             else
             {

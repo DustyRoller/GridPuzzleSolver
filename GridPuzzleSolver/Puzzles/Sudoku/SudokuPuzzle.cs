@@ -20,12 +20,14 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         }
 
         /// <summary>
-        /// Complete the puzzle, creating any missing cells.
+        /// Complete the puzzle, ensuring that all the sections are setup properly.
         /// </summary>
         public override void CompletePuzzle()
         {
+            var puzzleCells = GetPuzzleCells();
+
             // Ensure that there is at least one solved cell.
-            if (!Cells.Any(c => c.Solved))
+            if (!puzzleCells.Any(c => c.Solved))
             {
                 throw new GridPuzzleSolverException("Puzzle contains no solved cells.");
             }
@@ -44,18 +46,18 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         /// </summary>
         public void CreateSections()
         {
+            var puzzleCells = GetPuzzleCells();
+
             // Get all the column and row sections.
             for (int i = 0; i < 9; ++i)
             {
                 // Create the column section.
-                CreateSection(Cells.OfType<PuzzleCell>()
-                                   .Where(c => c.Coordinates.Y == i)
-                                   .ToList());
+                CreateSection(puzzleCells.Where(c => c.Coordinates.Y == i)
+                                         .ToList());
 
                 // Create the row section.
-                CreateSection(Cells.OfType<PuzzleCell>()
-                                   .Where(c => c.Coordinates.X == i)
-                                   .ToList());
+                CreateSection(puzzleCells.Where(c => c.Coordinates.X == i)
+                                         .ToList());
             }
 
             // Get all of the 3x3 squares from within the puzzle,
@@ -73,7 +75,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
                 {
                     for (int y = 0; y < 3; ++y)
                     {
-                        squareCells.Add(Cells[index]);
+                        squareCells.Add(puzzleCells[index]);
                         ++index;
                     }
 
