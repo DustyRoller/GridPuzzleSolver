@@ -36,22 +36,43 @@
     <None Update="TestPuzzles\Kakuro\Challenging9x17Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestPuzzles\Kakuro\Challenging9x17Puzzle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle.kak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle2.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestPuzzles\Kakuro\Easy6x6Puzzle.kak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Kakuro\Easy6x6Puzzle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestPuzzles\Kakuro\Hard9x11Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestPuzzles\Kakuro\Hard9x11Puzzle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestPuzzles\Kakuro\Hard9x11Puzzle2.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestPuzzles\Kakuro\Hard9x11Puzzle2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestPuzzles\Kakuro\Medium4x4Puzzle.kak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPuzzles\Kakuro\Medium4x4Puzzle.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestPuzzles\Sudoku\EasyPuzzle.sud">

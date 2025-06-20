@@ -18,8 +18,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             // Create the test XDocument.
             var xmlDocument = XDocument.Parse("<SudokuPuzzle><TestElement>test</TestElement></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
             Assert.That(ex?.Message, Is.EqualTo("Failed to find Cells elements."));
         }
@@ -30,8 +29,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             // Create the test XDocument.
             var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><TestElement>test</TestElement></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
             Assert.That(ex?.Message, Is.EqualTo("Failed to find Cells elements."));
         }
@@ -42,8 +40,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             // Create the test XDocument.
             var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><Cell></Cell></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
             Assert.That(ex?.Message, Is.EqualTo("Cell did not contain \'Coordinates\' element."));
         }
@@ -54,8 +51,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             // Create the test XDocument.
             var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><Cell><Coordinates y=\"1\" /></Cell></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
             Assert.That(ex?.Message, Is.EqualTo("Coordinate did not contain \'x\' attribute."));
         }
@@ -64,12 +60,12 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
         public void SudokuXmlParser_ParsePuzzle_ThrowsExceptionIfCoordinatesXValueIsNotAnInteger()
         {
             // Create the test XDocument.
-            var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><Cell><Coordinates x=\"notanint\" y=\"1\" /></Cell></Cells></SudokuPuzzle>");
+            var xValue = "notanint";
+            var xmlDocument = XDocument.Parse($"<SudokuPuzzle><Cells><Cell><Coordinates x=\"{xValue}\" y=\"1\" /></Cell></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
-            Assert.That(ex?.Message, Is.EqualTo("Failed to parse x coordinate value: notanint."));
+            Assert.That(ex?.Message, Is.EqualTo($"Failed to parse x coordinate value: {xValue}."));
         }
 
         [Test]
@@ -78,8 +74,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             // Create the test XDocument.
             var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><Cell><Coordinates x=\"1\" /></Cell></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
             Assert.That(ex?.Message, Is.EqualTo("Coordinate did not contain \'y\' attribute."));
         }
@@ -88,24 +83,24 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
         public void SudokuXmlParser_ParsePuzzle_ThrowsExceptionIfCoordinatesYValueIsNotAnInteger()
         {
             // Create the test XDocument.
-            var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><Cell><Coordinates x=\"1\" y=\"notanint\" /></Cell></Cells></SudokuPuzzle>");
+            var yValue = "notanint";
+            var xmlDocument = XDocument.Parse($"<SudokuPuzzle><Cells><Cell><Coordinates x=\"1\" y=\"{yValue}\" /></Cell></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
-            Assert.That(ex?.Message, Is.EqualTo("Failed to parse y coordinate value: notanint."));
+            Assert.That(ex?.Message, Is.EqualTo($"Failed to parse y coordinate value: {yValue}."));
         }
 
         [Test]
         public void SudokuXmlParser_ParsePuzzle_ThrowsExceptionIfCellValueIsNotAnInteger()
         {
             // Create the test XDocument.
-            var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><Cell value=\"notanint\"><Coordinates x=\"1\" y=\"1\" /></Cell></Cells></SudokuPuzzle>");
+            var cellValue = "notanint";
+            var xmlDocument = XDocument.Parse($"<SudokuPuzzle><Cells><Cell value=\"{cellValue}\"><Coordinates x=\"1\" y=\"1\" /></Cell></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<ParserException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
-            Assert.That(ex?.Message, Is.EqualTo("Failed to parse cell value: notanint."));
+            Assert.That(ex?.Message, Is.EqualTo($"Failed to parse cell value: {cellValue}."));
         }
 
         [Test]
@@ -114,8 +109,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             // Create the test XDocument.
             var xmlDocument = XDocument.Parse("<SudokuPuzzle><Cells><Cell value=\"10\"><Coordinates x=\"1\" y=\"1\" /></Cell></Cells></SudokuPuzzle>");
 
-            var parser = new SudokuXmlParser();
-            var ex = Assert.Throws<GridPuzzleSolverException>(() => parser.ParsePuzzle(xmlDocument));
+            var ex = Assert.Throws<GridPuzzleSolverException>(() => SudokuXmlParser.ParsePuzzle(xmlDocument));
 
             Assert.That(ex?.Message, Is.EqualTo("Puzzle cell value cannot be greater than 9. 1,1."));
         }
@@ -130,8 +124,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             // Load the test puzzle.
             var xmlDocument = XDocument.Load(testFile);
 
-            var parser = new SudokuXmlParser();
-            var puzzle = parser.ParsePuzzle(xmlDocument);
+            var puzzle = SudokuXmlParser.ParsePuzzle(xmlDocument);
 
             Assert.That(puzzle.Cells, Has.Count.EqualTo(81));
 

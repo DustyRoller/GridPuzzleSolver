@@ -1,5 +1,4 @@
-﻿using GridPuzzleSolver;
-using GridPuzzleSolver.Components.Cells;
+﻿using GridPuzzleSolver.Components.Cells;
 using GridPuzzleSolver.Parser;
 using GridPuzzleSolver.Puzzles.Kakuro;
 using GridPuzzleSolver.Puzzles.Kakuro.Parser;
@@ -120,8 +119,8 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Parser
 
             Assert.That(puzzle.Cells, Has.Count.EqualTo(25));
             Assert.That(puzzle.Cells.OfType<PuzzleCell>().ToList(), Has.Count.EqualTo(10));
-            Assert.That(puzzle.Width, Is.EqualTo(5u));
             Assert.That(puzzle.Height, Is.EqualTo(5u));
+            Assert.That(puzzle.Width, Is.EqualTo(5u));
 
             // Assert that the cell's coordinates are correct.
             var index = 0;
@@ -130,13 +129,8 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Parser
             {
                 for (var x = 0u; x < puzzle.Width; ++x)
                 {
-                    var expectedCoordinates = new Coordinates
-                    {
-                        X = x,
-                        Y = y,
-                    };
-
-                    Assert.That(puzzle.Cells[index].Coordinates, Is.EqualTo(expectedCoordinates));
+                    Assert.That(puzzle.Cells[index].Coordinates.X, Is.EqualTo(x));
+                    Assert.That(puzzle.Cells[index].Coordinates.Y, Is.EqualTo(y));
 
                     index++;
                 }

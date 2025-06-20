@@ -1,5 +1,6 @@
 ﻿using GridPuzzleSolver.Components;
 using GridPuzzleSolver.Parser;
+using GridPuzzleSolver.Puzzles.Kakuro.Parser;
 using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -55,7 +56,13 @@ namespace GridPuzzleSolver
                 {
                     Console.WriteLine("Parsing suduko puzzle");
 
-                    puzzle = new SudokuXmlParser().ParsePuzzle(xmlDoc);
+                    puzzle = SudokuXmlParser.ParsePuzzle(xmlDoc);
+                }
+                else if (rootValue == "KakuroPuzzle")
+                {
+                    Console.WriteLine("Parsing kakuro puzzle");
+
+                    puzzle = KakuroXmlParser.ParsePuzzle(xmlDoc);
                 }
                 else
                 {
