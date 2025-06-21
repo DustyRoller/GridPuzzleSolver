@@ -1,0 +1,151 @@
+<KakuroPuzzle>
+  <Cells>
+    <Cell blank="true">
+      <Coordinates x="0" y="0" />
+    </Cell>
+    <Cell column_clue="23">
+      <Coordinates x="0" y="1" />
+    </Cell>
+    <Cell column_clue="11">
+      <Coordinates x="0" y="2" />
+    </Cell>
+    <Cell blank="true">
+      <Coordinates x="0" y="3" />
+    </Cell>
+    <Cell blank="true">
+      <Coordinates x="0" y="4" />
+    </Cell>
+    <Cell column_clue="16">
+      <Coordinates x="0" y="5" />
+    </Cell>
+    <Cell column_clue="17">
+      <Coordinates x="0" y="6" />
+    </Cell>
+    <Cell row_clue="7">
+      <Coordinates x="1" y="0" />
+    </Cell>
+    <Cell>
+      <Coordinates x="1" y="1" />
+    </Cell>
+    <Cell>
+      <Coordinates x="1" y="2" />
+    </Cell>
+    <Cell blank="true">
+      <Coordinates x="1" y="3" />
+    </Cell>
+    <Cell column_clue="11" row_clue="16">
+      <Coordinates x="1" y="4" />
+    </Cell>
+    <Cell>
+      <Coordinates x="1" y="5" />
+    </Cell>
+    <Cell>
+      <Coordinates x="1" y="6" />
+    </Cell>
+    <Cell row_clue="10">
+      <Coordinates x="2" y="0" />
+    </Cell>
+    <Cell>
+      <Coordinates x="2" y="1" />
+    </Cell>
+    <Cell>
+      <Coordinates x="2" y="2" />
+    </Cell>
+    <Cell column_clue="9" row_clue="20">
+      <Coordinates x="2" y="3" />
+    </Cell>
+    <Cell>
+      <Coordinates x="2" y="4" />
+    </Cell>
+    <Cell>
+      <Coordinates x="2" y="5" />
+    </Cell>
+    <Cell>
+      <Coordinates x="2" y="6" />
+    </Cell>
+    <Cell row_clue="21">
+      <Coordinates x="3" y="0" />
+    </Cell>
+    <Cell>
+      <Coordinates x="3" y="1" />
+    </Cell>
+    <Cell>
+      <Coordinates x="3" y="2" />
+    </Cell>
+    <Cell>
+      <Coordinates x="3" y="3" />
+    </Cell>
+    <Cell>
+      <Coordinates x="3" y="4" />
+    </Cell>
+    <Cell column_clue="20">
+      <Coordinates x="3" y="5" />
+    </Cell>
+    <Cell column_clue="11">
+      <Coordinates x="3" y="6" />
+    </Cell>
+    <Cell blank="true">
+      <Coordinates x="4" y="0" />
+    </Cell>
+    <Cell column_clue="3">
+      <Coordinates x="4" y="1" />
+    </Cell>
+    <Cell column_clue="13" row_clue="23">
+      <Coordinates x="4" y="2" />
+    </Cell>
+    <Cell>
+      <Coordinates x="4" y="3" />
+    </Cell>
+    <Cell>
+      <Coordinates x="4" y="4" />
+    </Cell>
+    <Cell>
+      <Coordinates x="4" y="5" />
+    </Cell>
+    <Cell>
+      <Coordinates x="4" y="6" />
+    </Cell>
+    <Cell row_clue="7">
+      <Coordinates x="5" y="0" />
+    </Cell>
+    <Cell>
+      <Coordinates x="5" y="1" />
+    </Cell>
+    <Cell>
+      <Coordinates x="5" y="2" />
+    </Cell>
+    <Cell>
+      <Coordinates x="5" y="3" />
+    </Cell>
+    <Cell row_clue="16">
+      <Coordinates x="5" y="4" />
+    </Cell>
+    <Cell>
+      <Coordinates x="5" y="5" />
+    </Cell>
+    <Cell>
+      <Coordinates x="5" y="6" />
+    </Cell>
+    <Cell row_clue="10">
+      <Coordinates x="6" y="0" />
+    </Cell>
+    <Cell>
+      <Coordinates x="6" y="1" />
+    </Cell>
+    <Cell>
+      <Coordinates x="6" y="2" />
+    </Cell>
+    <Cell blank="true">
+      <Coordinates x="6" y="3" />
+    </Cell>
+    <Cell row_clue="4">
+      <Coordinates x="6" y="4" />
+    </Cell>
+    <Cell>
+      <Coordinates x="6" y="5" />
+    </Cell>
+    <Cell>
+      <Coordinates x="6" y="6" />
+    </Cell>
+  </Cells>
+</KakuroPuzzle>

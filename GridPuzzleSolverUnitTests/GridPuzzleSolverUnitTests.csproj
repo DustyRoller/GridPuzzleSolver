@@ -33,6 +33,9 @@
     <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle.kak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestPuzzles\Kakuro\Easy4x4Puzzle.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestPuzzles\Sudoku\EasyPuzzle.sud">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
