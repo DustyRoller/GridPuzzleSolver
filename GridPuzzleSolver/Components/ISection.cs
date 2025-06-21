@@ -5,7 +5,7 @@ namespace GridPuzzleSolver.Components
     /// <summary>
     /// Interface for sections within a puzzle.
     /// </summary>
-    internal interface ISection
+    public interface ISection
     {
         /// <summary>
         /// Gets the list of PuzzleCells that make up this section.

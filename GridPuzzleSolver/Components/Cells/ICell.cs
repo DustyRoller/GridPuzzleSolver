@@ -6,8 +6,8 @@
     internal interface ICell
     {
         /// <summary>
-        /// Gets the Cell's Coordinate.
+        /// Gets or sets the Cell's Coordinates.
         /// </summary>
-        Coordinate Coordinate { get; }
+        Coordinates Coordinates { get; set; }
     }
 }

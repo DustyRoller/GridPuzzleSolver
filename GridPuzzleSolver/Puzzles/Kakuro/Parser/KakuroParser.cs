@@ -1,0 +1,147 @@
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Components.Cells;
+using GridPuzzleSolver.Parser;
+
+namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
+{
+    /// <summary>
+    /// Class to parse Kakuro puzzles from text files.
+    /// </summary>
+    /// <remarks>
+    /// Puzzle files will be text format using the following format:
+    ///   |  x  |17\  |24\  |  x  |  x  |
+    ///   |  \16|  -  |  -  |20\  |  \  |
+    ///   |  \23|  -  |  -  |  -  |15\  |
+    ///   |  x  |  \23|  -  |  -  |  -  |
+    ///   |  x  |  x  |  \14|  -  |  -  |.
+    /// </remarks>
+    internal class KakuroParser : BaseParser
+    {
+        /// <summary>
+        /// Gets the file extension of the file that the parser will read.
+        /// </summary>
+        public static string FileExtension => ".kak";
+
+        /// <summary>
+        /// Parse the given file to generate a Puzzle, ready to be solved.
+        /// </summary>
+        /// <param name="puzzleFilePath">The path to the file containing the puzzle.</param>
+        /// <returns>A Puzzle object.</returns>
+        public override Puzzle ParsePuzzle(string puzzleFilePath)
+        {
+            ValidateInputFile(puzzleFilePath, FileExtension);
+
+            var puzzle = new KakuroPuzzle();
+
+            // Now read in the puzzle.
+            var lines = File.ReadAllLines(puzzleFilePath);
+
+            // Determine the height and width of the puzzle.
+            puzzle.Height = (uint)lines.Length;
+
+            // Width is minus two because of the starting and trailing '|'.
+            var firstLineWidth = (uint)lines[0].Split('|').Length;
+            if (firstLineWidth <= 3)
+            {
+                throw new ParserException("Puzzle must be at least two cells wide.");
+            }
+
+            puzzle.Width = firstLineWidth - 2;
+
+            // Now make sure every other row has the same number of cells.
+            for (var i = 1u; i < lines.Length; ++i)
+            {
+                var lineWidth = (uint)lines[i].Split('|').Length - 2;
+
+                if (lineWidth != puzzle.Width)
+                {
+                    throw new ParserException($"Mismatch in row width on row {i + 1}.");
+                }
+            }
+
+            for (var row = 0u; row < lines.Length; ++row)
+            {
+                // Cells within the line will be delimited by '|'.
+                var cellsStr = lines[row].Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                for (var column = 0u; column < cellsStr.Length; ++column)
+                {
+                    var cell = ParseCell(cellsStr[column]);
+                    cell.Coordinates = new Coordinates
+                    {
+                        X = column,
+                        Y = row,
+                    };
+
+                    puzzle.Cells.Add(cell);
+                }
+            }
+
+            puzzle.CreateSections();
+
+            return puzzle;
+        }
+
+        /// <summary>
+        /// Parse the given cell string to generate a Cell object.
+        /// </summary>
+        /// <param name="cellStr">The cell string to be parsed.</param>
+        /// <returns>A Cell object.</returns>
+        private static Cell ParseCell(string cellStr)
+        {
+            Cell cell;
+
+            // Square will either contain:
+            //  'x' - for blank squares, which are ignored for now
+            //  '-' - for puzzle squares that need to be solved
+            //  'n \ n' - for clue squares.
+            if (cellStr == "  -  ")
+            {
+                cell = new PuzzleCell();
+            }
+            else if (cellStr.Contains('\\'))
+            {
+                cell = ParseClueCell(cellStr);
+            }
+            else if (cellStr == "  x  ")
+            {
+                cell = new BlankCell();
+            }
+            else
+            {
+                throw new ParserException($"Found invalid cell data: {cellStr}.");
+            }
+
+            return cell;
+        }
+
+        /// <summary>
+        /// Parse the given string to generate a ClueCell object.
+        /// </summary>
+        /// <param name="clueCellStr">The clue cell string to parse.</param>
+        /// <returns>A ClueCell object.</returns>
+        private static ClueCell ParseClueCell(string clueCellStr)
+        {
+            // Need to get out the column and row clue.
+            var columnClue = 0u;
+            var rowClue = 0u;
+            var clues = clueCellStr.Split('\\');
+
+            if (!string.IsNullOrWhiteSpace(clues[0]))
+            {
+                columnClue = uint.Parse(clues[0].Trim());
+            }
+
+            if (!string.IsNullOrWhiteSpace(clues[1]))
+            {
+                rowClue = uint.Parse(clues[1].Trim());
+            }
+
+            return new ClueCell
+            {
+                ColumnClue = columnClue,
+                RowClue = rowClue,
+            };
+        }
+    }
+}

@@ -1,7 +1,12 @@
-﻿using GridPuzzleSolver.Parser;
+﻿using GridPuzzleSolver.Components;
+using GridPuzzleSolver.Parser;
+using GridPuzzleSolver.Puzzles.Kakuro.Parser;
+using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
+[assembly: InternalsVisibleTo("GridPuzzleSolverSystemTests")]
 [assembly: InternalsVisibleTo("GridPuzzleSolverUnitTests")]
 
 namespace GridPuzzleSolver
@@ -11,23 +16,73 @@ namespace GridPuzzleSolver
     /// </summary>
     internal static class Program
     {
-        private static void Main(string[] args)
+        /// <summary>
+        /// Runs the grid solver program. Parses the given puzzle file and attempts to solve it.
+        /// </summary>
+        /// <param name="puzzleFilePath">The path to the puzzle file containing the puzzle to be solved.</param>
+        /// <returns>True if the puzzle was solved, otherwise false.</returns>
+        /// <exception cref="ArgumentException">Thrown if the puzzle file path is invalid.</exception>
+        /// <exception cref="ParserException">Thrown if no suitable parser for the puzzle is found.</exception>
+        public static bool Run(string puzzleFilePath)
         {
-            if (args.Length != 1)
+            // Validate the input.
+            if (string.IsNullOrEmpty(puzzleFilePath))
             {
-                Console.Error.WriteLine("Expected 1 argument - puzzle file name");
-                Environment.Exit(1);
+                throw new ArgumentException("Puzzle file path is null or empty.", nameof(puzzleFilePath));
             }
 
-            // Get the correct parser for the given puzzle type.
-            var parser = ParserFactory.GetParser(args[0]);
+            // Get the file extension from the file name.
+            var puzzleFileExtension = Path.GetExtension(puzzleFilePath);
 
-            var puzzle = parser.ParsePuzzle(args[0]);
+            if (string.IsNullOrEmpty(puzzleFileExtension))
+            {
+                throw new ArgumentException(
+                    $"Failed to get file extension from puzzle file - {puzzleFilePath}.");
+            }
+
+            Puzzle? puzzle;
+
+            if (puzzleFileExtension == ".xml")
+            {
+                var xmlDoc = XDocument.Load(puzzleFilePath);
+                if (xmlDoc == null)
+                {
+                    throw new ParserException($"Failed to load puzzle file - {puzzleFilePath}");
+                }
+
+                var rootValue = xmlDoc.Root?.Name;
+
+                if (rootValue == "SudokuPuzzle")
+                {
+                    Console.WriteLine("Parsing suduko puzzle");
+
+                    puzzle = SudokuXmlParser.ParsePuzzle(xmlDoc);
+                }
+                else if (rootValue == "KakuroPuzzle")
+                {
+                    Console.WriteLine("Parsing kakuro puzzle");
+
+                    puzzle = KakuroXmlParser.ParsePuzzle(xmlDoc);
+                }
+                else
+                {
+                    throw new ParserException($"Invalid root node - {xmlDoc.Root?.Name}");
+                }
+            }
+            else
+            {
+                // Get the parser for the given puzzle type.
+                var parser = ParserFactory.GetParser(puzzleFileExtension);
+
+                puzzle = parser.ParsePuzzle(puzzleFilePath);
+            }
 
             // Time how long it takes to solve the puzzle.
             var stopwatch = Stopwatch.StartNew();
 
-            if (puzzle.Solve())
+            var solved = puzzle.Solve();
+
+            if (solved)
             {
                 Console.WriteLine("Successfully solved puzzle");
             }
@@ -48,6 +103,19 @@ namespace GridPuzzleSolver
             Console.WriteLine();
             var timeTaken = (stopwatch.ElapsedMilliseconds / 1000.0).ToString("F2");
             Console.WriteLine($"Time taken: {timeTaken}s");
+
+            return solved;
+        }
+
+        private static int Main(string[] args)
+        {
+            if (args.Length != 1)
+            {
+                Console.Error.WriteLine("Expected 1 argument - puzzle file name");
+                Environment.Exit(1);
+            }
+
+            return Run(args[0]) ? 0 : 1;
         }
     }
 }

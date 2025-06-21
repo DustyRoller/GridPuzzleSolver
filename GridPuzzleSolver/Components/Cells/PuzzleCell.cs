@@ -1,26 +1,19 @@
-﻿namespace GridPuzzleSolver.Components.Cells
+﻿using System.Xml.Serialization;
+
+namespace GridPuzzleSolver.Components.Cells
 {
     /// <summary>
     /// The PuzzleCell class represents a cell within the puzzle that requires
     /// solving.
     /// </summary>
-    internal class PuzzleCell : Cell
+    public class PuzzleCell : Cell
     {
         private uint cellValue = 0u;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PuzzleCell"/> class.
-        /// </summary>
-        /// <param name="coordinate">The cell's Coordinate.</param>
-        public PuzzleCell(Coordinate coordinate)
-            : base(coordinate)
-        {
-            Sections = new List<ISection>();
-        }
-
-        /// <summary>
         /// Gets or sets the value of the cell, will be 0 if it hasn't been solved yet.
         /// </summary>
+        [XmlAttribute("value")]
         public uint CellValue
         {
             get => cellValue;
@@ -28,7 +21,7 @@
             {
                 if (value > 9)
                 {
-                    throw new GridPuzzleSolverException($"Puzzle cell value cannot be greater than 9. {Coordinate}.");
+                    throw new GridPuzzleSolverException($"Puzzle cell value cannot be greater than 9. {Coordinates}.");
                 }
 
                 cellValue = value;
@@ -43,14 +36,25 @@
         /// sections that this cell belongs to, and returns all of the common
         /// values into a single list.
         /// </remarks>
-        public List<uint> PossibleValues =>
-            Sections.Select(s => s.CalculatePossibleValues())
-                    .Aggregate((previousPossValues, nextPossValues) => previousPossValues.Intersect(nextPossValues).ToList());
+        public List<uint> PossibleValues
+        {
+            get
+            {
+                if (Sections.Count == 0)
+                {
+                    return new List<uint>();
+                }
+
+                return Sections.Select(s => s.CalculatePossibleValues())
+                        .Aggregate((previousPossValues, nextPossValues)
+                            => previousPossValues.Intersect(nextPossValues).ToList());
+            }
+        }
 
         /// <summary>
-        /// Gets the sections that this cell belongs to.
+        /// Gets or sets the sections that this cell belongs to.
         /// </summary>
-        public List<ISection> Sections { get; private set; }
+        public List<Section> Sections { get; set; } = new List<Section>();
 
         /// <summary>
         /// Gets a value indicating whether this cell has been solved or not.

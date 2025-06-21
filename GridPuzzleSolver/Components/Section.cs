@@ -1,7 +1,4 @@
 ﻿using GridPuzzleSolver.Components.Cells;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace GridPuzzleSolver.Components
 {
@@ -10,7 +7,7 @@ namespace GridPuzzleSolver.Components
     /// The sum of the values of the PuzzleCells must add up to the value
     /// of the ClueCell.
     /// </summary>
-    internal abstract class Section : ISection
+    public abstract class Section : ISection
     {
         /// <summary>
         /// Gets the list of PuzzleCells that make up this section.

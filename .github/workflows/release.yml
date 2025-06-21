@@ -18,7 +18,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 9.0.x
 
     - name: Restore dependencies
       run: dotnet restore
@@ -39,7 +39,7 @@ jobs:
       run: cd build && zip GridPuzzleSolver-${{ env.RELEASE_VERSION }}.zip *.exe
 
     - name: Create release
-      uses: ncipollo/release-action@v1.13.0
+      uses: ncipollo/release-action@v1.16.0
       with:
         artifacts: "./build/GridPuzzleSolver-${{ env.RELEASE_VERSION }}.zip"
         bodyFile: "README.md"

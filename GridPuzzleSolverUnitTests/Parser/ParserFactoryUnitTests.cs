@@ -1,74 +1,65 @@
-﻿using GridPuzzleSolver.Solvers.KakuroSolver.Parser;
-using GridPuzzleSolver.Solvers.SudokuSolver.Parser;
+﻿using GridPuzzleSolver.Parser;
+using GridPuzzleSolver.Puzzles.Kakuro.Parser;
+using GridPuzzleSolver.Puzzles.Sudoku.Parser;
 using NUnit.Framework;
 
-namespace GridPuzzleSolver.Parser.UnitTests
+namespace GridPuzzleSolverUnitTests.Parser
 {
     [TestFixture]
     public class ParserFactoryUnitTests
     {
         [TestCase]
-        public void ParserFactory_GetParser_ThrowsExceptionWithNullFileName()
+        public void ParserFactory_GetParser_ThrowsExceptionWithNullFileExtension()
         {
-// Converting null literal or possible null value to non-nullable type.
-// Possible null reference argument.
+            // Converting null literal or possible null value to non-nullable type.
+            // Possible null reference argument.
 #pragma warning disable CS8600, CS8604
             string inputFile = null;
 
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 #pragma warning restore CS8604, CS8600
 
-            Assert.AreEqual("Puzzle file is null or empty. (Parameter 'puzzleFile')", ex?.Message);
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file extension is null or empty. (Parameter 'puzzleFileExtension')"));
         }
 
         [TestCase]
-        public void ParserFactory_GetParser_ThrowsExceptionWithEmptyFileName()
+        public void ParserFactory_GetParser_ThrowsExceptionWithEmptyFileExtension()
         {
             var inputFile = string.Empty;
 
             var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
 
-            Assert.AreEqual("Puzzle file is null or empty. (Parameter 'puzzleFile')", ex?.Message);
-        }
-
-        [TestCase]
-        public void ParserFactory_GetParser_ThrowsExceptionWithInvalidFileName()
-        {
-            var inputFile = "adodgyfilename";
-
-            var ex = Assert.Throws<ArgumentException>(() => ParserFactory.GetParser(inputFile));
-
-            Assert.AreEqual($"Failed to get file extension from puzzle file - {inputFile}.", ex?.Message);
+            Assert.That(ex?.Message, Is.EqualTo("Puzzle file extension is null or empty. (Parameter 'puzzleFileExtension')"));
         }
 
         [TestCase]
         public void ParserFactory_GetParser_ThrowsExceptionWithUnknownFileExtension()
         {
-            var inputFile = "puzzlefile.txt";
+            var inputFile = ".txt";
 
             var ex = Assert.Throws<ParserException>(() => ParserFactory.GetParser(inputFile));
 
-            Assert.AreEqual($"File extension \'{Path.GetExtension(inputFile)}\' not recognised.", ex?.Message);
+            Assert.That($"File extension \'{Path.GetExtension(inputFile)}\' not recognised.", Is.EqualTo(ex?.Message));
         }
 
         [TestCase]
         public void ParserFactory_GetParser_ReturnsKakuroParser()
         {
-            var inputFile = "puzzlefile.kak";
+            var inputFile = ".kak";
 
             var parser = ParserFactory.GetParser(inputFile);
 
-            Assert.IsInstanceOf(typeof(KakuroParser), parser);
+            Assert.That(parser, Is.InstanceOf<KakuroParser>());
         }
 
         [TestCase]
         public void ParserFactory_GetParser_ReturnsSudokuParser()
         {
-            var inputFile = "puzzlefile.sud";
+            var inputFile = ".sud";
 
             var parser = ParserFactory.GetParser(inputFile);
 
-            Assert.IsInstanceOf(typeof(SudokuParser), parser);
+            Assert.That(parser, Is.InstanceOf<SudokuParser>());
         }
     }
 }
