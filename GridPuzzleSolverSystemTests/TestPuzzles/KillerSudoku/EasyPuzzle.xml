@@ -1,6 +1,6 @@
 <KillerSudokuPuzzle>
   <Cages>
-    <Cage sum="10">
+    <Cage sum="19">
       <Cells>
         <Cell>
           <Coordinates x="0" y="0" />
@@ -8,31 +8,392 @@
         <Cell>
           <Coordinates x="0" y="1" />
         </Cell>
-      </Cells>
-    </Cage>
-    <Cage sum="15">
-      <Cells>
         <Cell>
           <Coordinates x="0" y="2" />
         </Cell>
+      </Cells>
+    </Cage>
+    <Cage sum="20">
+      <Cells>
         <Cell>
-          <Coordinates x="1" y="2" />
+          <Coordinates x="0" y="3" />
         </Cell>
         <Cell>
-          <Coordinates x="2" y="2" />
+          <Coordinates x="0" y="4" />
+        </Cell>
+        <Cell>
+          <Coordinates x="0" y="5" />
         </Cell>
       </Cells>
     </Cage>
-    <Cage sum="6">
+    <Cage sum="11">
+      <Cells>
+        <Cell>
+          <Coordinates x="0" y="6" />
+        </Cell>
+        <Cell>
+          <Coordinates x="0" y="7" />
+        </Cell>
+        <Cell>
+          <Coordinates x="1" y="7" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="7">
+      <Cells>
+        <Cell>
+          <Coordinates x="0" y="8" />
+        </Cell>
+        <Cell>
+          <Coordinates x="1" y="8" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="16">
       <Cells>
         <Cell>
           <Coordinates x="1" y="0" />
         </Cell>
         <Cell>
+          <Coordinates x="1" y="1" />
+        </Cell>
+        <Cell>
           <Coordinates x="2" y="0" />
+        </Cell>
+        <Cell>
+          <Coordinates x="2" y="1" />
         </Cell>
       </Cells>
     </Cage>
-    <!-- Additional cages... -->
+    
+    <Cage sum="15">
+      <Cells>
+        <Cell>
+          <Coordinates x="1" y="2" />
+        </Cell>
+        <Cell>
+          <Coordinates x="1" y="3" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="10">
+      <Cells>
+        <Cell>
+          <Coordinates x="1" y="4" />
+        </Cell>
+        <Cell>
+          <Coordinates x="2" y="4" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="14">
+      <Cells>
+        <Cell>
+          <Coordinates x="1" y="5" />
+        </Cell>
+        <Cell>
+          <Coordinates x="1" y="6" />
+        </Cell>
+        <Cell>
+          <Coordinates x="2" y="5" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="6">
+      <Cells>
+        <Cell>
+          <Coordinates x="2" y="2" />
+        </Cell>
+        <Cell>
+          <Coordinates x="2" y="3" />
+        </Cell>
+        <Cell>
+          <Coordinates x="3" y="3" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="13">
+      <Cells>
+        <Cell>
+          <Coordinates x="2" y="6" />
+        </Cell>
+        <Cell>
+          <Coordinates x="3" y="6" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="15">
+      <Cells>
+        <Cell>
+          <Coordinates x="2" y="7" />
+        </Cell>
+        <Cell>
+          <Coordinates x="2" y="8" />
+        </Cell>
+      </Cells>
+    </Cage>
+
+    <Cage sum="17">
+      <Cells>
+        <Cell>
+          <Coordinates x="3" y="0" />
+        </Cell>
+        <Cell>
+          <Coordinates x="3" y="1" />
+        </Cell>
+        <Cell>
+          <Coordinates x="4" y="0" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="0" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="11">
+      <Cells>
+        <Cell>
+          <Coordinates x="3" y="2" />
+        </Cell>
+        <Cell>
+          <Coordinates x="4" y="2" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="11">
+      <Cells>
+        <Cell>
+          <Coordinates x="3" y="4" />
+        </Cell>
+        <Cell>
+          <Coordinates x="3" y="5" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="10">
+      <Cells>
+        <Cell>
+          <Coordinates x="3" y="7" />
+        </Cell>
+        <Cell>
+          <Coordinates x="3" y="8" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="14">
+      <Cells>
+        <Cell>
+          <Coordinates x="3" y="8" />
+        </Cell>
+        <Cell>
+          <Coordinates x="4" y="8" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="7" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="8" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="15">
+      <Cells>
+        <Cell>
+          <Coordinates x="4" y="1" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="1" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="14">
+      <Cells>
+        <Cell>
+          <Coordinates x="4" y="3" />
+        </Cell>
+        <Cell>
+          <Coordinates x="4" y="4" />
+        </Cell>
+        <Cell>
+          <Coordinates x="4" y="5" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="12">
+      <Cells>
+        <Cell>
+          <Coordinates x="4" y="6" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="6" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="9">
+      <Cells>
+        <Cell>
+          <Coordinates x="5" y="2" />
+        </Cell>
+        <Cell>
+          <Coordinates x="6" y="2" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="15">
+      <Cells>
+        <Cell>
+          <Coordinates x="5" y="3" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="4" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="6">
+      <Cells>
+        <Cell>
+          <Coordinates x="4" y="5" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="5" />
+        </Cell>
+        <Cell>
+          <Coordinates x="5" y="6" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="11">
+      <Cells>
+        <Cell>
+          <Coordinates x="6" y="0" />
+        </Cell>
+        <Cell>
+          <Coordinates x="6" y="1" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="18">
+      <Cells>
+        <Cell>
+          <Coordinates x="6" y="3" />
+        </Cell>
+        <Cell>
+          <Coordinates x="7" y="2" />
+        </Cell>
+        <Cell>
+          <Coordinates x="7" y="3" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="7">
+      <Cells>
+        <Cell>
+          <Coordinates x="6" y="4" />
+        </Cell>
+        <Cell>
+          <Coordinates x="7" y="4" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="24">
+      <Cells>
+        <Cell>
+          <Coordinates x="6" y="7" />
+        </Cell>
+        <Cell>
+          <Coordinates x="6" y="8" />
+        </Cell>
+        <Cell>
+          <Coordinates x="7" y="7" />
+        </Cell>
+        <Cell>
+          <Coordinates x="7" y="8" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="10">
+      <Cells>
+        <Cell>
+          <Coordinates x="7" y="0" />
+        </Cell>
+        <Cell>
+          <Coordinates x="8" y="0" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="11">
+      <Cells>
+        <Cell>
+          <Coordinates x="7" y="1" />
+        </Cell>
+        <Cell>
+          <Coordinates x="8" y="1" />
+        </Cell>
+        <Cell>
+          <Coordinates x="8" y="2" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="6">
+      <Cells>
+        <Cell>
+          <Coordinates x="7" y="5" />
+        </Cell>
+        <Cell>
+          <Coordinates x="7" y="6" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="20">
+      <Cells>
+        <Cell>
+          <Coordinates x="8" y="3" />
+        </Cell>
+        <Cell>
+          <Coordinates x="8" y="4" />
+        </Cell>
+        <Cell>
+          <Coordinates x="8" y="5" />
+        </Cell>
+      </Cells>
+    </Cage>
+    
+    <Cage sum="18">
+      <Cells>
+        <Cell>
+          <Coordinates x="8" y="6" />
+        </Cell>
+        <Cell>
+          <Coordinates x="8" y="7" />
+        </Cell>
+        <Cell>
+          <Coordinates x="8" y="8" />
+        </Cell>
+      </Cells>
+    </Cage>
   </Cages>
 </KillerSudokuPuzzle>
