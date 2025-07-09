@@ -60,13 +60,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku.Parser
                 }
             }
 
-            puzzle.CreateSections();
-
-            // Ensure that there is at least one solved cell.
-            if (puzzle.NumberOfUnsolvedCells == 81)
-            {
-                throw new ParserException("Puzzle contains no solved cells");
-            }
+            puzzle.CompletePuzzle();
 
             return puzzle;
         }

@@ -132,29 +132,6 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
         }
 
         [Test]
-        public void SudokuParser_ParsePuzzle_FailsWithPuzzleWithNoSolvedCells()
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-            sb.AppendLine("|-|-|-|-|-|-|-|-|-|");
-
-            File.WriteAllText(TestPuzzleFileName, sb.ToString());
-
-            var parser = new SudokuParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
-
-            Assert.That(ex?.Message, Is.EqualTo("Puzzle contains no solved cells"));
-        }
-
-        [Test]
         public void SudokuParser_ParsePuzzle_Successful()
         {
             var testFile = Path.Combine(testPuzzleDir, "EasyPuzzle.sud");

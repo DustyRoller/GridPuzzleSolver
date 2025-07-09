@@ -36,24 +36,13 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
             // Now read in the puzzle.
             var lines = File.ReadAllLines(puzzleFilePath);
 
-            // Determine the height and width of the puzzle.
-            puzzle.Height = (uint)lines.Length;
-
-            // Width is minus two because of the starting and trailing '|'.
-            var firstLineWidth = (uint)lines[0].Split('|').Length;
-            if (firstLineWidth <= 3)
-            {
-                throw new ParserException("Puzzle must be at least two cells wide.");
-            }
-
-            puzzle.Width = firstLineWidth - 2;
-
             // Now make sure every other row has the same number of cells.
+            var firstLineWidth = (uint)lines[0].Split('|').Length - 2;
             for (var i = 1u; i < lines.Length; ++i)
             {
                 var lineWidth = (uint)lines[i].Split('|').Length - 2;
 
-                if (lineWidth != puzzle.Width)
+                if (lineWidth != firstLineWidth)
                 {
                     throw new ParserException($"Mismatch in row width on row {i + 1}.");
                 }
@@ -77,7 +66,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro.Parser
                 }
             }
 
-            puzzle.CreateSections();
+            puzzle.CompletePuzzle();
 
             return puzzle;
         }
