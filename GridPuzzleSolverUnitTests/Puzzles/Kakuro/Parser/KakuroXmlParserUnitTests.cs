@@ -138,17 +138,17 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Parser
 
             var puzzle = KakuroXmlParser.ParsePuzzle(xmlDocument);
 
-            Assert.That(puzzle.Height, Is.EqualTo(5u));
-            Assert.That(puzzle.Width, Is.EqualTo(5u));
             Assert.That(puzzle.Cells, Has.Count.EqualTo(25));
             Assert.That(puzzle.Cells.OfType<PuzzleCell>().ToList(), Has.Count.EqualTo(10));
+            Assert.That(puzzle.Height, Is.EqualTo(5u));
+            Assert.That(puzzle.Width, Is.EqualTo(5u));
 
             // Assert that the cell's coordinates are correct.
             var index = 0;
 
-            for (var x = 0u; x < puzzle.Height; ++x)
+            for (var y = 0u; y < puzzle.Height; ++y)
             {
-                for (var y = 0u; y < puzzle.Width; ++y)
+                for (var x = 0u; x < puzzle.Width; ++x)
                 {
                     Assert.That(puzzle.Cells[index].Coordinates.X, Is.EqualTo(x));
                     Assert.That(puzzle.Cells[index].Coordinates.Y, Is.EqualTo(y));

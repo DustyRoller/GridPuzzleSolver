@@ -127,13 +127,14 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Sudoku.Parser
             var puzzle = SudokuXmlParser.ParsePuzzle(xmlDocument);
 
             Assert.That(puzzle.Cells, Has.Count.EqualTo(81));
+            Assert.That(puzzle.Sections, Has.Count.EqualTo(27));
 
             // Assert that the cell's coordinates are correct.
             var index = 0;
 
-            for (var x = 0u; x < 9; ++x)
+            for (var y = 0u; y < 9; ++y)
             {
-                for (var y = 0u; y < 9; ++y)
+                for (var x = 0u; x < 9; ++x)
                 {
                     Assert.That(puzzle.Cells[index].Coordinates.X, Is.EqualTo(x));
                     Assert.That(puzzle.Cells[index].Coordinates.Y, Is.EqualTo(y));
