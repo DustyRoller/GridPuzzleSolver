@@ -16,8 +16,8 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
         public override void CompletePuzzle()
         {
             // Calculate the height and width of the puzzle.
-            Height = (uint)Cells.Count(c => c.Coordinates.Y == 0);
-            Width = (uint)Cells.Count(c => c.Coordinates.X == 0);
+            Height = (uint)Cells.Count(c => c.Coordinates.X == 0);
+            Width = (uint)Cells.Count(c => c.Coordinates.Y == 0);
 
             // Now create the sections to complete the puzzle.
             CreateSections();

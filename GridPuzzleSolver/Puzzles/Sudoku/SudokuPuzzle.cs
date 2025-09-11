@@ -94,7 +94,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         {
             if (cells.Count != 9)
             {
-                throw new GridPuzzleSolverException($"Section can only contain 9 cells but received: {Cells.Count}");
+                throw new GridPuzzleSolverException($"Section must have 9 cells, but received: {cells.Count}");
             }
 
             var section = new SudokuSection();

@@ -90,7 +90,11 @@ namespace GridPuzzleSolver.Components
         {
             var sb = new StringBuilder();
 
-            for (var i = 0; i < Cells.Count; ++i)
+            var orderedCells = Cells.OrderBy(c => c.Coordinates.Y)
+                                    .ThenBy(c => c.Coordinates.X)
+                                    .ToList();
+
+            for (var i = 0; i < orderedCells.Count; ++i)
             {
                 sb.Append('|');
 
@@ -100,7 +104,7 @@ namespace GridPuzzleSolver.Components
                     sb.Append('|');
                 }
 
-                sb.Append(Cells[i].ToString());
+                sb.Append(orderedCells[i].ToString());
             }
 
             sb.Append('|');
