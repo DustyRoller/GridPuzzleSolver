@@ -7,7 +7,7 @@ Currently sudoku and kakuro puzzles are supported.
 
 Puzzles can be passed to the solver in the form of either text or XML files, the following sections describe the formats for the files for the different puzzle types.
 
-Examples of puzzle files can be found in GridPuzzleSolver/GridPuzzleSolverSystemTests/TestPuzzle.
+Example puzzle can be found in the [system tests puzzle directory](GridPuzzleSolverSystemTests/TestPuzzles).
 
 ### Sudoku puzzle format
 
