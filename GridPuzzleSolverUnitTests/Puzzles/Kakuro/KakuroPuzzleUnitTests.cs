@@ -98,7 +98,7 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro
                 CellValue = 1u,
             });
 
-            Assert.That(puzzle.NumberOfUnsolvedCells, Is.EqualTo(0));
+            Assert.That(puzzle.NumberOfUnsolvedCells, Is.Zero);
         }
     }
 }
