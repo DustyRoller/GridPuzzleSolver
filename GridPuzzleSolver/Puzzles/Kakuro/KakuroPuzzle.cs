@@ -17,7 +17,16 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
         {
             // Calculate the height and width of the puzzle.
             Height = (uint)Cells.Count(c => c.Coordinates.X == 0);
+            if (Height <= 3)
+            {
+                throw new GridPuzzleSolverException("Puzzle must be at least two cells high.");
+            }
+
             Width = (uint)Cells.Count(c => c.Coordinates.Y == 0);
+            if (Width <= 3)
+            {
+                throw new GridPuzzleSolverException("Puzzle must be at least two cells wide.");
+            }
 
             // Now create the sections to complete the puzzle.
             CreateSections();
@@ -26,7 +35,7 @@ namespace GridPuzzleSolver.Puzzles.Kakuro
         /// <summary>
         /// Create the puzzle's sections.
         /// </summary>
-        public void CreateSections()
+        private void CreateSections()
         {
             // Need to generate sections that can be solved.
             for (var i = 0; i < Cells.Count; ++i)

@@ -24,17 +24,17 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         /// </summary>
         public override void CompletePuzzle()
         {
+            if (Cells.Count != 81)
+            {
+                throw new GridPuzzleSolverException($"Puzzle should contain 81 cells but contains: {Cells.Count}");
+            }
+
             var puzzleCells = GetPuzzleCells();
 
             // Ensure that there is at least one solved cell.
             if (!puzzleCells.Any(c => c.Solved))
             {
                 throw new GridPuzzleSolverException("Puzzle contains no solved cells.");
-            }
-
-            if (Cells.Count != 81)
-            {
-                throw new GridPuzzleSolverException($"Puzzle should contain 81 cells but contains: {Cells.Count}");
             }
 
             // Now create the sections to complete the puzzle.
@@ -44,7 +44,7 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
         /// <summary>
         /// Create the puzzle's sections.
         /// </summary>
-        public void CreateSections()
+        private void CreateSections()
         {
             var puzzleCells = GetPuzzleCells();
 
@@ -95,6 +95,14 @@ namespace GridPuzzleSolver.Puzzles.Sudoku
             if (cells.Count != 9)
             {
                 throw new GridPuzzleSolverException($"Section must have 9 cells, but received: {cells.Count}");
+            }
+
+            // Ensure that all the solved cells in this section have unique values.
+            var solvedCells = cells.Where(c => c.Solved);
+
+            if (solvedCells.Any() && solvedCells.Select(c => c.CellValue).Distinct().Count() != solvedCells.Count())
+            {
+                throw new GridPuzzleSolverException("Section's solved cells are not all unique");
             }
 
             var section = new SudokuSection();

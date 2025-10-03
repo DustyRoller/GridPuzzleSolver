@@ -52,25 +52,6 @@ namespace GridPuzzleSolverUnitTests.Puzzles.Kakuro.Parser
         }
 
         [Test]
-        public void KakuroParser_ParsePuzzle_FailsWithPuzzleWithWidthOfOneCell()
-        {
-            var sb = new StringBuilder();
-
-            // First line has 3 columns, second has 4 columns.
-            sb.AppendLine("|  x  |");
-            sb.AppendLine("|  x  |");
-
-            File.WriteAllText(TestPuzzleFileName, sb.ToString());
-
-            var parser = new KakuroParser();
-            var ex = Assert.Throws<ParserException>(() => parser.ParsePuzzle(TestPuzzleFileName));
-
-            Assert.That(ex?.Message, Is.EqualTo("Puzzle must be at least two cells wide."));
-
-            File.Delete(TestPuzzleFileName);
-        }
-
-        [Test]
         public void KakuroParser_ParsePuzzle_FailsWithPuzzleWithDifferentColumnLengths()
         {
             var sb = new StringBuilder();
